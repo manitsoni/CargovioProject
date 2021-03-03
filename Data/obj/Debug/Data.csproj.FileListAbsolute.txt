@@ -1,0 +1,10 @@
+D:\CargovioProject\Cargovio\Data\bin\Debug\Data.dll.config
+D:\CargovioProject\Cargovio\Data\bin\Debug\Data.dll
+D:\CargovioProject\Cargovio\Data\bin\Debug\Data.pdb
+D:\CargovioProject\Cargovio\Data\bin\Debug\EntityFramework.dll
+D:\CargovioProject\Cargovio\Data\bin\Debug\EntityFramework.SqlServer.dll
+D:\CargovioProject\Cargovio\Data\bin\Debug\EntityFramework.xml
+D:\CargovioProject\Cargovio\Data\bin\Debug\EntityFramework.SqlServer.xml
+D:\CargovioProject\Cargovio\Data\obj\Debug\Data.csprojResolveAssemblyReference.cache
+D:\CargovioProject\Cargovio\Data\obj\Debug\Data.dll
+D:\CargovioProject\Cargovio\Data\obj\Debug\Data.pdb

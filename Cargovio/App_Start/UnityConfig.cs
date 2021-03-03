@@ -4,7 +4,6 @@ using Unity.WebApi;
 using Business.RepositoryHelper;
 using Business.User.Manager;
 using Business.User.Manager.Interface;
-
 namespace Cargovio
 {
     public static class UnityConfig
@@ -17,7 +16,7 @@ namespace Cargovio
             // it is NOT necessary to register your controllers
 
             // e.g. container.RegisterType<ITestService, TestService>();
-            container.RegisterType<IUserManager, UserManager>();
+            container.RegisterType<IUserManager,UserManager>();
             container.AddNewExtension<UnityRepositoryHelper>();
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

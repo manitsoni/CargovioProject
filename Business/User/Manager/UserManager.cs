@@ -19,7 +19,7 @@ namespace Business.User.Manager
         private IUserRepository userRepository;
         public UserManager(IUserRepository user)
         {
-            user = userRepository;
+            userRepository = user;
         }
 
         public IList<UserRegistrationEntities> BindToSession(int id)

@@ -1,0 +1,5 @@
+D:\CargovioProject\Cargovio\BusinessEntities\bin\Debug\BusinessEntities.dll
+D:\CargovioProject\Cargovio\BusinessEntities\bin\Debug\BusinessEntities.pdb
+D:\CargovioProject\Cargovio\BusinessEntities\obj\Debug\BusinessEntities.csprojResolveAssemblyReference.cache
+D:\CargovioProject\Cargovio\BusinessEntities\obj\Debug\BusinessEntities.dll
+D:\CargovioProject\Cargovio\BusinessEntities\obj\Debug\BusinessEntities.pdb

@@ -1,0 +1,5 @@
+D:\CargovioProject\Cargovio\Common\bin\Debug\Common.dll
+D:\CargovioProject\Cargovio\Common\bin\Debug\Common.pdb
+D:\CargovioProject\Cargovio\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+D:\CargovioProject\Cargovio\Common\obj\Debug\Common.dll
+D:\CargovioProject\Cargovio\Common\obj\Debug\Common.pdb
