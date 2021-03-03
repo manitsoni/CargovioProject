@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DBE4A3C8-7977-449F-9E9F-CD92225A1896}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Data</RootNamespace>
+    <AssemblyName>Data</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommonEntities\Repository\Interface\IUserRepository.cs" />
+    <Compile Include="CommonEntities\Repository\UserRepository.cs" />
+    <Compile Include="Model\CargoStatusType.cs">
+      <DependentUpon>CargovioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CargovioModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CargovioModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CargovioModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CargovioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CargovioModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CargovioModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CompanyDetail.cs">
+      <DependentUpon>CargovioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Office.cs">
+      <DependentUpon>CargovioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sysdiagram.cs">
+      <DependentUpon>CargovioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tblBooking.cs">
+      <DependentUpon>CargovioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tblDestination.cs">
+      <DependentUpon>CargovioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tblSource.cs">
+      <DependentUpon>CargovioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Tracking.cs">
+      <DependentUpon>CargovioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\UserRegistration.cs">
+      <DependentUpon>CargovioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\UserType.cs">
+      <DependentUpon>CargovioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Admin\" />
+    <Folder Include="CustomerAdmin\" />
+    <Folder Include="Customer\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Model\CargovioModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CargovioModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="Model\CargovioModel.edmx.diagram">
+      <DependentUpon>CargovioModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\CargovioModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CargovioModel.Context.cs</LastGenOutput>
+      <DependentUpon>CargovioModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Model\CargovioModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CargovioModel.edmx</DependentUpon>
+      <LastGenOutput>CargovioModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

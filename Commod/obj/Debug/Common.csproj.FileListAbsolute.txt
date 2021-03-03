@@ -1,0 +1,6 @@
+D:\ServiceBookingSystem\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+D:\ServiceBookingSystem\Common\bin\Debug\Common.dll
+D:\ServiceBookingSystem\Common\bin\Debug\Common.pdb
+D:\ServiceBookingSystem\Common\obj\Debug\Common.dll
+D:\ServiceBookingSystem\Common\obj\Debug\Common.pdb
+D:\ServiceBookingSystem\Common\obj\Debug\Common.csprojAssemblyReference.cache
