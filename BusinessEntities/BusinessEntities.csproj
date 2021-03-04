@@ -45,6 +45,7 @@
     <Compile Include="CommonEntities\UserRegistrationEntities.cs" />
     <Compile Include="Customer\BookingEntities.cs" />
     <Compile Include="Customer\CommonBookingEntities.cs" />
+    <Compile Include="Customer\CommonQuotationEntities.cs" />
     <Compile Include="Customer\DestinationAddressEntities.cs" />
     <Compile Include="Customer\GetQuotationEntities.cs" />
     <Compile Include="Customer\PackageEntities.cs" />

@@ -66,10 +66,11 @@
           <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
           <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
           <ScalarProperty Name="ShipmentId" ColumnName="ShipmentId" />
-          <ScalarProperty Name="BranchId" ColumnName="BranchId" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
           <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -93,6 +94,48 @@
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPackageDetails">
+      <EntityTypeMapping TypeName="CargovioDbModel.tblPackageDetail">
+        <MappingFragment StoreEntitySet="tblPackageDetails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PackageType" ColumnName="PackageType" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Length" ColumnName="Length" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+          <ScalarProperty Name="Width" ColumnName="Width" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblQuotations">
+      <EntityTypeMapping TypeName="CargovioDbModel.tblQuotation">
+        <MappingFragment StoreEntitySet="tblQuotation">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="SourceAddress1" ColumnName="SourceAddress1" />
+          <ScalarProperty Name="SourceAddress2" ColumnName="SourceAddress2" />
+          <ScalarProperty Name="SourcePincode" ColumnName="SourcePincode" />
+          <ScalarProperty Name="SourceCity" ColumnName="SourceCity" />
+          <ScalarProperty Name="SourceState" ColumnName="SourceState" />
+          <ScalarProperty Name="SourceCountry" ColumnName="SourceCountry" />
+          <ScalarProperty Name="DestinationAddress1" ColumnName="DestinationAddress1" />
+          <ScalarProperty Name="DestinationAddress2" ColumnName="DestinationAddress2" />
+          <ScalarProperty Name="DestinationCity" ColumnName="DestinationCity" />
+          <ScalarProperty Name="DestinationState" ColumnName="DestinationState" />
+          <ScalarProperty Name="DestinationCountry" ColumnName="DestinationCountry" />
+          <ScalarProperty Name="DestinationPincode" ColumnName="DestinationPincode" />
+          <ScalarProperty Name="PackageDeatilsId" ColumnName="PackageDeatilsId" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -123,7 +166,7 @@
       <EntityTypeMapping TypeName="CargovioDbModel.Tracking">
         <MappingFragment StoreEntitySet="Tracking">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="ShipmentId" ColumnName="ShipmentId" />
+          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
           <ScalarProperty Name="CargoStatusTypeId" ColumnName="CargoStatusTypeId" />
           <ScalarProperty Name="CurrentLocation" ColumnName="CurrentLocation" />
           <ScalarProperty Name="IsDelivered" ColumnName="IsDelivered" />

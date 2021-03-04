@@ -13,5 +13,7 @@ namespace Business.Customer.Manager.Interface
         int AddDestinationAddress(DestinationAddressEntities de);
         int AddBooking(BookingEntities be);
         int AddTracking(TrackingEntities te);
+        IList<CommonBookingEntities> GetBooking();
+        IList<CommonBookingEntities> GetBookingDetails(string ShipmentId);
     }
 }

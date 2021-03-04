@@ -97,3 +97,6 @@ D:\CargovioProject\Cargovio\Cargovio\bin\Data.pdb
 D:\CargovioProject\Cargovio\Cargovio\bin\Data.dll.config
 D:\CargovioProject\Cargovio\Cargovio\obj\Debug\Cargovio.dll
 D:\CargovioProject\Cargovio\Cargovio\obj\Debug\Cargovio.pdb
+D:\CargovioProject\Cargovio\Cargovio\bin\System.Web.Cors.dll
+D:\CargovioProject\Cargovio\Cargovio\bin\System.Web.Http.Cors.dll
+D:\CargovioProject\Cargovio\Cargovio\bin\System.Web.Http.Cors.xml

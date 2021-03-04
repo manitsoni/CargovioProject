@@ -49,9 +49,12 @@ namespace BusinessEntities.Customer
         public Nullable<Boolean> IsActive { get; set; }
 
        
-        public int? Amount { get; set; }
+        public decimal? Amount { get; set; }
         public string PaymentType { get; set; }
         
-
+        //Optional
+        public string ShipmentId { get; set; }
+        public string CargoStatus { get; set; }
+        public string CargoLocation { get; set; }
     }
 }

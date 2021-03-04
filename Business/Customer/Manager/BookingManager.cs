@@ -27,7 +27,7 @@ namespace Business.Customer.Manager
             if (UserLogin.IsUserLogin())
             {
                 tblBooking ba = mapper.Map<BookingEntities, tblBooking>(be);
-                int BookingId = bookingRepository.AddSourceAddress(ba);
+                int BookingId = bookingRepository.AddBooking(ba);
                 return BookingId;
             }
             else
@@ -92,13 +92,23 @@ namespace Business.Customer.Manager
             if (UserLogin.IsUserLogin())
             {
                 Tracking ta = mapper.Map<TrackingEntities, Tracking>(te);
-                int TrackingId = bookingRepository.AddSourceAddress(te);
+                int TrackingId = bookingRepository.AddTracking(ta);
                 return TrackingId;
             }
             else
             {
                 return 0;
             }
+        }
+
+        public IList<CommonBookingEntities> GetBooking()
+        {
+            return bookingRepository.GetBooking();
+        }
+
+        public IList<CommonBookingEntities> GetBookingDetails(string ShipmentId)
+        {
+            return bookingRepository.GetBookingDetails(ShipmentId);
         }
     }
 }

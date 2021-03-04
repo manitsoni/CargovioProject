@@ -120,7 +120,6 @@ namespace Cargovio.Areas.Customer.Controllers
                 te.IsDelivered = false;
                 te.UpdatedBy = OfficeUserId;
                 int TrackingId = bookingManager.AddTracking(te);
-
                 return Ok(TrackingId);
             }
             catch (Exception)
@@ -128,6 +127,33 @@ namespace Cargovio.Areas.Customer.Controllers
                 return NotFound();
             }
         }
-        
+        [HttpGet]
+        [Route("Customer/Api/GetMyBooking")]
+        public IHttpActionResult GetBooking()
+        {
+            try
+            {
+                return Ok(bookingManager.GetBooking());
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpGet]
+        [Route("Customer/Api/GetMyBookingDetails")]
+        public IHttpActionResult GetBookingDetails(string ShipmentId)
+        {
+            try
+            {
+                return Ok(bookingManager.GetBookingDetails(ShipmentId));
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
     }
 }

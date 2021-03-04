@@ -47,5 +47,60 @@ namespace Data.Customer.Repository
             db.SaveChanges();
             return (objTracking.Id);
         }
+
+        public IList<CommonBookingEntities> GetBooking()
+        {
+            var BookingData = (from tr in db.Trackings
+                               join bd in db.tblBookings on tr.BookingId equals bd.ID
+                               join cr in db.CargoStatusTypes on tr.CargoStatusTypeId equals cr.Id
+                               join da in db.tblDestinations on bd.DestinationId equals da.ID
+                               join sa in db.tblSources on bd.SourceId equals sa.ID
+                               join ur in db.UserRegistrations on bd.Userid equals ur.Id
+                               join pd in db.tblPackageDetails on bd.PackageDetailsId equals pd.Id
+                               where bd.Userid == SessionProxyUser.UserID && tr.IsDelivered == false
+                               select new CommonBookingEntities
+                               {
+                                   Amount = bd.Amount,
+                                   EmailId = ur.Email,
+                                   SourceCity = sa.City,
+                                   SourcePincode = sa.Pincode,
+                                   DestinationCity = da.Pincode,
+                                   DestinationPincode = da.Pincode,
+                                   Packagename = pd.PackageType,
+                                   Quantity = pd.Quantity,
+                                   ShipmentId = bd.ShipmentId,
+                                   CargoLocation = tr.CurrentLocation,
+                                   CargoStatus = cr.StatusName
+                                   
+                               }).ToList();
+            return BookingData;
+        }
+        public IList<CommonBookingEntities> GetBookingDetails(string ShipmentId)
+        {
+            var BookingData = (from tr in db.Trackings
+                               join bd in db.tblBookings on tr.BookingId equals bd.ID
+                               join cr in db.CargoStatusTypes on tr.CargoStatusTypeId equals cr.Id
+                               join da in db.tblDestinations on bd.DestinationId equals da.ID
+                               join sa in db.tblSources on bd.SourceId equals sa.ID
+                               join ur in db.UserRegistrations on bd.Userid equals ur.Id
+                               join pd in db.tblPackageDetails on bd.PackageDetailsId equals pd.Id
+                               where bd.Userid == SessionProxyUser.UserID && tr.IsDelivered == false && bd.ShipmentId == ShipmentId
+                               select new CommonBookingEntities
+                               {
+                                   Amount = bd.Amount,
+                                   EmailId = ur.Email,
+                                   SourceCity = sa.City,
+                                   SourcePincode = sa.Pincode,
+                                   DestinationCity = da.Pincode,
+                                   DestinationPincode = da.Pincode,
+                                   Packagename = pd.PackageType,
+                                   Quantity = pd.Quantity,
+                                   ShipmentId = bd.ShipmentId,
+                                   CargoLocation = tr.CurrentLocation,
+                                   CargoStatus = cr.StatusName
+
+                               }).ToList();
+            return BookingData;
+        }
     }
 }
