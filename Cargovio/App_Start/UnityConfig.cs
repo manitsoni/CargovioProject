@@ -20,7 +20,7 @@ namespace Cargovio
             // e.g. container.RegisterType<ITestService, TestService>();
             container.RegisterType<IUserManager,UserManager>();
             container.RegisterType<IQuotationManager, QuotationManager>();
-            //container.RegisterType<IBookingManager, BookingManager>();
+            container.RegisterType<IBookingManager, BookingManager>();
             container.AddNewExtension<UnityRepositoryHelper>();
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

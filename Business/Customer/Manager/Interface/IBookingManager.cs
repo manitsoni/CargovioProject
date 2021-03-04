@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using BusinessEntities.Customer;
 namespace Business.Customer.Manager.Interface
 {
-    public interface IBookingRepository
+    public interface IBookingManager
     {
         int AddPackage(PackageEntities pe);
-        int AddSourceAddress();
-        int AddDestinationAddress();
-        int AddBooking();
-        int AddTracking();
+        int AddSourceAddress(SourceAddressEntities se);
+        int AddDestinationAddress(DestinationAddressEntities de);
+        int AddBooking(BookingEntities be);
+        //int AddTracking();
     }
 }

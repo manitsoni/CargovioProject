@@ -4,19 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f9c070001f644f13924030ae24c53835" Name="Diagram1">
-        <EntityTypeShape EntityType="CargovioDbModel.CargoStatusType" Width="1.5" PointX="10.5" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CargovioDbModel.CompanyDetail" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CargovioDbModel.Office" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CargovioDbModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CargovioDbModel.tblBooking" Width="1.5" PointX="7.5" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CargovioDbModel.tblDestination" Width="1.5" PointX="5.25" PointY="16.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CargovioDbModel.tblPackageDetail" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CargovioDbModel.tblQuotation" Width="1.5" PointX="10.5" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CargovioDbModel.tblSource" Width="1.5" PointX="5.25" PointY="21.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CargovioDbModel.Tracking" Width="1.5" PointX="12.75" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CargovioDbModel.UserRegistration" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="CargovioDbModel.UserType" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+      <Diagram DiagramId="d916032a34fc4b6199fc7b895be63bd7" Name="Diagram1">
+        <EntityTypeShape EntityType="CargovioDbModel.CargoStatusType" Width="1.5" PointX="10.5" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CargovioDbModel.CompanyDetail" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CargovioDbModel.Office" Width="1.5" PointX="5.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CargovioDbModel.sysdiagram" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CargovioDbModel.tblBooking" Width="1.5" PointX="7.5" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="CargovioDbModel.tblDestination" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CargovioDbModel.tblPackageDetail" Width="1.5" PointX="5.25" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CargovioDbModel.tblQuotation" Width="1.5" PointX="10.5" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CargovioDbModel.tblSource" Width="1.5" PointX="5.25" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="CargovioDbModel.Tracking" Width="1.5" PointX="12.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="CargovioDbModel.UserRegistration" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CargovioDbModel.UserType" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
         <AssociationConnector Association="CargovioDbModel.FK_Tracking_CargoStatusType" ManuallyRouted="false" />
         <AssociationConnector Association="CargovioDbModel.FK_CompanyDetails_UserRegistration" ManuallyRouted="false" />
         <AssociationConnector Association="CargovioDbModel.FK_Office_UserRegistration" ManuallyRouted="false" />

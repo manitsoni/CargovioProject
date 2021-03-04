@@ -56,55 +56,55 @@
     <Compile Include="Customer\Repository\Interface\IQuotationRepository.cs" />
     <Compile Include="Customer\Repository\QuotationRepository.cs" />
     <Compile Include="Model\CargoStatusType.cs">
-      <DependentUpon>CustomerModel.tt</DependentUpon>
+      <DependentUpon>CargovioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CargovioModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CargovioModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CargovioModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CargovioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CargovioModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CargovioModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\CompanyDetail.cs">
-      <DependentUpon>CustomerModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\CustomerModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CustomerModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\CustomerModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CustomerModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\CustomerModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CustomerModel.edmx</DependentUpon>
+      <DependentUpon>CargovioModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Office.cs">
-      <DependentUpon>CustomerModel.tt</DependentUpon>
+      <DependentUpon>CargovioModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\sysdiagram.cs">
-      <DependentUpon>CustomerModel.tt</DependentUpon>
+      <DependentUpon>CargovioModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\tblBooking.cs">
-      <DependentUpon>CustomerModel.tt</DependentUpon>
+      <DependentUpon>CargovioModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\tblDestination.cs">
-      <DependentUpon>CustomerModel.tt</DependentUpon>
+      <DependentUpon>CargovioModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\tblPackageDetail.cs">
-      <DependentUpon>CustomerModel.tt</DependentUpon>
+      <DependentUpon>CargovioModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\tblQuotation.cs">
-      <DependentUpon>CustomerModel.tt</DependentUpon>
+      <DependentUpon>CargovioModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\tblSource.cs">
-      <DependentUpon>CustomerModel.tt</DependentUpon>
+      <DependentUpon>CargovioModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Tracking.cs">
-      <DependentUpon>CustomerModel.tt</DependentUpon>
+      <DependentUpon>CargovioModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\UserRegistration.cs">
-      <DependentUpon>CustomerModel.tt</DependentUpon>
+      <DependentUpon>CargovioModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\UserType.cs">
-      <DependentUpon>CustomerModel.tt</DependentUpon>
+      <DependentUpon>CargovioModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -114,29 +114,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="Model\CustomerModel.edmx">
+    <EntityDeploy Include="Model\CargovioModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CustomerModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>CargovioModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\CustomerModel.edmx.diagram">
-      <DependentUpon>CustomerModel.edmx</DependentUpon>
+    <None Include="Model\CargovioModel.edmx.diagram">
+      <DependentUpon>CargovioModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Model\CustomerModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CustomerModel.edmx</DependentUpon>
-      <LastGenOutput>CustomerModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model\CustomerModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CustomerModel.edmx</DependentUpon>
-      <LastGenOutput>CustomerModel.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessEntities\BusinessEntities.csproj">
@@ -147,6 +135,18 @@
       <Project>{d94eaf40-0798-43ff-8bbc-3e1916c75db7}</Project>
       <Name>Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\CargovioModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CargovioModel.edmx</DependentUpon>
+      <LastGenOutput>CargovioModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\CargovioModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CargovioModel.edmx</DependentUpon>
+      <LastGenOutput>CargovioModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

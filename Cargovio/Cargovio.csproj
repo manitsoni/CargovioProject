@@ -179,8 +179,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\Area1AreaRegistration.cs" />
     <Compile Include="Areas\CustomerAdmin\CustomerAdminAreaRegistration.cs" />
+    <Compile Include="Areas\Customer\Controllers\BookingController.cs" />
     <Compile Include="Areas\Customer\Controllers\QuotationController.cs" />
     <Compile Include="Areas\Customer\CustomerAreaRegistration.cs" />
+    <Compile Include="Areas\Customer\Models\Helper.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -282,7 +284,6 @@
     <Folder Include="Areas\CustomerAdmin\Controllers\" />
     <Folder Include="Areas\CustomerAdmin\Models\" />
     <Folder Include="Areas\CustomerAdmin\Views\Shared\" />
-    <Folder Include="Areas\Customer\Models\" />
     <Folder Include="Areas\Customer\Views\Shared\" />
     <Folder Include="Areas\User\Models\" />
     <Folder Include="Areas\User\Views\Shared\" />
@@ -315,6 +316,10 @@
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{d94eaf40-0798-43ff-8bbc-3e1916c75db7}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{dbe4a3c8-7977-449f-9e9f-cd92225a1896}</Project>
+      <Name>Data</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

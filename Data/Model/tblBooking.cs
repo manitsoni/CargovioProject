@@ -29,10 +29,12 @@ namespace Data.Model
         public string PaymentType { get; set; }
         public Nullable<int> TransactionId { get; set; }
         public Nullable<int> OfficeId { get; set; }
-        public Nullable<int> ShipmentId { get; set; }
+        public string ShipmentId { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<int> UpdatedBy { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
     
         public virtual Office Office { get; set; }
         public virtual tblDestination tblDestination { get; set; }

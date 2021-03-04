@@ -27,12 +27,12 @@ namespace Data.Model
         public string DestinationCity { get; set; }
         public string DestinationState { get; set; }
         public string DestinationCountry { get; set; }
+        public string DestinationPincode { get; set; }
         public Nullable<int> PackageDeatilsId { get; set; }
         public Nullable<int> CreateBy { get; set; }
         public Nullable<int> UpdatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
-        public string DestinationPincode { get; set; }
         public Nullable<bool> IsActive { get; set; }
     
         public virtual tblPackageDetail tblPackageDetail { get; set; }

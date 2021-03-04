@@ -20,7 +20,7 @@ namespace Cargovio
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-            var cors = new EnableCorsAttribute("*", "*", "*");//origins,headers,methods   
+            var cors = new EnableCorsAttribute("*", "*", "*");   
             config.EnableCors(cors);
         }
     }

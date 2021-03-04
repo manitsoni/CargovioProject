@@ -20,8 +20,8 @@ namespace Data.CommonEntities.Repository
         {
             db.UserRegistrations.Add(objUser);
             db.SaveChanges();
-            int UserId = db.UserRegistrations.Last().Id;
-            return UserId;
+           
+            return (objUser.Id);
         }
 
         public bool AddOfficeDetails(Office objOffice)
