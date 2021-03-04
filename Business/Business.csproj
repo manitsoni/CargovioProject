@@ -65,6 +65,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Customer\Manager\BookingManager.cs" />
+    <Compile Include="Customer\Manager\Interface\IBookingRepository.cs" />
     <Compile Include="Customer\Manager\Interface\IQuotationManager.cs" />
     <Compile Include="Customer\Manager\QuotationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

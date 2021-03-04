@@ -7,7 +7,8 @@ using Unity;
 using Unity.Extension;
 using Data.CommonEntities.Repository;
 using Data.CommonEntities.Repository.Interface;
-
+using Data.Customer.Repository;
+using Data.Customer.Repository.Interface;
 namespace Business.RepositoryHelper
 {
     public class UnityRepositoryHelper : UnityContainerExtension
@@ -15,6 +16,8 @@ namespace Business.RepositoryHelper
         protected override void Initialize()
         {
             Container.RegisterType<IUserRepository, UserRepository>();
+            Container.RegisterType<IQuotationRepository, QuotationRepository>();
+            Container.RegisterType<IBookingRepository, BookingRepository>();
         }
     }
 }

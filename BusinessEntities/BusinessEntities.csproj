@@ -43,9 +43,11 @@
     <Compile Include="CommonEntities\CompanyDetailsEntities.cs" />
     <Compile Include="CommonEntities\OfficeDetailsEntities.cs" />
     <Compile Include="CommonEntities\UserRegistrationEntities.cs" />
+    <Compile Include="Customer\BookingEntities.cs" />
     <Compile Include="Customer\GetQuotationEntities.cs" />
     <Compile Include="Customer\PackageEntities.cs" />
     <Compile Include="Customer\QuotationEntities.cs" />
+    <Compile Include="Customer\SourceAddressEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
