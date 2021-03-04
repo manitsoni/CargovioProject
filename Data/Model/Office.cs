@@ -14,6 +14,12 @@ namespace Data.Model
     
     public partial class Office
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Office()
+        {
+            this.tblBookings = new HashSet<tblBooking>();
+        }
+    
         public int Id { get; set; }
         public int UserId { get; set; }
         public string BranchLocation { get; set; }
@@ -24,5 +30,7 @@ namespace Data.Model
         public System.DateTime CreatedDate { get; set; }
     
         public virtual UserRegistration UserRegistration { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblBooking> tblBookings { get; set; }
     }
 }

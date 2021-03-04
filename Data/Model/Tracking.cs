@@ -15,14 +15,17 @@ namespace Data.Model
     public partial class Tracking
     {
         public int Id { get; set; }
-        public int ShipmentId { get; set; }
-        public int CargoStatusTypeId { get; set; }
+        public Nullable<int> BookingId { get; set; }
+        public Nullable<int> CargoStatusTypeId { get; set; }
         public string CurrentLocation { get; set; }
-        public bool IsDelivered { get; set; }
-        public bool IsActive { get; set; }
-        public int CreatedBy { get; set; }
-        public int UpdatedBy { get; set; }
+        public Nullable<bool> IsDelivered { get; set; }
+        public Nullable<bool> IsActive { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<int> UpdatedBy { get; set; }
     
         public virtual CargoStatusType CargoStatusType { get; set; }
+        public virtual tblBooking tblBooking { get; set; }
+        public virtual UserRegistration UserRegistration { get; set; }
+        public virtual UserRegistration UserRegistration1 { get; set; }
     }
 }

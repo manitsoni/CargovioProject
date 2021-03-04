@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CargovioDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CargovioDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CargoStatusType">
           <Key>
             <PropertyRef Name="Id" />
@@ -67,7 +67,6 @@
           <Property Name="TransactionId" Type="int" />
           <Property Name="OfficeId" Type="int" />
           <Property Name="ShipmentId" Type="int" />
-          <Property Name="BranchId" Type="int" />
           <Property Name="CreatedBy" Type="int" />
           <Property Name="UpdatedBy" Type="int" />
           <Property Name="IsActive" Type="bit" />
@@ -93,6 +92,46 @@
           <Property Name="IsActive" Type="bit" />
           <Property Name="CreatedBy" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblPackageDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="PackageType" Type="nvarchar(max)" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Weight" Type="int" />
+          <Property Name="Length" Type="int" />
+          <Property Name="Height" Type="int" />
+          <Property Name="Width" Type="int" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblQuotation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="SourceAddress1" Type="nvarchar(max)" />
+          <Property Name="SourceAddress2" Type="nvarchar(max)" />
+          <Property Name="SourcePincode" Type="nvarchar(max)" />
+          <Property Name="SourceCity" Type="nvarchar(max)" />
+          <Property Name="SourceState" Type="nvarchar(max)" />
+          <Property Name="SourceCountry" Type="nvarchar(max)" />
+          <Property Name="DestinationAddress1" Type="nvarchar(max)" />
+          <Property Name="DestinationAddress2" Type="nvarchar(max)" />
+          <Property Name="DestinationCity" Type="nvarchar(max)" />
+          <Property Name="DestinationState" Type="nvarchar(max)" />
+          <Property Name="DestinationCountry" Type="nvarchar(max)" />
+          <Property Name="DestinationPincode" Type="nvarchar(max)" />
+          <Property Name="PackageDeatilsId" Type="int" />
+          <Property Name="CreateBy" Type="int" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="tblSource">
           <Key>
@@ -121,13 +160,13 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ShipmentId" Type="int" Nullable="false" />
-          <Property Name="CargoStatusTypeId" Type="int" Nullable="false" />
-          <Property Name="CurrentLocation" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="IsDelivered" Type="bit" Nullable="false" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="UpdatedBy" Type="int" Nullable="false" />
+          <Property Name="BookingId" Type="int" />
+          <Property Name="CargoStatusTypeId" Type="int" />
+          <Property Name="CurrentLocation" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDelivered" Type="bit" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedBy" Type="int" />
         </EntityType>
         <EntityType Name="UserRegistration">
           <Key>
@@ -181,6 +220,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblBooking_Office">
+          <End Role="Office" Type="Self.Office" Multiplicity="0..1" />
+          <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblBooking">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblBooking_tblDestination">
           <End Role="tblDestination" Type="Self.tblDestination" Multiplicity="0..1" />
           <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="*" />
@@ -190,6 +241,18 @@
             </Principal>
             <Dependent Role="tblBooking">
               <PropertyRef Name="DestinationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBooking_tblPackageDetails">
+          <End Role="tblPackageDetails" Type="Self.tblPackageDetails" Multiplicity="0..1" />
+          <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPackageDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblBooking">
+              <PropertyRef Name="PackageDetailsId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -205,8 +268,104 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblBooking_UserRegistration">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="0..1" />
+          <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblBooking">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBooking_UserRegistration1">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="0..1" />
+          <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblBooking">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPackageDetails_UserRegistration">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="0..1" />
+          <End Role="tblPackageDetails" Type="Self.tblPackageDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblPackageDetails">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPackageDetails_UserRegistration1">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="0..1" />
+          <End Role="tblPackageDetails" Type="Self.tblPackageDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblPackageDetails">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblQuotation_tblPackageDetails">
+          <End Role="tblPackageDetails" Type="Self.tblPackageDetails" Multiplicity="0..1" />
+          <End Role="tblQuotation" Type="Self.tblQuotation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPackageDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblQuotation">
+              <PropertyRef Name="PackageDeatilsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblQuotation_UserRegistration">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="0..1" />
+          <End Role="tblQuotation" Type="Self.tblQuotation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblQuotation">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblQuotation_UserRegistration1">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="0..1" />
+          <End Role="tblQuotation" Type="Self.tblQuotation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblQuotation">
+              <PropertyRef Name="CreateBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblQuotation_UserRegistration2">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="0..1" />
+          <End Role="tblQuotation" Type="Self.tblQuotation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblQuotation">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tracking_CargoStatusType">
-          <End Role="CargoStatusType" Type="Self.CargoStatusType" Multiplicity="1" />
+          <End Role="CargoStatusType" Type="Self.CargoStatusType" Multiplicity="0..1" />
           <End Role="Tracking" Type="Self.Tracking" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CargoStatusType">
@@ -214,6 +373,42 @@
             </Principal>
             <Dependent Role="Tracking">
               <PropertyRef Name="CargoStatusTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tracking_tblBooking">
+          <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="0..1" />
+          <End Role="Tracking" Type="Self.Tracking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBooking">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tracking">
+              <PropertyRef Name="BookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tracking_UserRegistration">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="0..1" />
+          <End Role="Tracking" Type="Self.Tracking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tracking">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tracking_UserRegistration1">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="0..1" />
+          <End Role="Tracking" Type="Self.Tracking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tracking">
+              <PropertyRef Name="UpdatedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -236,6 +431,8 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblBooking" EntityType="Self.tblBooking" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDestination" EntityType="Self.tblDestination" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPackageDetails" EntityType="Self.tblPackageDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblQuotation" EntityType="Self.tblQuotation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblSource" EntityType="Self.tblSource" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tracking" EntityType="Self.Tracking" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRegistration" EntityType="Self.UserRegistration" Schema="dbo" store:Type="Tables" />
@@ -248,16 +445,68 @@
             <End Role="UserRegistration" EntitySet="UserRegistration" />
             <End Role="Office" EntitySet="Office" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblBooking_Office" Association="Self.FK_tblBooking_Office">
+            <End Role="Office" EntitySet="Office" />
+            <End Role="tblBooking" EntitySet="tblBooking" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblBooking_tblDestination" Association="Self.FK_tblBooking_tblDestination">
             <End Role="tblDestination" EntitySet="tblDestination" />
+            <End Role="tblBooking" EntitySet="tblBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBooking_tblPackageDetails" Association="Self.FK_tblBooking_tblPackageDetails">
+            <End Role="tblPackageDetails" EntitySet="tblPackageDetails" />
             <End Role="tblBooking" EntitySet="tblBooking" />
           </AssociationSet>
           <AssociationSet Name="FK_tblBooking_tblSource" Association="Self.FK_tblBooking_tblSource">
             <End Role="tblSource" EntitySet="tblSource" />
             <End Role="tblBooking" EntitySet="tblBooking" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblBooking_UserRegistration" Association="Self.FK_tblBooking_UserRegistration">
+            <End Role="UserRegistration" EntitySet="UserRegistration" />
+            <End Role="tblBooking" EntitySet="tblBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBooking_UserRegistration1" Association="Self.FK_tblBooking_UserRegistration1">
+            <End Role="UserRegistration" EntitySet="UserRegistration" />
+            <End Role="tblBooking" EntitySet="tblBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPackageDetails_UserRegistration" Association="Self.FK_tblPackageDetails_UserRegistration">
+            <End Role="UserRegistration" EntitySet="UserRegistration" />
+            <End Role="tblPackageDetails" EntitySet="tblPackageDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPackageDetails_UserRegistration1" Association="Self.FK_tblPackageDetails_UserRegistration1">
+            <End Role="UserRegistration" EntitySet="UserRegistration" />
+            <End Role="tblPackageDetails" EntitySet="tblPackageDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblQuotation_tblPackageDetails" Association="Self.FK_tblQuotation_tblPackageDetails">
+            <End Role="tblPackageDetails" EntitySet="tblPackageDetails" />
+            <End Role="tblQuotation" EntitySet="tblQuotation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblQuotation_UserRegistration" Association="Self.FK_tblQuotation_UserRegistration">
+            <End Role="UserRegistration" EntitySet="UserRegistration" />
+            <End Role="tblQuotation" EntitySet="tblQuotation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblQuotation_UserRegistration1" Association="Self.FK_tblQuotation_UserRegistration1">
+            <End Role="UserRegistration" EntitySet="UserRegistration" />
+            <End Role="tblQuotation" EntitySet="tblQuotation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblQuotation_UserRegistration2" Association="Self.FK_tblQuotation_UserRegistration2">
+            <End Role="UserRegistration" EntitySet="UserRegistration" />
+            <End Role="tblQuotation" EntitySet="tblQuotation" />
+          </AssociationSet>
           <AssociationSet Name="FK_Tracking_CargoStatusType" Association="Self.FK_Tracking_CargoStatusType">
             <End Role="CargoStatusType" EntitySet="CargoStatusType" />
+            <End Role="Tracking" EntitySet="Tracking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tracking_tblBooking" Association="Self.FK_Tracking_tblBooking">
+            <End Role="tblBooking" EntitySet="tblBooking" />
+            <End Role="Tracking" EntitySet="Tracking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tracking_UserRegistration" Association="Self.FK_Tracking_UserRegistration">
+            <End Role="UserRegistration" EntitySet="UserRegistration" />
+            <End Role="Tracking" EntitySet="Tracking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tracking_UserRegistration1" Association="Self.FK_Tracking_UserRegistration1">
+            <End Role="UserRegistration" EntitySet="UserRegistration" />
             <End Role="Tracking" EntitySet="Tracking" />
           </AssociationSet>
           <AssociationSet Name="FK_UserRegistration_UserType" Association="Self.FK_UserRegistration_UserType">
@@ -265,8 +514,7 @@
             <End Role="UserRegistration" EntitySet="UserRegistration" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CargovioDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -310,6 +558,7 @@
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="UserRegistration" Relationship="Self.FK_Office_UserRegistration" FromRole="Office" ToRole="UserRegistration" />
+          <NavigationProperty Name="tblBookings" Relationship="Self.FK_tblBooking_Office" FromRole="Office" ToRole="tblBooking" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -335,12 +584,16 @@
           <Property Name="TransactionId" Type="Int32" />
           <Property Name="OfficeId" Type="Int32" />
           <Property Name="ShipmentId" Type="Int32" />
-          <Property Name="BranchId" Type="Int32" />
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="UpdatedBy" Type="Int32" />
           <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Office" Relationship="Self.FK_tblBooking_Office" FromRole="tblBooking" ToRole="Office" />
           <NavigationProperty Name="tblDestination" Relationship="Self.FK_tblBooking_tblDestination" FromRole="tblBooking" ToRole="tblDestination" />
+          <NavigationProperty Name="tblPackageDetail" Relationship="Self.FK_tblBooking_tblPackageDetails" FromRole="tblBooking" ToRole="tblPackageDetails" />
           <NavigationProperty Name="tblSource" Relationship="Self.FK_tblBooking_tblSource" FromRole="tblBooking" ToRole="tblSource" />
+          <NavigationProperty Name="UserRegistration" Relationship="Self.FK_tblBooking_UserRegistration" FromRole="tblBooking" ToRole="UserRegistration" />
+          <NavigationProperty Name="UserRegistration1" Relationship="Self.FK_tblBooking_UserRegistration1" FromRole="tblBooking" ToRole="UserRegistration" />
+          <NavigationProperty Name="Trackings" Relationship="Self.FK_Tracking_tblBooking" FromRole="tblBooking" ToRole="Tracking" />
         </EntityType>
         <EntityType Name="tblDestination">
           <Key>
@@ -364,6 +617,54 @@
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tblBookings" Relationship="Self.FK_tblBooking_tblDestination" FromRole="tblDestination" ToRole="tblBooking" />
+        </EntityType>
+        <EntityType Name="tblPackageDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="PackageType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Weight" Type="Int32" />
+          <Property Name="Length" Type="Int32" />
+          <Property Name="Height" Type="Int32" />
+          <Property Name="Width" Type="Int32" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="tblBookings" Relationship="Self.FK_tblBooking_tblPackageDetails" FromRole="tblPackageDetails" ToRole="tblBooking" />
+          <NavigationProperty Name="UserRegistration" Relationship="Self.FK_tblPackageDetails_UserRegistration" FromRole="tblPackageDetails" ToRole="UserRegistration" />
+          <NavigationProperty Name="UserRegistration1" Relationship="Self.FK_tblPackageDetails_UserRegistration1" FromRole="tblPackageDetails" ToRole="UserRegistration" />
+          <NavigationProperty Name="tblQuotations" Relationship="Self.FK_tblQuotation_tblPackageDetails" FromRole="tblPackageDetails" ToRole="tblQuotation" />
+        </EntityType>
+        <EntityType Name="tblQuotation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="SourceAddress1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SourceAddress2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SourcePincode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SourceCity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SourceState" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SourceCountry" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DestinationAddress1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DestinationAddress2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DestinationCity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DestinationState" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DestinationCountry" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PackageDeatilsId" Type="Int32" />
+          <Property Name="CreateBy" Type="Int32" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblPackageDetail" Relationship="Self.FK_tblQuotation_tblPackageDetails" FromRole="tblQuotation" ToRole="tblPackageDetails" />
+          <NavigationProperty Name="UserRegistration" Relationship="Self.FK_tblQuotation_UserRegistration" FromRole="tblQuotation" ToRole="UserRegistration" />
+          <NavigationProperty Name="UserRegistration1" Relationship="Self.FK_tblQuotation_UserRegistration1" FromRole="tblQuotation" ToRole="UserRegistration" />
+          <NavigationProperty Name="UserRegistration2" Relationship="Self.FK_tblQuotation_UserRegistration2" FromRole="tblQuotation" ToRole="UserRegistration" />
+          <Property Name="DestinationPincode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
         </EntityType>
         <EntityType Name="tblSource">
           <Key>
@@ -393,14 +694,17 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ShipmentId" Type="Int32" Nullable="false" />
-          <Property Name="CargoStatusTypeId" Type="Int32" Nullable="false" />
-          <Property Name="CurrentLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IsDelivered" Type="Boolean" Nullable="false" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+          <Property Name="BookingId" Type="Int32" />
+          <Property Name="CargoStatusTypeId" Type="Int32" />
+          <Property Name="CurrentLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelivered" Type="Boolean" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedBy" Type="Int32" />
           <NavigationProperty Name="CargoStatusType" Relationship="Self.FK_Tracking_CargoStatusType" FromRole="Tracking" ToRole="CargoStatusType" />
+          <NavigationProperty Name="tblBooking" Relationship="Self.FK_Tracking_tblBooking" FromRole="Tracking" ToRole="tblBooking" />
+          <NavigationProperty Name="UserRegistration" Relationship="Self.FK_Tracking_UserRegistration" FromRole="Tracking" ToRole="UserRegistration" />
+          <NavigationProperty Name="UserRegistration1" Relationship="Self.FK_Tracking_UserRegistration1" FromRole="Tracking" ToRole="UserRegistration" />
         </EntityType>
         <EntityType Name="UserRegistration">
           <Key>
@@ -423,6 +727,15 @@
           <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="CompanyDetails" Relationship="Self.FK_CompanyDetails_UserRegistration" FromRole="UserRegistration" ToRole="CompanyDetails" />
           <NavigationProperty Name="Offices" Relationship="Self.FK_Office_UserRegistration" FromRole="UserRegistration" ToRole="Office" />
+          <NavigationProperty Name="tblBookings" Relationship="Self.FK_tblBooking_UserRegistration" FromRole="UserRegistration" ToRole="tblBooking" />
+          <NavigationProperty Name="tblBookings1" Relationship="Self.FK_tblBooking_UserRegistration1" FromRole="UserRegistration" ToRole="tblBooking" />
+          <NavigationProperty Name="tblPackageDetails" Relationship="Self.FK_tblPackageDetails_UserRegistration" FromRole="UserRegistration" ToRole="tblPackageDetails" />
+          <NavigationProperty Name="tblPackageDetails1" Relationship="Self.FK_tblPackageDetails_UserRegistration1" FromRole="UserRegistration" ToRole="tblPackageDetails" />
+          <NavigationProperty Name="tblQuotations" Relationship="Self.FK_tblQuotation_UserRegistration" FromRole="UserRegistration" ToRole="tblQuotation" />
+          <NavigationProperty Name="tblQuotations1" Relationship="Self.FK_tblQuotation_UserRegistration1" FromRole="UserRegistration" ToRole="tblQuotation" />
+          <NavigationProperty Name="tblQuotations2" Relationship="Self.FK_tblQuotation_UserRegistration2" FromRole="UserRegistration" ToRole="tblQuotation" />
+          <NavigationProperty Name="Trackings" Relationship="Self.FK_Tracking_UserRegistration" FromRole="UserRegistration" ToRole="Tracking" />
+          <NavigationProperty Name="Trackings1" Relationship="Self.FK_Tracking_UserRegistration1" FromRole="UserRegistration" ToRole="Tracking" />
           <NavigationProperty Name="UserType" Relationship="Self.FK_UserRegistration_UserType" FromRole="UserRegistration" ToRole="UserType" />
         </EntityType>
         <EntityType Name="UserType">
@@ -435,7 +748,7 @@
           <NavigationProperty Name="UserRegistrations" Relationship="Self.FK_UserRegistration_UserType" FromRole="UserType" ToRole="UserRegistration" />
         </EntityType>
         <Association Name="FK_Tracking_CargoStatusType">
-          <End Role="CargoStatusType" Type="Self.CargoStatusType" Multiplicity="1" />
+          <End Role="CargoStatusType" Type="Self.CargoStatusType" Multiplicity="0..1" />
           <End Role="Tracking" Type="Self.Tracking" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CargoStatusType">
@@ -470,6 +783,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblBooking_Office">
+          <End Role="Office" Type="Self.Office" Multiplicity="0..1" />
+          <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblBooking">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblBooking_tblDestination">
           <End Role="tblDestination" Type="Self.tblDestination" Multiplicity="0..1" />
           <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="*" />
@@ -482,6 +807,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblBooking_tblPackageDetails">
+          <End Role="tblPackageDetails" Type="Self.tblPackageDetail" Multiplicity="0..1" />
+          <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPackageDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblBooking">
+              <PropertyRef Name="PackageDetailsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblBooking_tblSource">
           <End Role="tblSource" Type="Self.tblSource" Multiplicity="0..1" />
           <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="*" />
@@ -491,6 +828,138 @@
             </Principal>
             <Dependent Role="tblBooking">
               <PropertyRef Name="SourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBooking_UserRegistration">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="0..1" />
+          <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblBooking">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBooking_UserRegistration1">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="0..1" />
+          <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblBooking">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tracking_tblBooking">
+          <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="0..1" />
+          <End Role="Tracking" Type="Self.Tracking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBooking">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tracking">
+              <PropertyRef Name="BookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPackageDetails_UserRegistration">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="0..1" />
+          <End Role="tblPackageDetails" Type="Self.tblPackageDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblPackageDetails">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPackageDetails_UserRegistration1">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="0..1" />
+          <End Role="tblPackageDetails" Type="Self.tblPackageDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblPackageDetails">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblQuotation_tblPackageDetails">
+          <End Role="tblPackageDetails" Type="Self.tblPackageDetail" Multiplicity="0..1" />
+          <End Role="tblQuotation" Type="Self.tblQuotation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPackageDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblQuotation">
+              <PropertyRef Name="PackageDeatilsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblQuotation_UserRegistration">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="0..1" />
+          <End Role="tblQuotation" Type="Self.tblQuotation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblQuotation">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblQuotation_UserRegistration1">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="0..1" />
+          <End Role="tblQuotation" Type="Self.tblQuotation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblQuotation">
+              <PropertyRef Name="CreateBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblQuotation_UserRegistration2">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="0..1" />
+          <End Role="tblQuotation" Type="Self.tblQuotation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblQuotation">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tracking_UserRegistration">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="0..1" />
+          <End Role="Tracking" Type="Self.Tracking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tracking">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tracking_UserRegistration1">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="0..1" />
+          <End Role="Tracking" Type="Self.Tracking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tracking">
+              <PropertyRef Name="UpdatedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -513,6 +982,8 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="tblBookings" EntityType="Self.tblBooking" />
           <EntitySet Name="tblDestinations" EntityType="Self.tblDestination" />
+          <EntitySet Name="tblPackageDetails" EntityType="Self.tblPackageDetail" />
+          <EntitySet Name="tblQuotations" EntityType="Self.tblQuotation" />
           <EntitySet Name="tblSources" EntityType="Self.tblSource" />
           <EntitySet Name="Trackings" EntityType="Self.Tracking" />
           <EntitySet Name="UserRegistrations" EntityType="Self.UserRegistration" />
@@ -529,13 +1000,65 @@
             <End Role="UserRegistration" EntitySet="UserRegistrations" />
             <End Role="Office" EntitySet="Offices" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblBooking_Office" Association="Self.FK_tblBooking_Office">
+            <End Role="Office" EntitySet="Offices" />
+            <End Role="tblBooking" EntitySet="tblBookings" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblBooking_tblDestination" Association="Self.FK_tblBooking_tblDestination">
             <End Role="tblDestination" EntitySet="tblDestinations" />
+            <End Role="tblBooking" EntitySet="tblBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBooking_tblPackageDetails" Association="Self.FK_tblBooking_tblPackageDetails">
+            <End Role="tblPackageDetails" EntitySet="tblPackageDetails" />
             <End Role="tblBooking" EntitySet="tblBookings" />
           </AssociationSet>
           <AssociationSet Name="FK_tblBooking_tblSource" Association="Self.FK_tblBooking_tblSource">
             <End Role="tblSource" EntitySet="tblSources" />
             <End Role="tblBooking" EntitySet="tblBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBooking_UserRegistration" Association="Self.FK_tblBooking_UserRegistration">
+            <End Role="UserRegistration" EntitySet="UserRegistrations" />
+            <End Role="tblBooking" EntitySet="tblBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBooking_UserRegistration1" Association="Self.FK_tblBooking_UserRegistration1">
+            <End Role="UserRegistration" EntitySet="UserRegistrations" />
+            <End Role="tblBooking" EntitySet="tblBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tracking_tblBooking" Association="Self.FK_Tracking_tblBooking">
+            <End Role="tblBooking" EntitySet="tblBookings" />
+            <End Role="Tracking" EntitySet="Trackings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPackageDetails_UserRegistration" Association="Self.FK_tblPackageDetails_UserRegistration">
+            <End Role="UserRegistration" EntitySet="UserRegistrations" />
+            <End Role="tblPackageDetails" EntitySet="tblPackageDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPackageDetails_UserRegistration1" Association="Self.FK_tblPackageDetails_UserRegistration1">
+            <End Role="UserRegistration" EntitySet="UserRegistrations" />
+            <End Role="tblPackageDetails" EntitySet="tblPackageDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblQuotation_tblPackageDetails" Association="Self.FK_tblQuotation_tblPackageDetails">
+            <End Role="tblPackageDetails" EntitySet="tblPackageDetails" />
+            <End Role="tblQuotation" EntitySet="tblQuotations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblQuotation_UserRegistration" Association="Self.FK_tblQuotation_UserRegistration">
+            <End Role="UserRegistration" EntitySet="UserRegistrations" />
+            <End Role="tblQuotation" EntitySet="tblQuotations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblQuotation_UserRegistration1" Association="Self.FK_tblQuotation_UserRegistration1">
+            <End Role="UserRegistration" EntitySet="UserRegistrations" />
+            <End Role="tblQuotation" EntitySet="tblQuotations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblQuotation_UserRegistration2" Association="Self.FK_tblQuotation_UserRegistration2">
+            <End Role="UserRegistration" EntitySet="UserRegistrations" />
+            <End Role="tblQuotation" EntitySet="tblQuotations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tracking_UserRegistration" Association="Self.FK_Tracking_UserRegistration">
+            <End Role="UserRegistration" EntitySet="UserRegistrations" />
+            <End Role="Tracking" EntitySet="Trackings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tracking_UserRegistration1" Association="Self.FK_Tracking_UserRegistration1">
+            <End Role="UserRegistration" EntitySet="UserRegistrations" />
+            <End Role="Tracking" EntitySet="Trackings" />
           </AssociationSet>
           <AssociationSet Name="FK_UserRegistration_UserType" Association="Self.FK_UserRegistration_UserType">
             <End Role="UserType" EntitySet="UserTypes" />
@@ -613,7 +1136,6 @@
                 <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
                 <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
                 <ScalarProperty Name="ShipmentId" ColumnName="ShipmentId" />
-                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
@@ -640,6 +1162,48 @@
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPackageDetails">
+            <EntityTypeMapping TypeName="CargovioDbModel.tblPackageDetail">
+              <MappingFragment StoreEntitySet="tblPackageDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PackageType" ColumnName="PackageType" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblQuotations">
+            <EntityTypeMapping TypeName="CargovioDbModel.tblQuotation">
+              <MappingFragment StoreEntitySet="tblQuotation">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DestinationPincode" ColumnName="DestinationPincode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SourceAddress1" ColumnName="SourceAddress1" />
+                <ScalarProperty Name="SourceAddress2" ColumnName="SourceAddress2" />
+                <ScalarProperty Name="SourcePincode" ColumnName="SourcePincode" />
+                <ScalarProperty Name="SourceCity" ColumnName="SourceCity" />
+                <ScalarProperty Name="SourceState" ColumnName="SourceState" />
+                <ScalarProperty Name="SourceCountry" ColumnName="SourceCountry" />
+                <ScalarProperty Name="DestinationAddress1" ColumnName="DestinationAddress1" />
+                <ScalarProperty Name="DestinationAddress2" ColumnName="DestinationAddress2" />
+                <ScalarProperty Name="DestinationCity" ColumnName="DestinationCity" />
+                <ScalarProperty Name="DestinationState" ColumnName="DestinationState" />
+                <ScalarProperty Name="DestinationCountry" ColumnName="DestinationCountry" />
+                <ScalarProperty Name="PackageDeatilsId" ColumnName="PackageDeatilsId" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -670,7 +1234,7 @@
             <EntityTypeMapping TypeName="CargovioDbModel.Tracking">
               <MappingFragment StoreEntitySet="Tracking">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ShipmentId" ColumnName="ShipmentId" />
+                <ScalarProperty Name="BookingId" ColumnName="BookingId" />
                 <ScalarProperty Name="CargoStatusTypeId" ColumnName="CargoStatusTypeId" />
                 <ScalarProperty Name="CurrentLocation" ColumnName="CurrentLocation" />
                 <ScalarProperty Name="IsDelivered" ColumnName="IsDelivered" />

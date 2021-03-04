@@ -31,6 +31,8 @@ namespace Data.Model
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<tblBooking> tblBookings { get; set; }
         public virtual DbSet<tblDestination> tblDestinations { get; set; }
+        public virtual DbSet<tblPackageDetail> tblPackageDetails { get; set; }
+        public virtual DbSet<tblQuotation> tblQuotations { get; set; }
         public virtual DbSet<tblSource> tblSources { get; set; }
         public virtual DbSet<Tracking> Trackings { get; set; }
         public virtual DbSet<UserRegistration> UserRegistrations { get; set; }

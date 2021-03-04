@@ -43,12 +43,14 @@
     <Compile Include="CommonEntities\CompanyDetailsEntities.cs" />
     <Compile Include="CommonEntities\OfficeDetailsEntities.cs" />
     <Compile Include="CommonEntities\UserRegistrationEntities.cs" />
+    <Compile Include="Customer\GetQuotationEntities.cs" />
+    <Compile Include="Customer\PackageEntities.cs" />
+    <Compile Include="Customer\QuotationEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\" />
     <Folder Include="CustomerAdmin\" />
-    <Folder Include="Customer\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

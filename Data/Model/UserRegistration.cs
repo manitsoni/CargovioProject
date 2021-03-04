@@ -19,6 +19,15 @@ namespace Data.Model
         {
             this.CompanyDetails = new HashSet<CompanyDetail>();
             this.Offices = new HashSet<Office>();
+            this.tblBookings = new HashSet<tblBooking>();
+            this.tblBookings1 = new HashSet<tblBooking>();
+            this.tblPackageDetails = new HashSet<tblPackageDetail>();
+            this.tblPackageDetails1 = new HashSet<tblPackageDetail>();
+            this.tblQuotations = new HashSet<tblQuotation>();
+            this.tblQuotations1 = new HashSet<tblQuotation>();
+            this.tblQuotations2 = new HashSet<tblQuotation>();
+            this.Trackings = new HashSet<Tracking>();
+            this.Trackings1 = new HashSet<Tracking>();
         }
     
         public int Id { get; set; }
@@ -41,6 +50,24 @@ namespace Data.Model
         public virtual ICollection<CompanyDetail> CompanyDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Office> Offices { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblBooking> tblBookings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblBooking> tblBookings1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblPackageDetail> tblPackageDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblPackageDetail> tblPackageDetails1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblQuotation> tblQuotations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblQuotation> tblQuotations1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblQuotation> tblQuotations2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tracking> Trackings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tracking> Trackings1 { get; set; }
         public virtual UserType UserType { get; set; }
     }
 }

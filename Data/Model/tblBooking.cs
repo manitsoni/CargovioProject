@@ -14,6 +14,12 @@ namespace Data.Model
     
     public partial class tblBooking
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblBooking()
+        {
+            this.Trackings = new HashSet<Tracking>();
+        }
+    
         public int ID { get; set; }
         public Nullable<int> Userid { get; set; }
         public Nullable<int> SourceId { get; set; }
@@ -24,12 +30,17 @@ namespace Data.Model
         public Nullable<int> TransactionId { get; set; }
         public Nullable<int> OfficeId { get; set; }
         public Nullable<int> ShipmentId { get; set; }
-        public Nullable<int> BranchId { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<int> UpdatedBy { get; set; }
         public Nullable<bool> IsActive { get; set; }
     
+        public virtual Office Office { get; set; }
         public virtual tblDestination tblDestination { get; set; }
+        public virtual tblPackageDetail tblPackageDetail { get; set; }
         public virtual tblSource tblSource { get; set; }
+        public virtual UserRegistration UserRegistration { get; set; }
+        public virtual UserRegistration UserRegistration1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tracking> Trackings { get; set; }
     }
 }
