@@ -50,6 +50,7 @@
     <Compile Include="Customer\PackageEntities.cs" />
     <Compile Include="Customer\QuotationEntities.cs" />
     <Compile Include="Customer\SourceAddressEntities.cs" />
+    <Compile Include="Customer\TrackingEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

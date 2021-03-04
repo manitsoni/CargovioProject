@@ -86,6 +86,7 @@ namespace Cargovio.Areas.Customer.Controllers
                 string City = SessionProxyUser.City;
                 int OfficeId;
                 int oid = db.Offices.Where(m => m.City == City).Select(m => m.Id).First();
+                int OfficeUserId = db.Offices.Where(m => m.City == City).Select(m => m.UserId).FirstOrDefault();
                 if (oid > 0)
                 {
                     OfficeId = oid;
@@ -110,12 +111,23 @@ namespace Cargovio.Areas.Customer.Controllers
                 int BookingId = bookingManager.AddBooking(be);
 
                 //Add Tracking Info in DB
-                return Ok();
+                TrackingEntities te = new TrackingEntities();
+                te.BookingId = BookingId;
+                te.CargoStatusTypeId = 1;
+                te.CreatedBy = SessionProxyUser.UserID;
+                te.CurrentLocation = SessionProxyUser.City;
+                te.IsActive = true;
+                te.IsDelivered = false;
+                te.UpdatedBy = OfficeUserId;
+                int TrackingId = bookingManager.AddTracking(te);
+
+                return Ok(TrackingId);
             }
             catch (Exception)
             {
                 return NotFound();
             }
         }
+        
     }
 }

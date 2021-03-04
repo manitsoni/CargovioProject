@@ -84,5 +84,21 @@ namespace Business.Customer.Manager
                 return 0;
             }
         }
+
+        public int AddTracking(TrackingEntities te)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<TrackingEntities, Tracking>());
+            IMapper mapper = config.CreateMapper();
+            if (UserLogin.IsUserLogin())
+            {
+                Tracking ta = mapper.Map<TrackingEntities, Tracking>(te);
+                int TrackingId = bookingRepository.AddSourceAddress(te);
+                return TrackingId;
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
 }

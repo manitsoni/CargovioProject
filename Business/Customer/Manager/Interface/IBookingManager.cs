@@ -12,6 +12,6 @@ namespace Business.Customer.Manager.Interface
         int AddSourceAddress(SourceAddressEntities se);
         int AddDestinationAddress(DestinationAddressEntities de);
         int AddBooking(BookingEntities be);
-        //int AddTracking();
+        int AddTracking(TrackingEntities te);
     }
 }

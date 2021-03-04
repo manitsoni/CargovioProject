@@ -43,7 +43,9 @@ namespace Data.Customer.Repository
 
         public int AddTracking(Tracking objTracking)
         {
-            throw new NotImplementedException();
+            db.Trackings.Add(objTracking);
+            db.SaveChanges();
+            return (objTracking.Id);
         }
     }
 }
