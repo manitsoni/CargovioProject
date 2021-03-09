@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Cargovio.Helper;
+
 using AutoMapper;
 using Data.Model;
 using BusinessEntities.Customer;
@@ -132,12 +132,12 @@ namespace Cargovio.Areas.Customer.Controllers
             }
         }
         [HttpGet]
-        [Route("Customer/Api/GetMyBooking")]
-        public IHttpActionResult GetBooking()
+        [Route("Customer/Api/GetMyBooking/{Userid}")]
+        public IHttpActionResult GetBooking(string Userid)
         {
             try
             {
-                return Ok(bookingManager.GetBooking());
+                return Ok(bookingManager.GetBooking(Convert.ToInt32(Userid)));
             }
             catch (Exception)
             {

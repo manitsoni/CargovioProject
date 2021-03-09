@@ -20,7 +20,7 @@ namespace Business.Customer.Manager
         {
             quotationRepository = quotation;
         }
-        IsLogin UserLogin = new IsLogin();
+      
         public int AddPackage(PackageEntities pe)
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<PackageEntities, tblPackageDetail>());

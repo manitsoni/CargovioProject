@@ -48,7 +48,7 @@ namespace Data.Customer.Repository
             return (objTracking.Id);
         }
 
-        public IList<CommonBookingEntities> GetBooking()
+        public IList<CommonBookingEntities> GetBooking(int _userId)
         {
             var BookingData = (from tr in db.Trackings
                                join bd in db.tblBookings on tr.BookingId equals bd.ID
@@ -57,7 +57,7 @@ namespace Data.Customer.Repository
                                join sa in db.tblSources on bd.SourceId equals sa.ID
                                join ur in db.UserRegistrations on bd.Userid equals ur.Id
                                join pd in db.tblPackageDetails on bd.PackageDetailsId equals pd.Id
-                               where bd.Userid == SessionProxyUser.UserID && tr.IsDelivered == false
+                               where bd.Userid == _userId && tr.IsDelivered == false
                                select new CommonBookingEntities
                                {
                                    Amount = bd.Amount,
@@ -77,6 +77,8 @@ namespace Data.Customer.Repository
         }
         public IList<CommonBookingEntities> GetBookingDetails(string ShipmentId)
         {
+            var data = db.tblBookings.Where(m => m.ShipmentId == ShipmentId).FirstOrDefault();
+            int Userid = Convert.ToInt32(data.Userid);
             var BookingData = (from tr in db.Trackings
                                join bd in db.tblBookings on tr.BookingId equals bd.ID
                                join cr in db.CargoStatusTypes on tr.CargoStatusTypeId equals cr.Id
@@ -84,7 +86,7 @@ namespace Data.Customer.Repository
                                join sa in db.tblSources on bd.SourceId equals sa.ID
                                join ur in db.UserRegistrations on bd.Userid equals ur.Id
                                join pd in db.tblPackageDetails on bd.PackageDetailsId equals pd.Id
-                               where bd.Userid == SessionProxyUser.UserID && tr.IsDelivered == false && bd.ShipmentId == ShipmentId
+                               where bd.Userid == Userid && tr.IsDelivered == false && bd.ShipmentId == ShipmentId
                                select new CommonBookingEntities
                                {
                                    Amount = bd.Amount,

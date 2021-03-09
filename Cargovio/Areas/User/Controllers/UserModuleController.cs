@@ -8,7 +8,7 @@ using Business;
 using Business.User.Manager;
 using Business.User.Manager.Interface;
 using BusinessEntities.CommonEntities;
-using Cargovio.Helper;
+
 using Data.Model;
 using Cargovio.Areas.User.Models;
 namespace Cargovio.Areas.User.Controllers
@@ -160,7 +160,7 @@ namespace Cargovio.Areas.User.Controllers
         {
             try
             {
-                SessionProxyUser.IsUserLogin = false;
+                //SessionProxyUser.IsUserLogin = false;
                 return Ok();
             }
             catch (Exception)

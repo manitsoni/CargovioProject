@@ -14,7 +14,7 @@ namespace Data.Customer.Repository.Interface
         int AddPackage(tblPackageDetail objPackage);
         int AddBooking(tblBooking objBooking);
         int AddTracking(Tracking objTracking);
-        IList<CommonBookingEntities> GetBooking();
+        IList<CommonBookingEntities> GetBooking(int id);
         IList<CommonBookingEntities> GetBookingDetails(string ShipmentId);
     }
 }
