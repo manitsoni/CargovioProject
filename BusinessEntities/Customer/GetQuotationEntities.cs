@@ -25,15 +25,15 @@ namespace BusinessEntities.Customer
         public int? PackageDetailsId { get; set; }
         public int? CreatedBy { get; set; }
         public int? UpdatedBy { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime UpdatedDate { get; set; }
+        public string CreatedDate { get; set; }
+        public string UpdatedDate { get; set; }
         public int PackageId { get; set; }
         public string Packagename { get; set; }
 
         public int? Quantity { get; set; }
         public int? Width { get; set; }
         public int? Height { get; set; }
-        public int? Lenght { get; set; }
+        public int? Length { get; set; }
         public int? Weight { get; set; }
 
         public Nullable<Boolean> IsActive { get; set; }

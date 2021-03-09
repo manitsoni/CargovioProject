@@ -8,13 +8,16 @@ using Business;
 using Business.User.Manager;
 using Business.User.Manager.Interface;
 using BusinessEntities.CommonEntities;
-using Common;
+using Cargovio.Helper;
+using Data.Model;
+using Cargovio.Areas.User.Models;
 namespace Cargovio.Areas.User.Controllers
 {
     public class UserModuleController : ApiController
     {
         private IUserManager userManager;
-        private int UserId =0;
+        private int UserId;
+        CargovioDbEntities db = new CargovioDbEntities();
         private string UserType = "";
         public UserModuleController(IUserManager user)
         {
@@ -29,13 +32,29 @@ namespace Cargovio.Areas.User.Controllers
                 user.IsActive = true;
                 user.CreatedDate = DateTime.Now;
                 user.UpdatedDate = DateTime.Now;
+                
                 UserType = _userType;
                 if (_userType == "CustomerAdmin")
                 {
+                    user.IsVerify = true;
+                    user.OfficeId = 2;
                     user.UserTypeId = 2;
                 }
                 else if(_userType =="Customer")
                 {
+                    var City = user.City;
+                    var data = db.Offices.Where(m => m.City == City).FirstOrDefault();
+                    int OfficeId = data.Id;
+                    if (OfficeId  > 0)
+                    {
+                        user.OfficeId = OfficeId;
+                    }
+                    else
+                    {
+                        user.OfficeId = 6;
+                    }
+                   
+                    user.IsVerify = false;
                     user.UserTypeId = 3;
                 }
                 UserId = userManager.UserRegistration(user);
@@ -44,12 +63,12 @@ namespace Cargovio.Areas.User.Controllers
                     return NotFound();
                 }
                 else{
-                    return Ok();
+                    return Ok(UserId);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound();
+                return Ok(ex);
             }
         }
         [Route("User/Api/UserModule/CompanyRegister")]
@@ -58,22 +77,23 @@ namespace Cargovio.Areas.User.Controllers
         {
             try
             {
-                if (UserId != 0 && UserType =="Customer")
+                if (company.UserId > 0)
                 {
-                    company.IsActibe = true;
+                    company.IsActive = true;
                     company.CreatedDate = DateTime.Now;
-                    company.UserId = UserId;
+                    company.CopmanyAddress1 = company.City;
+                    company.CopmanyAddress2 = company.City;
                     return Ok(userManager.CompanyDetails(company));
                 }
                 else
                 {
-                    return NotFound();
+                    return Ok("Please Register First!");
                 }
-               
+
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound();
+                return Ok(ex);
             }
         }
         [Route("User/Api/UserModule/OfficeRegister")]
@@ -82,12 +102,20 @@ namespace Cargovio.Areas.User.Controllers
         {
             try
             {
-                if (UserId !=0 && UserType == "CustomerAdmin")
+                if (office.UserId !=0)
                 {
+                    
                     office.IsActive = true;
                     office.CreatedDate = DateTime.Now;
-                    office.UserId = UserId;
-                    return Ok(userManager.OfficeDetails(office));
+                    office.UserId = office.UserId;
+                    office.OfficeLocation = office.City;
+                    int OfficeId = userManager.OfficeDetails(office);
+                    UserRegistration ur = new UserRegistration();
+                    ur = db.UserRegistrations.Find(office.UserId);
+                    ur.OfficeId = OfficeId;
+                    db.Entry(ur).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                    return Ok(OfficeId);
 
                 }
                 else
@@ -108,17 +136,20 @@ namespace Cargovio.Areas.User.Controllers
             try
             {
                 int _userId = userManager.Login(Email, Password);
+                //int TypeId = Convert.ToInt32(db.UserRegistrations.Where(m => m.Id == _userId).Select(m => m.UserTypeId));
                 if (_userId == 0)
                 {
                     return NotFound();
                 }
                 else
                 {
-                    userManager.BindToSession(_userId).ToList();
-                    return Ok();
+                    //userManager.BindToSession(_userId).ToList();
+                    // BindToSession(_userId);
+
+                    return Ok(_userId);
                 }
             }
-            catch (Exception)
+            catch (NullReferenceException ex)
             {
                 return NotFound();
             }
@@ -136,6 +167,16 @@ namespace Cargovio.Areas.User.Controllers
             {
                 return NotFound();
             }
+        }
+
+       
+        [HttpGet]
+        [Route("User/Api/UserModule/GetTypeId/{Userid}")]
+        public IHttpActionResult GetTypeId(int Userid)
+        {
+            var data = db.UserRegistrations.Where(m => m.Id == Userid).FirstOrDefault();
+            int TypeId = data.UserTypeId;
+            return Ok(TypeId);
         }
     }
 }

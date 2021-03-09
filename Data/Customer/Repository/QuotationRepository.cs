@@ -26,16 +26,16 @@ namespace Data.Customer.Repository
             return db.SaveChanges() > 0;
         }
 
-        public IList<GetQuotationEntities> GetQuotation()
+        public IList<GetQuotationEntities> GetQuotation(int id)
         {
             var Data = (from qe in db.tblQuotations
                         join pe in db.tblPackageDetails on qe.PackageDeatilsId equals pe.Id
                         join ur in db.UserRegistrations on qe.UserId equals ur.Id
-                        where ur.Id == SessionProxyUser.UserID && qe.PackageDeatilsId == pe.Id
+                        where ur.Id == id && qe.PackageDeatilsId == pe.Id
                         select new GetQuotationEntities
                         {
                             CreatedBy = qe.CreateBy,
-                            CreatedDate = Convert.ToDateTime(qe.CreatedDate),
+                            CreatedDate = (qe.CreatedDate).ToString(),
                             DestinationAddress1 = qe.DestinationAddress1,
                             DestinationAddress2 = qe.DestinationAddress2,
                             DestinationCity = qe.DestinationCity,
@@ -44,7 +44,7 @@ namespace Data.Customer.Repository
                             DestinationState = qe.DestinationState,
                             Height = pe.Height,
                             IsActive = qe.IsActive,
-                            Lenght = pe.Length,
+                            Length = pe.Length,
                             PackageDetailsId = pe.Id,
                             PackageId = pe.Id,
                             Packagename = pe.PackageType,
@@ -57,7 +57,7 @@ namespace Data.Customer.Repository
                             SourcePincode = qe.SourcePincode,
                             SourceState = qe.SourceState,
                             UpdatedBy = qe.UpdatedBy,
-                            UpdatedDate = Convert.ToDateTime(qe.UpdatedDate), 
+                            UpdatedDate =qe.UpdatedDate.ToString(), 
                             UserId = qe.UserId,
                             Weight =pe.Weight,
                             Width = pe.Width

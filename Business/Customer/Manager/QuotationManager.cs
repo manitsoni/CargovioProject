@@ -25,16 +25,17 @@ namespace Business.Customer.Manager
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<PackageEntities, tblPackageDetail>());
             IMapper mapper = config.CreateMapper();
-            if (UserLogin.IsUserLogin())
-            {
-                tblPackageDetail package = mapper.Map<PackageEntities, tblPackageDetail>(pe);
-                int PackageId = quotationRepository.BookPackage(package);
-                return PackageId;
-            }
-            else
-            {
-                return 0;
-            }
+            tblPackageDetail package = mapper.Map<PackageEntities, tblPackageDetail>(pe);
+            int PackageId = quotationRepository.BookPackage(package);
+            return PackageId;
+            //if (UserLogin.IsUserLogin())
+            //{
+                
+            //}
+            //else
+            //{
+            //    return 0;
+            //}
 
         }
 
@@ -42,20 +43,20 @@ namespace Business.Customer.Manager
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<QuotationEntities, tblQuotation>());
             IMapper mapper = config.CreateMapper();
-            if (UserLogin.IsUserLogin())
-            {
-                tblQuotation quot = mapper.Map<QuotationEntities, tblQuotation>(qe);
-                return quotationRepository.BookQuotation(quot); ;
-            }
-            else
-            {
-                return false;
-            }
+            tblQuotation quot = mapper.Map<QuotationEntities, tblQuotation>(qe);
+            return quotationRepository.BookQuotation(quot); 
+            //if (UserLogin.IsUserLogin())
+            //{
+            //}
+            //else
+            //{
+            //    return false;
+            //}
         }
 
-        public IList<GetQuotationEntities> GetQuotation()
+        public IList<GetQuotationEntities> GetQuotation(int id)
         {
-            return quotationRepository.GetQuotation().ToList();
+            return quotationRepository.GetQuotation(id).ToList();
         }
     }
 }

@@ -69,6 +69,8 @@
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
           <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsPickUp" ColumnName="IsPickUp" />
+          <ScalarProperty Name="IsDelivered" ColumnName="IsDelivered" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
         </MappingFragment>
@@ -118,6 +120,7 @@
         <MappingFragment StoreEntitySet="tblQuotation">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
           <ScalarProperty Name="SourceAddress1" ColumnName="SourceAddress1" />
           <ScalarProperty Name="SourceAddress2" ColumnName="SourceAddress2" />
           <ScalarProperty Name="SourcePincode" ColumnName="SourcePincode" />
@@ -179,6 +182,7 @@
     <EntitySetMapping Name="UserRegistrations">
       <EntityTypeMapping TypeName="CargovioDbModel.UserRegistration">
         <MappingFragment StoreEntitySet="UserRegistration">
+          <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="Password" ColumnName="Password" />
@@ -194,6 +198,7 @@
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="IsVerify" ColumnName="IsVerify" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

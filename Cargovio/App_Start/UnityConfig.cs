@@ -6,6 +6,8 @@ using Business.User.Manager;
 using Business.User.Manager.Interface;
 using Business.Customer.Manager;
 using Business.Customer.Manager.Interface;
+using Business.Admin.Manager;
+using Business.Admin.Manager.Interface;
 namespace Cargovio
 {
     public static class UnityConfig
@@ -21,6 +23,7 @@ namespace Cargovio
             container.RegisterType<IUserManager,UserManager>();
             container.RegisterType<IQuotationManager, QuotationManager>();
             container.RegisterType<IBookingManager, BookingManager>();
+            container.RegisterType<IManageCustomerByAdminManager, ManageCustomerByAdminManager>();
             container.AddNewExtension<UnityRepositoryHelper>();
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

@@ -24,10 +24,20 @@ namespace Data.CommonEntities.Repository
             return (objUser.Id);
         }
 
-        public bool AddOfficeDetails(Office objOffice)
+        public int AddOfficeDetails(Office objOffice)
         {
-            db.Offices.Add(objOffice);
-            return db.SaveChanges() > 0;
+            try
+            {
+                db.Offices.Add(objOffice);
+                db.SaveChanges();
+                return (objOffice.Id);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            
         }
 
         public bool CheckCompany(int id, string CompanyName)
@@ -47,7 +57,7 @@ namespace Data.CommonEntities.Repository
 
         public int CheckLogin(string Email, string password)
         {
-            var UserList = db.UserRegistrations.ToList();
+            var UserList = db.UserRegistrations.Where(m => m.IsActive == true && m.IsVerify == true).ToList();
             int getUserid = 0;
             foreach (var item in UserList)
             {
@@ -88,6 +98,12 @@ namespace Data.CommonEntities.Repository
                 }
             }
             return IsAvailable;
+        }
+
+        public int GetOfficeId(int Userid)
+        {
+            int id = db.Offices.Where(m => m.UserId == Userid).Select(m => m.Id).First();
+            return id;
         }
 
         public IQueryable<UserRegistration> GetUser(int id)

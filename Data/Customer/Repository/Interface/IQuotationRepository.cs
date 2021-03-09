@@ -13,6 +13,6 @@ namespace Data.Customer.Repository.Interface
         int BookPackage(tblPackageDetail objPackage);
         bool BookQuotation(tblQuotation objQuotation);
         
-        IList<GetQuotationEntities> GetQuotation();
+        IList<GetQuotationEntities> GetQuotation(int id);
     }
 }

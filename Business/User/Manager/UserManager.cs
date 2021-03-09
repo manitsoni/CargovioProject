@@ -4,62 +4,50 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using Common;
+
 using Business.User.Manager.Interface;
 using BusinessEntities.CommonEntities;
 using Data.Model;
 using Data.CommonEntities.Repository;
 using Data.CommonEntities.Repository.Interface;
-
 namespace Business.User.Manager
 {
     public class UserManager : IUserManager
     {
 
         private IUserRepository userRepository;
+        
         public UserManager(IUserRepository user)
         {
             userRepository = user;
         }
 
-        public IList<UserRegistrationEntities> BindToSession(int id)
-        {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<UserRegistration, UserRegistrationEntities>());
-            IMapper mapper = config.CreateMapper();
-            var User = userRepository.GetUser(id).ToList();
-            List<UserRegistrationEntities> _User = User.Select(x => mapper.Map<UserRegistration, UserRegistrationEntities>(x)).ToList();
-            foreach (var item in _User)
-            {
-                SessionProxyUser.IsUserLogin = true;
-                SessionProxyUser.UserID = item.Id;
-                SessionProxyUser.UserEmail = item.Email;
-                SessionProxyUser.Name = item.UserName;
-                SessionProxyUser.Address1 = item.Addressline1;
-                SessionProxyUser.Address2 = item.AddressLine2;
-                SessionProxyUser.City = item.City;
-                SessionProxyUser.State = item.State;
-                SessionProxyUser.Country = item.Country;
-                SessionProxyUser.Pincode = item.Pincode.ToString();
-                SessionProxyUser.Phone = item.ContactNo;
-                break;
-            }
-            return _User;
-        }
+        
 
         public bool CompanyDetails(CompanyDetailsEntities objCompany)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<CompanyDetailsEntities, CompanyDetail>());
-            IMapper mapper = config.CreateMapper();
-            bool IsAvailable = userRepository.CheckCompany(objCompany.UserId, objCompany.CompanyName);
-            if (IsAvailable == false)
+            try
             {
-                CompanyDetail company = mapper.Map<CompanyDetailsEntities, CompanyDetail>(objCompany);
-                return userRepository.AddCompanyDetails(company);
+              
+                var config = new MapperConfiguration(cfg => cfg.CreateMap<CompanyDetailsEntities, CompanyDetail>());
+                IMapper mapper = config.CreateMapper();
+                bool IsAvailable = userRepository.CheckCompany(objCompany.UserId, objCompany.CompanyName);
+                if (IsAvailable == false)
+                {
+                    CompanyDetail company = mapper.Map<CompanyDetailsEntities, CompanyDetail>(objCompany);
+                    return userRepository.AddCompanyDetails(company);
+                }
+                else
+                {
+                    return false; ;
+                }
             }
-            else
+            catch (DataMisalignedException ex)
             {
-                return false; ;
+
+                throw;
             }
+         
         }
 
         public int Login(string Email, string Password)
@@ -73,19 +61,21 @@ namespace Business.User.Manager
             throw new NotImplementedException();
         }
 
-        public bool OfficeDetails(OfficeDetailsEntities objOffice)
+        public int OfficeDetails(OfficeDetailsEntities objOffice)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<UserRegistrationEntities, UserRegistration>());
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<OfficeDetailsEntities, Office>());
             IMapper mapper = config.CreateMapper();
             bool IsAvailable = userRepository.CheckOffice(objOffice.UserId, objOffice.OfficeLocation);
             if (IsAvailable == false)
             {
                 Office office = mapper.Map<OfficeDetailsEntities, Office>(objOffice);
-                return userRepository.AddOfficeDetails(office);
+                office.BranchLocation = objOffice.OfficeLocation;
+                int OfficeId = userRepository.AddOfficeDetails(office);
+                return OfficeId;
             }
             else
             {
-                return false;
+                return 0;
             }
         }
 

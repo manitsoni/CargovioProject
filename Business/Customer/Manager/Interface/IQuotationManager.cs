@@ -10,6 +10,6 @@ namespace Business.Customer.Manager.Interface
     {
         int AddPackage(PackageEntities pe);
         bool AddQuotation(QuotationEntities qe);
-        IList<GetQuotationEntities> GetQuotation();
+        IList<GetQuotationEntities> GetQuotation(int id);
     }
 }

@@ -178,6 +178,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\Area1AreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManageCustomerController.cs" />
     <Compile Include="Areas\CustomerAdmin\CustomerAdminAreaRegistration.cs" />
     <Compile Include="Areas\Customer\Controllers\BookingController.cs" />
     <Compile Include="Areas\Customer\Controllers\QuotationController.cs" />
@@ -212,6 +213,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Areas\User\Controllers\UserModuleController.cs" />
+    <Compile Include="Areas\User\Models\data.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -278,14 +280,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\CustomerAdmin\Controllers\" />
     <Folder Include="Areas\CustomerAdmin\Models\" />
     <Folder Include="Areas\CustomerAdmin\Views\Shared\" />
     <Folder Include="Areas\Customer\Views\Shared\" />
-    <Folder Include="Areas\User\Models\" />
     <Folder Include="Areas\User\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>
@@ -321,6 +321,9 @@
       <Project>{dbe4a3c8-7977-449f-9e9f-cd92225a1896}</Project>
       <Name>Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

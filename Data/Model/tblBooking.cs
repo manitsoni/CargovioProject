@@ -33,6 +33,8 @@ namespace Data.Model
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<int> UpdatedBy { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        public Nullable<bool> IsPickUp { get; set; }
+        public Nullable<bool> IsDelivered { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
     

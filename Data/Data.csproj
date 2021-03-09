@@ -49,8 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\Repository\Interface\IManageCustomerRepositoryByAdmin.cs" />
+    <Compile Include="Admin\Repository\ManageCustomerRepository.cs" />
     <Compile Include="CommonEntities\Repository\Interface\IUserRepository.cs" />
     <Compile Include="CommonEntities\Repository\UserRepository.cs" />
+    <Compile Include="CustomerAdmin\Repository\CustomerRepository.cs" />
+    <Compile Include="CustomerAdmin\Repository\Interface\ICustomerRepository.cs" />
     <Compile Include="Customer\Repository\BookingRepository.cs" />
     <Compile Include="Customer\Repository\Interface\IBookingRepository.cs" />
     <Compile Include="Customer\Repository\Interface\IQuotationRepository.cs" />
@@ -108,10 +112,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Admin\" />
-    <Folder Include="CustomerAdmin\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.Config" />
     <EntityDeploy Include="Model\CargovioModel.edmx">

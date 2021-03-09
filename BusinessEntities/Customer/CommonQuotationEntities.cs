@@ -28,6 +28,7 @@ namespace BusinessEntities.Customer
         public int? Height { get; set; }
         public int? Lenght { get; set; }
         public int? Weight { get; set; }
+        public int? OfficeId { get; set; }
     
     }
 }

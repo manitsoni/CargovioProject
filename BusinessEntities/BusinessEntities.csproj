@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonEntities\CommonCustomerEntities.cs" />
     <Compile Include="CommonEntities\CompanyDetailsEntities.cs" />
     <Compile Include="CommonEntities\OfficeDetailsEntities.cs" />
     <Compile Include="CommonEntities\UserRegistrationEntities.cs" />

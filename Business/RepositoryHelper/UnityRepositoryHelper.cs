@@ -9,6 +9,8 @@ using Data.CommonEntities.Repository;
 using Data.CommonEntities.Repository.Interface;
 using Data.Customer.Repository;
 using Data.Customer.Repository.Interface;
+using Data.Admin.Repository;
+using Data.Admin.Repository.Interface;
 namespace Business.RepositoryHelper
 {
     public class UnityRepositoryHelper : UnityContainerExtension
@@ -18,6 +20,7 @@ namespace Business.RepositoryHelper
             Container.RegisterType<IUserRepository, UserRepository>();
             Container.RegisterType<IQuotationRepository, QuotationRepository>();
             Container.RegisterType<IBookingRepository, BookingRepository>();
+            Container.RegisterType<IManageCustomerRepositoryByAdmin, ManageCustomerRepository>();
         }
     }
 }

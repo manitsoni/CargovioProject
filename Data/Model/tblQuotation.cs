@@ -16,6 +16,7 @@ namespace Data.Model
     {
         public int Id { get; set; }
         public Nullable<int> UserId { get; set; }
+        public Nullable<int> OfficeId { get; set; }
         public string SourceAddress1 { get; set; }
         public string SourceAddress2 { get; set; }
         public string SourcePincode { get; set; }
@@ -35,6 +36,7 @@ namespace Data.Model
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<bool> IsActive { get; set; }
     
+        public virtual Office Office { get; set; }
         public virtual tblPackageDetail tblPackageDetail { get; set; }
         public virtual UserRegistration UserRegistration { get; set; }
         public virtual UserRegistration UserRegistration1 { get; set; }

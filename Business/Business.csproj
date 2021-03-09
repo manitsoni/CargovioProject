@@ -65,6 +65,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\Manager\Interface\IManageCustomerByAdminManager.cs" />
+    <Compile Include="Admin\Manager\ManageCustomerByAdminManager.cs" />
     <Compile Include="Customer\Manager\BookingManager.cs" />
     <Compile Include="Customer\Manager\Interface\IBookingManager.cs" />
     <Compile Include="Customer\Manager\Interface\IQuotationManager.cs" />
@@ -79,7 +81,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Admin\" />
     <Folder Include="CustomerAdmin\" />
   </ItemGroup>
   <ItemGroup>

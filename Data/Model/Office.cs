@@ -18,6 +18,7 @@ namespace Data.Model
         public Office()
         {
             this.tblBookings = new HashSet<tblBooking>();
+            this.tblQuotations = new HashSet<tblQuotation>();
         }
     
         public int Id { get; set; }
@@ -32,5 +33,7 @@ namespace Data.Model
         public virtual UserRegistration UserRegistration { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblBooking> tblBookings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblQuotation> tblQuotations { get; set; }
     }
 }

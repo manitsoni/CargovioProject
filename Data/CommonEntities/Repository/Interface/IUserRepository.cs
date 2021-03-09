@@ -14,11 +14,12 @@ namespace Data.CommonEntities.Repository.Interface
 
         bool AddCompanyDetails(CompanyDetail objCompanyDetails);
 
-        bool AddOfficeDetails(Office objOffice);
+        int AddOfficeDetails(Office objOffice);
 
         bool CheckUser(string Email, string password);
         bool CheckCompany(int id, string CompanyName);
         bool CheckOffice(int Userid, string OfficeLocation);
         IQueryable<UserRegistration> GetUser(int id);
+        int GetOfficeId(int Userid);
     }
 }

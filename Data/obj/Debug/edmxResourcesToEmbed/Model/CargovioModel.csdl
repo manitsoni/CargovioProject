@@ -41,6 +41,7 @@
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="UserRegistration" Relationship="Self.FK_Office_UserRegistration" FromRole="Office" ToRole="UserRegistration" />
     <NavigationProperty Name="tblBookings" Relationship="Self.FK_tblBooking_Office" FromRole="Office" ToRole="tblBooking" />
+    <NavigationProperty Name="tblQuotations" Relationship="Self.FK_tblQuotation_Office" FromRole="Office" ToRole="tblQuotation" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
@@ -69,6 +70,8 @@
     <Property Name="CreatedBy" Type="Int32" />
     <Property Name="UpdatedBy" Type="Int32" />
     <Property Name="IsActive" Type="Boolean" />
+    <Property Name="IsPickUp" Type="Boolean" />
+    <Property Name="IsDelivered" Type="Boolean" />
     <Property Name="CreatedDate" Type="DateTime" Precision="3" />
     <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Office" Relationship="Self.FK_tblBooking_Office" FromRole="tblBooking" ToRole="Office" />
@@ -127,6 +130,7 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserId" Type="Int32" />
+    <Property Name="OfficeId" Type="Int32" />
     <Property Name="SourceAddress1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="SourceAddress2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="SourcePincode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -145,6 +149,7 @@
     <Property Name="CreatedDate" Type="DateTime" Precision="3" />
     <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
     <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="Office" Relationship="Self.FK_tblQuotation_Office" FromRole="tblQuotation" ToRole="Office" />
     <NavigationProperty Name="tblPackageDetail" Relationship="Self.FK_tblQuotation_tblPackageDetails" FromRole="tblQuotation" ToRole="tblPackageDetails" />
     <NavigationProperty Name="UserRegistration" Relationship="Self.FK_tblQuotation_UserRegistration" FromRole="tblQuotation" ToRole="UserRegistration" />
     <NavigationProperty Name="UserRegistration1" Relationship="Self.FK_tblQuotation_UserRegistration1" FromRole="tblQuotation" ToRole="UserRegistration" />
@@ -209,6 +214,7 @@
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsVerify" Type="Boolean" />
     <NavigationProperty Name="CompanyDetails" Relationship="Self.FK_CompanyDetails_UserRegistration" FromRole="UserRegistration" ToRole="CompanyDetails" />
     <NavigationProperty Name="Offices" Relationship="Self.FK_Office_UserRegistration" FromRole="UserRegistration" ToRole="Office" />
     <NavigationProperty Name="tblBookings" Relationship="Self.FK_tblBooking_UserRegistration" FromRole="UserRegistration" ToRole="tblBooking" />
@@ -221,6 +227,7 @@
     <NavigationProperty Name="Trackings" Relationship="Self.FK_Tracking_UserRegistration" FromRole="UserRegistration" ToRole="Tracking" />
     <NavigationProperty Name="Trackings1" Relationship="Self.FK_Tracking_UserRegistration1" FromRole="UserRegistration" ToRole="Tracking" />
     <NavigationProperty Name="UserType" Relationship="Self.FK_UserRegistration_UserType" FromRole="UserRegistration" ToRole="UserType" />
+    <Property Name="OfficeId" Type="Int32" />
   </EntityType>
   <EntityType Name="UserType">
     <Key>
@@ -275,6 +282,18 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="tblBooking">
+        <PropertyRef Name="OfficeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblQuotation_Office">
+    <End Role="Office" Type="Self.Office" Multiplicity="0..1" />
+    <End Role="tblQuotation" Type="Self.tblQuotation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Office">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblQuotation">
         <PropertyRef Name="OfficeId" />
       </Dependent>
     </ReferentialConstraint>
@@ -487,6 +506,10 @@
     <AssociationSet Name="FK_tblBooking_Office" Association="Self.FK_tblBooking_Office">
       <End Role="Office" EntitySet="Offices" />
       <End Role="tblBooking" EntitySet="tblBookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblQuotation_Office" Association="Self.FK_tblQuotation_Office">
+      <End Role="Office" EntitySet="Offices" />
+      <End Role="tblQuotation" EntitySet="tblQuotations" />
     </AssociationSet>
     <AssociationSet Name="FK_tblBooking_tblDestination" Association="Self.FK_tblBooking_tblDestination">
       <End Role="tblDestination" EntitySet="tblDestinations" />

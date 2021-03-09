@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CargovioDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CargovioDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CargoStatusType">
           <Key>
             <PropertyRef Name="Id" />
@@ -70,6 +70,8 @@
           <Property Name="CreatedBy" Type="int" />
           <Property Name="UpdatedBy" Type="int" />
           <Property Name="IsActive" Type="bit" />
+          <Property Name="IsPickUp" Type="bit" />
+          <Property Name="IsDelivered" Type="bit" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="UpdatedDate" Type="datetime" />
         </EntityType>
@@ -116,6 +118,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" />
+          <Property Name="OfficeId" Type="int" />
           <Property Name="SourceAddress1" Type="nvarchar(max)" />
           <Property Name="SourceAddress2" Type="nvarchar(max)" />
           <Property Name="SourcePincode" Type="nvarchar(max)" />
@@ -180,6 +183,7 @@
           <Property Name="Email" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="ContactNo" Type="nvarchar" MaxLength="13" Nullable="false" />
           <Property Name="UserTypeId" Type="int" Nullable="false" />
+          <Property Name="OfficeId" Type="int" />
           <Property Name="Addressline1" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Addressline2" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -189,6 +193,7 @@
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsVerify" Type="bit" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -315,6 +320,18 @@
             </Principal>
             <Dependent Role="tblPackageDetails">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblQuotation_Office">
+          <End Role="Office" Type="Self.Office" Multiplicity="0..1" />
+          <End Role="tblQuotation" Type="Self.tblQuotation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblQuotation">
+              <PropertyRef Name="OfficeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -479,6 +496,10 @@
             <End Role="UserRegistration" EntitySet="UserRegistration" />
             <End Role="tblPackageDetails" EntitySet="tblPackageDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblQuotation_Office" Association="Self.FK_tblQuotation_Office">
+            <End Role="Office" EntitySet="Office" />
+            <End Role="tblQuotation" EntitySet="tblQuotation" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblQuotation_tblPackageDetails" Association="Self.FK_tblQuotation_tblPackageDetails">
             <End Role="tblPackageDetails" EntitySet="tblPackageDetails" />
             <End Role="tblQuotation" EntitySet="tblQuotation" />
@@ -516,8 +537,7 @@
             <End Role="UserRegistration" EntitySet="UserRegistration" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CargovioDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -562,6 +582,7 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="UserRegistration" Relationship="Self.FK_Office_UserRegistration" FromRole="Office" ToRole="UserRegistration" />
           <NavigationProperty Name="tblBookings" Relationship="Self.FK_tblBooking_Office" FromRole="Office" ToRole="tblBooking" />
+          <NavigationProperty Name="tblQuotations" Relationship="Self.FK_tblQuotation_Office" FromRole="Office" ToRole="tblQuotation" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -590,6 +611,8 @@
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="UpdatedBy" Type="Int32" />
           <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsPickUp" Type="Boolean" />
+          <Property Name="IsDelivered" Type="Boolean" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Office" Relationship="Self.FK_tblBooking_Office" FromRole="tblBooking" ToRole="Office" />
@@ -648,6 +671,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="Int32" />
+          <Property Name="OfficeId" Type="Int32" />
           <Property Name="SourceAddress1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SourceAddress2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SourcePincode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -666,6 +690,7 @@
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Office" Relationship="Self.FK_tblQuotation_Office" FromRole="tblQuotation" ToRole="Office" />
           <NavigationProperty Name="tblPackageDetail" Relationship="Self.FK_tblQuotation_tblPackageDetails" FromRole="tblQuotation" ToRole="tblPackageDetails" />
           <NavigationProperty Name="UserRegistration" Relationship="Self.FK_tblQuotation_UserRegistration" FromRole="tblQuotation" ToRole="UserRegistration" />
           <NavigationProperty Name="UserRegistration1" Relationship="Self.FK_tblQuotation_UserRegistration1" FromRole="tblQuotation" ToRole="UserRegistration" />
@@ -730,6 +755,7 @@
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsVerify" Type="Boolean" />
           <NavigationProperty Name="CompanyDetails" Relationship="Self.FK_CompanyDetails_UserRegistration" FromRole="UserRegistration" ToRole="CompanyDetails" />
           <NavigationProperty Name="Offices" Relationship="Self.FK_Office_UserRegistration" FromRole="UserRegistration" ToRole="Office" />
           <NavigationProperty Name="tblBookings" Relationship="Self.FK_tblBooking_UserRegistration" FromRole="UserRegistration" ToRole="tblBooking" />
@@ -742,6 +768,7 @@
           <NavigationProperty Name="Trackings" Relationship="Self.FK_Tracking_UserRegistration" FromRole="UserRegistration" ToRole="Tracking" />
           <NavigationProperty Name="Trackings1" Relationship="Self.FK_Tracking_UserRegistration1" FromRole="UserRegistration" ToRole="Tracking" />
           <NavigationProperty Name="UserType" Relationship="Self.FK_UserRegistration_UserType" FromRole="UserRegistration" ToRole="UserType" />
+          <Property Name="OfficeId" Type="Int32" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -796,6 +823,18 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="tblBooking">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblQuotation_Office">
+          <End Role="Office" Type="Self.Office" Multiplicity="0..1" />
+          <End Role="tblQuotation" Type="Self.tblQuotation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblQuotation">
               <PropertyRef Name="OfficeId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1009,6 +1048,10 @@
             <End Role="Office" EntitySet="Offices" />
             <End Role="tblBooking" EntitySet="tblBookings" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblQuotation_Office" Association="Self.FK_tblQuotation_Office">
+            <End Role="Office" EntitySet="Offices" />
+            <End Role="tblQuotation" EntitySet="tblQuotations" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblBooking_tblDestination" Association="Self.FK_tblBooking_tblDestination">
             <End Role="tblDestination" EntitySet="tblDestinations" />
             <End Role="tblBooking" EntitySet="tblBookings" />
@@ -1144,6 +1187,8 @@
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsPickUp" ColumnName="IsPickUp" />
+                <ScalarProperty Name="IsDelivered" ColumnName="IsDelivered" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
               </MappingFragment>
@@ -1193,6 +1238,7 @@
               <MappingFragment StoreEntitySet="tblQuotation">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
                 <ScalarProperty Name="SourceAddress1" ColumnName="SourceAddress1" />
                 <ScalarProperty Name="SourceAddress2" ColumnName="SourceAddress2" />
                 <ScalarProperty Name="SourcePincode" ColumnName="SourcePincode" />
@@ -1254,6 +1300,7 @@
           <EntitySetMapping Name="UserRegistrations">
             <EntityTypeMapping TypeName="CargovioDbModel.UserRegistration">
               <MappingFragment StoreEntitySet="UserRegistration">
+                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
@@ -1269,6 +1316,7 @@
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="IsVerify" ColumnName="IsVerify" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

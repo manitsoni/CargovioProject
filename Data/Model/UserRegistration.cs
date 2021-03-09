@@ -45,6 +45,8 @@ namespace Data.Model
         public bool IsActive { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime UpdatedDate { get; set; }
+        public Nullable<bool> IsVerify { get; set; }
+        public Nullable<int> OfficeId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompanyDetail> CompanyDetails { get; set; }
