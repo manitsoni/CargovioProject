@@ -44,6 +44,8 @@
     <Compile Include="CommonEntities\CompanyDetailsEntities.cs" />
     <Compile Include="CommonEntities\OfficeDetailsEntities.cs" />
     <Compile Include="CommonEntities\UserRegistrationEntities.cs" />
+    <Compile Include="CustomerAdmin\CargoStatus.cs" />
+    <Compile Include="CustomerAdmin\OfficeList.cs" />
     <Compile Include="Customer\BookingEntities.cs" />
     <Compile Include="Customer\CommonBookingEntities.cs" />
     <Compile Include="Customer\CommonQuotationEntities.cs" />
@@ -57,7 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\" />
-    <Folder Include="CustomerAdmin\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

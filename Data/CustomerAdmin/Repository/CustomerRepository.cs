@@ -70,5 +70,16 @@ namespace Data.CustomerAdmin.Repoitory
                                }).ToList();
             return BookingData;
         }
+
+        public IList<CargoStatusType> GetCargoStatus()
+        {
+            return db.CargoStatusTypes.ToList();
+        }
+
+        public IList<Office> GetAllOffice()
+        {
+            return db.Offices.Where(m => m.IsActive == true).ToList();
+        }
+            
     }
 }

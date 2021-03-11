@@ -12,5 +12,8 @@ namespace Data.CustomerAdmin.Repoitory.Interface
         IQueryable<UserRegistration> GetAllCustomer(int Officeid);
 
         IList<CommonBookingEntities> GetMyShipments(int OfficeId);
+
+        IList<CargoStatusType> GetCargoStatus();
+        IList<Office> GetAllOffice();
     }
 }

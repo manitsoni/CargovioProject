@@ -85,13 +85,25 @@ namespace Business.Customer.Manager
             return bookingRepository.GetBookingDetails(ShipmentId);
         }
 
-        public tblPackageDetail GetPackageById(int packageId)
+        public PackageEntities GetPackageById(int packageId)
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<tblPackageDetail, PackageEntities>());
             IMapper mapper = config.CreateMapper();
-            var package = bookingRepository.GetPackageById(packageId);
-            //PackageEntities packagdata = package.(x => mapper.Map<tblPackageDetail, PackageEntities>(x)).ToList();
-            return package;
+            tblPackageDetail package = bookingRepository.GetPackageById(packageId);
+            //tblPackageDetail pd = new tblPackageDetail();
+            PackageEntities packagedata = new PackageEntities();
+            packagedata.CreatedBy = package.CreatedBy;
+            packagedata.Height = package.Height;
+            packagedata.Id = package.Id;
+            packagedata.IsActive = package.IsActive;
+            packagedata.Lenght = package.Lenght;
+            packagedata.Packagename = package.Packagename;
+            packagedata.Quantity = package.Quantity;
+            packagedata.UserId = package.UserId;
+            packagedata.Weight = package.Weight;
+            packagedata.Width = package.Width;
+           
+            return packagedata;
         }
 
         public bool UpdatePackage(PackageEntities pe)

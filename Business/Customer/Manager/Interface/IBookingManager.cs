@@ -17,7 +17,7 @@ namespace Business.Customer.Manager.Interface
         IList<CommonBookingEntities> GetBooking(int id);
         IList<CommonBookingEntities> GetBookingDetails(string ShipmentId);
 
-        tblPackageDetail GetPackageById(int packageId);
+        PackageEntities GetPackageById(int packageId);
         bool UpdatePackage(PackageEntities pe);
     }
 }

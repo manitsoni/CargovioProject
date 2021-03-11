@@ -182,6 +182,7 @@ namespace Cargovio.Areas.Customer.Controllers
                 if (data.IsPickUp == false)
                 {
                     int _packageId = Convert.ToInt32(data.PackageDetailsId);
+                    var data1 = bookingManager.GetPackageById(_packageId);
                     return Ok(bookingManager.GetPackageById(_packageId));
                 }
                 else
