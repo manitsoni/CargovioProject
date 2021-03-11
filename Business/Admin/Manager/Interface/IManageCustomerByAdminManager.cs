@@ -8,7 +8,7 @@ namespace Business.Admin.Manager.Interface
 {
     public interface IManageCustomerByAdminManager
     {
-        IList<CommonCustomerEntities> getCustomer();
+        IList<CommonCustomerEntities> getCustomer(int OfficeId);
         bool VerifyCustomer(int id);
     }
 }

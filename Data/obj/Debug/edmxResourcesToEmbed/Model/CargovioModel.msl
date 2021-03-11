@@ -85,14 +85,14 @@
           <ScalarProperty Name="Emailid" ColumnName="Emailid" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-          <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
-          <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
-          <ScalarProperty Name="Pincode" ColumnName="Pincode" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="State" ColumnName="State" />
-          <ScalarProperty Name="Country" ColumnName="Country" />
-          <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
-          <ScalarProperty Name="DocumentNumber" ColumnName="DocumentNumber" />
+          <ScalarProperty Name="DestinationAddress1" ColumnName="DestinationAddress1" />
+          <ScalarProperty Name="DestinationAddress2" ColumnName="DestinationAddress2" />
+          <ScalarProperty Name="DestinationPincode" ColumnName="DestinationPincode" />
+          <ScalarProperty Name="DestinationCity" ColumnName="DestinationCity" />
+          <ScalarProperty Name="DestinationState" ColumnName="DestinationState" />
+          <ScalarProperty Name="DestinationCountry" ColumnName="DestinationCountry" />
+          <ScalarProperty Name="DestinationDocumentName" ColumnName="DestinationDocumentName" />
+          <ScalarProperty Name="DestinationDocumentNumber" ColumnName="DestinationDocumentNumber" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -104,10 +104,10 @@
         <MappingFragment StoreEntitySet="tblPackageDetails">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="PackageType" ColumnName="PackageType" />
+          <ScalarProperty Name="Packagename" ColumnName="Packagename" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="Weight" ColumnName="Weight" />
-          <ScalarProperty Name="Length" ColumnName="Length" />
+          <ScalarProperty Name="Lenght" ColumnName="Lenght" />
           <ScalarProperty Name="Height" ColumnName="Height" />
           <ScalarProperty Name="Width" ColumnName="Width" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -151,14 +151,14 @@
           <ScalarProperty Name="Emailid" ColumnName="Emailid" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-          <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
-          <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
-          <ScalarProperty Name="Pincode" ColumnName="Pincode" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="State" ColumnName="State" />
-          <ScalarProperty Name="Country" ColumnName="Country" />
-          <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
-          <ScalarProperty Name="DocumentNumber" ColumnName="DocumentNumber" />
+          <ScalarProperty Name="SourceAddress1" ColumnName="SourceAddress1" />
+          <ScalarProperty Name="SourceAddress2" ColumnName="SourceAddress2" />
+          <ScalarProperty Name="SourcePincode" ColumnName="SourcePincode" />
+          <ScalarProperty Name="SourceCity" ColumnName="SourceCity" />
+          <ScalarProperty Name="SourceState" ColumnName="SourceState" />
+          <ScalarProperty Name="SourceCountry" ColumnName="SourceCountry" />
+          <ScalarProperty Name="SourceDocumentName" ColumnName="SourceDocumentName" />
+          <ScalarProperty Name="SourceDocumentNumber" ColumnName="SourceDocumentNumber" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -182,13 +182,13 @@
     <EntitySetMapping Name="UserRegistrations">
       <EntityTypeMapping TypeName="CargovioDbModel.UserRegistration">
         <MappingFragment StoreEntitySet="UserRegistration">
-          <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
           <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+          <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
           <ScalarProperty Name="Addressline1" ColumnName="Addressline1" />
           <ScalarProperty Name="Addressline2" ColumnName="Addressline2" />
           <ScalarProperty Name="City" ColumnName="City" />

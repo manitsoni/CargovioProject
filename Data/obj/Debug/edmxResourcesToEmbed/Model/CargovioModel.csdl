@@ -92,14 +92,14 @@
     <Property Name="Emailid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="AddressLine1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="AddressLine2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Pincode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="DocumentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="DocumentNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DestinationAddress1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DestinationAddress2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DestinationPincode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DestinationCity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DestinationState" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DestinationCountry" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DestinationDocumentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DestinationDocumentNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="IsActive" Type="Boolean" />
     <Property Name="CreatedBy" Type="Int32" />
     <Property Name="CreatedDate" Type="DateTime" Precision="3" />
@@ -111,10 +111,10 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserId" Type="Int32" />
-    <Property Name="PackageType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Packagename" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Quantity" Type="Int32" />
     <Property Name="Weight" Type="Int32" />
-    <Property Name="Length" Type="Int32" />
+    <Property Name="Lenght" Type="Int32" />
     <Property Name="Height" Type="Int32" />
     <Property Name="Width" Type="Int32" />
     <Property Name="CreatedBy" Type="Int32" />
@@ -165,14 +165,14 @@
     <Property Name="Emailid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="AddressLine1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="AddressLine2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Pincode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="DocumentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="DocumentNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SourceAddress1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SourceAddress2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SourcePincode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SourceCity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SourceState" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SourceCountry" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SourceDocumentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SourceDocumentNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="IsActive" Type="Boolean" />
     <Property Name="CreatedBy" Type="Int32" />
     <Property Name="CreatedDate" Type="DateTime" Precision="3" />
@@ -205,6 +205,7 @@
     <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="ContactNo" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+    <Property Name="OfficeId" Type="Int32" />
     <Property Name="Addressline1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Addressline2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -227,7 +228,6 @@
     <NavigationProperty Name="Trackings" Relationship="Self.FK_Tracking_UserRegistration" FromRole="UserRegistration" ToRole="Tracking" />
     <NavigationProperty Name="Trackings1" Relationship="Self.FK_Tracking_UserRegistration1" FromRole="UserRegistration" ToRole="Tracking" />
     <NavigationProperty Name="UserType" Relationship="Self.FK_UserRegistration_UserType" FromRole="UserRegistration" ToRole="UserType" />
-    <Property Name="OfficeId" Type="Int32" />
   </EntityType>
   <EntityType Name="UserType">
     <Key>

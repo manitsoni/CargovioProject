@@ -13,11 +13,11 @@ namespace Data.Admin.Repository
 
     {
         CargovioDbEntities db = new CargovioDbEntities();
-        public IList<CommonCustomerEntities> getCostomers()
+        public IList<CommonCustomerEntities> getCostomers(int OfficeId)
         {
             var Data = (from ur in db.UserRegistrations
                         join cd in db.CompanyDetails on ur.Id equals cd.UserId
-                        where ur.IsVerify == false
+                        where ur.IsVerify == false && ur.OfficeId == OfficeId
                         
                         select new CommonCustomerEntities
                         {

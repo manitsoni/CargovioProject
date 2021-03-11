@@ -67,6 +67,8 @@
   <ItemGroup>
     <Compile Include="Admin\Manager\Interface\IManageCustomerByAdminManager.cs" />
     <Compile Include="Admin\Manager\ManageCustomerByAdminManager.cs" />
+    <Compile Include="CustomerAdmin\Manager\CustomerAdminManager.cs" />
+    <Compile Include="CustomerAdmin\Manager\Interface\ICustomerAdminManager.cs" />
     <Compile Include="Customer\Manager\BookingManager.cs" />
     <Compile Include="Customer\Manager\Interface\IBookingManager.cs" />
     <Compile Include="Customer\Manager\Interface\IQuotationManager.cs" />
@@ -80,9 +82,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CustomerAdmin\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\BusinessEntities\BusinessEntities.csproj">
       <Project>{4600153e-23f7-4ae6-85be-1989b2f3fc0c}</Project>

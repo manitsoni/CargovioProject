@@ -36,6 +36,7 @@ namespace Data.Model
         public string Email { get; set; }
         public string ContactNo { get; set; }
         public int UserTypeId { get; set; }
+        public Nullable<int> OfficeId { get; set; }
         public string Addressline1 { get; set; }
         public string Addressline2 { get; set; }
         public string City { get; set; }
@@ -46,7 +47,6 @@ namespace Data.Model
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime UpdatedDate { get; set; }
         public Nullable<bool> IsVerify { get; set; }
-        public Nullable<int> OfficeId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompanyDetail> CompanyDetails { get; set; }

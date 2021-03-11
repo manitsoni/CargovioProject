@@ -112,7 +112,18 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Model\CargovioModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CargovioModel.edmx</DependentUpon>
+      <LastGenOutput>CargovioModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\CargovioModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CargovioModel.edmx</DependentUpon>
+      <LastGenOutput>CargovioModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
     <EntityDeploy Include="Model\CargovioModel.edmx">
@@ -136,18 +147,6 @@
       <Project>{d94eaf40-0798-43ff-8bbc-3e1916c75db7}</Project>
       <Name>Common</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Model\CargovioModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CargovioModel.edmx</DependentUpon>
-      <LastGenOutput>CargovioModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model\CargovioModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CargovioModel.edmx</DependentUpon>
-      <LastGenOutput>CargovioModel.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

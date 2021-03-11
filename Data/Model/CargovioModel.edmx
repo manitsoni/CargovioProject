@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CargovioDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CargovioDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CargoStatusType">
           <Key>
             <PropertyRef Name="Id" />
@@ -85,14 +85,14 @@
           <Property Name="Emailid" Type="nvarchar(max)" />
           <Property Name="Phone" Type="nvarchar(max)" />
           <Property Name="CompanyName" Type="nvarchar(max)" />
-          <Property Name="AddressLine1" Type="nvarchar(max)" />
-          <Property Name="AddressLine2" Type="nvarchar(max)" />
-          <Property Name="Pincode" Type="nvarchar(max)" />
-          <Property Name="City" Type="nvarchar(max)" />
-          <Property Name="State" Type="nvarchar(max)" />
-          <Property Name="Country" Type="nvarchar(max)" />
-          <Property Name="DocumentName" Type="nvarchar(max)" />
-          <Property Name="DocumentNumber" Type="nvarchar(max)" />
+          <Property Name="DestinationAddress1" Type="nvarchar(max)" />
+          <Property Name="DestinationAddress2" Type="nvarchar(max)" />
+          <Property Name="DestinationPincode" Type="nvarchar(max)" />
+          <Property Name="DestinationCity" Type="nvarchar(max)" />
+          <Property Name="DestinationState" Type="nvarchar(max)" />
+          <Property Name="DestinationCountry" Type="nvarchar(max)" />
+          <Property Name="DestinationDocumentName" Type="nvarchar(max)" />
+          <Property Name="DestinationDocumentNumber" Type="nvarchar(max)" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="CreatedBy" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
@@ -103,10 +103,10 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" />
-          <Property Name="PackageType" Type="nvarchar(max)" />
+          <Property Name="Packagename" Type="nvarchar(max)" />
           <Property Name="Quantity" Type="int" />
           <Property Name="Weight" Type="int" />
-          <Property Name="Length" Type="int" />
+          <Property Name="Lenght" Type="int" />
           <Property Name="Height" Type="int" />
           <Property Name="Width" Type="int" />
           <Property Name="CreatedBy" Type="int" />
@@ -148,14 +148,14 @@
           <Property Name="Emailid" Type="nvarchar(max)" />
           <Property Name="Phone" Type="nvarchar(max)" />
           <Property Name="CompanyName" Type="nvarchar(max)" />
-          <Property Name="AddressLine1" Type="nvarchar(max)" />
-          <Property Name="AddressLine2" Type="nvarchar(max)" />
-          <Property Name="Pincode" Type="nvarchar(max)" />
-          <Property Name="City" Type="nvarchar(max)" />
-          <Property Name="State" Type="nvarchar(max)" />
-          <Property Name="Country" Type="nvarchar(max)" />
-          <Property Name="DocumentName" Type="nvarchar(max)" />
-          <Property Name="DocumentNumber" Type="nvarchar(max)" />
+          <Property Name="SourceAddress1" Type="nvarchar(max)" />
+          <Property Name="SourceAddress2" Type="nvarchar(max)" />
+          <Property Name="SourcePincode" Type="nvarchar(max)" />
+          <Property Name="SourceCity" Type="nvarchar(max)" />
+          <Property Name="SourceState" Type="nvarchar(max)" />
+          <Property Name="SourceCountry" Type="nvarchar(max)" />
+          <Property Name="SourceDocumentName" Type="nvarchar(max)" />
+          <Property Name="SourceDocumentNumber" Type="nvarchar(max)" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="CreatedBy" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
@@ -537,7 +537,8 @@
             <End Role="UserRegistration" EntitySet="UserRegistration" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CargovioDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -633,14 +634,14 @@
           <Property Name="Emailid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AddressLine1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AddressLine2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Pincode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DocumentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DocumentNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DestinationAddress1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DestinationAddress2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DestinationPincode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DestinationCity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DestinationState" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DestinationCountry" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DestinationDocumentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DestinationDocumentNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
@@ -652,10 +653,10 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="Int32" />
-          <Property Name="PackageType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Packagename" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Quantity" Type="Int32" />
           <Property Name="Weight" Type="Int32" />
-          <Property Name="Length" Type="Int32" />
+          <Property Name="Lenght" Type="Int32" />
           <Property Name="Height" Type="Int32" />
           <Property Name="Width" Type="Int32" />
           <Property Name="CreatedBy" Type="Int32" />
@@ -706,14 +707,14 @@
           <Property Name="Emailid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AddressLine1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AddressLine2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Pincode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DocumentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DocumentNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SourceAddress1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SourceAddress2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SourcePincode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SourceCity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SourceState" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SourceCountry" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SourceDocumentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SourceDocumentNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
@@ -746,6 +747,7 @@
           <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ContactNo" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+          <Property Name="OfficeId" Type="Int32" />
           <Property Name="Addressline1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Addressline2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -768,7 +770,6 @@
           <NavigationProperty Name="Trackings" Relationship="Self.FK_Tracking_UserRegistration" FromRole="UserRegistration" ToRole="Tracking" />
           <NavigationProperty Name="Trackings1" Relationship="Self.FK_Tracking_UserRegistration1" FromRole="UserRegistration" ToRole="Tracking" />
           <NavigationProperty Name="UserType" Relationship="Self.FK_UserRegistration_UserType" FromRole="UserRegistration" ToRole="UserType" />
-          <Property Name="OfficeId" Type="Int32" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -1203,14 +1204,14 @@
                 <ScalarProperty Name="Emailid" ColumnName="Emailid" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
-                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
-                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
-                <ScalarProperty Name="DocumentNumber" ColumnName="DocumentNumber" />
+                <ScalarProperty Name="DestinationAddress1" ColumnName="DestinationAddress1" />
+                <ScalarProperty Name="DestinationAddress2" ColumnName="DestinationAddress2" />
+                <ScalarProperty Name="DestinationPincode" ColumnName="DestinationPincode" />
+                <ScalarProperty Name="DestinationCity" ColumnName="DestinationCity" />
+                <ScalarProperty Name="DestinationState" ColumnName="DestinationState" />
+                <ScalarProperty Name="DestinationCountry" ColumnName="DestinationCountry" />
+                <ScalarProperty Name="DestinationDocumentName" ColumnName="DestinationDocumentName" />
+                <ScalarProperty Name="DestinationDocumentNumber" ColumnName="DestinationDocumentNumber" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -1222,10 +1223,10 @@
               <MappingFragment StoreEntitySet="tblPackageDetails">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="PackageType" ColumnName="PackageType" />
+                <ScalarProperty Name="Packagename" ColumnName="Packagename" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="Lenght" ColumnName="Lenght" />
                 <ScalarProperty Name="Height" ColumnName="Height" />
                 <ScalarProperty Name="Width" ColumnName="Width" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -1269,14 +1270,14 @@
                 <ScalarProperty Name="Emailid" ColumnName="Emailid" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
-                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
-                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
-                <ScalarProperty Name="DocumentNumber" ColumnName="DocumentNumber" />
+                <ScalarProperty Name="SourceAddress1" ColumnName="SourceAddress1" />
+                <ScalarProperty Name="SourceAddress2" ColumnName="SourceAddress2" />
+                <ScalarProperty Name="SourcePincode" ColumnName="SourcePincode" />
+                <ScalarProperty Name="SourceCity" ColumnName="SourceCity" />
+                <ScalarProperty Name="SourceState" ColumnName="SourceState" />
+                <ScalarProperty Name="SourceCountry" ColumnName="SourceCountry" />
+                <ScalarProperty Name="SourceDocumentName" ColumnName="SourceDocumentName" />
+                <ScalarProperty Name="SourceDocumentNumber" ColumnName="SourceDocumentNumber" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -1300,13 +1301,13 @@
           <EntitySetMapping Name="UserRegistrations">
             <EntityTypeMapping TypeName="CargovioDbModel.UserRegistration">
               <MappingFragment StoreEntitySet="UserRegistration">
-                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
                 <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
                 <ScalarProperty Name="Addressline1" ColumnName="Addressline1" />
                 <ScalarProperty Name="Addressline2" ColumnName="Addressline2" />
                 <ScalarProperty Name="City" ColumnName="City" />

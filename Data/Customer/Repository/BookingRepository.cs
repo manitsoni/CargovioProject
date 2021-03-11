@@ -62,11 +62,11 @@ namespace Data.Customer.Repository
                                {
                                    Amount = bd.Amount,
                                    EmailId = ur.Email,
-                                   SourceCity = sa.City,
-                                   SourcePincode = sa.Pincode,
-                                   DestinationCity = da.Pincode,
-                                   DestinationPincode = da.Pincode,
-                                   Packagename = pd.PackageType,
+                                   SourceCity = sa.SourceCity,
+                                   SourcePincode = sa.SourcePincode,
+                                   DestinationCity = da.DestinationCity,
+                                   DestinationPincode = da.DestinationPincode,
+                                   Packagename = pd.Packagename,
                                    Quantity = pd.Quantity,
                                    ShipmentId = bd.ShipmentId,
                                    CargoLocation = tr.CurrentLocation,
@@ -85,21 +85,46 @@ namespace Data.Customer.Repository
                                join da in db.tblDestinations on bd.DestinationId equals da.ID
                                join sa in db.tblSources on bd.SourceId equals sa.ID
                                join ur in db.UserRegistrations on bd.Userid equals ur.Id
+                               join cd in db.CompanyDetails on ur.Id equals cd.UserId
                                join pd in db.tblPackageDetails on bd.PackageDetailsId equals pd.Id
                                where bd.Userid == Userid && tr.IsDelivered == false && bd.ShipmentId == ShipmentId
                                select new CommonBookingEntities
                                {
                                    Amount = bd.Amount,
                                    EmailId = ur.Email,
-                                   SourceCity = sa.City,
-                                   SourcePincode = sa.Pincode,
-                                   DestinationCity = da.Pincode,
-                                   DestinationPincode = da.Pincode,
-                                   Packagename = pd.PackageType,
+                                   SourceCity = sa.SourceCity,
+                                   SourcePincode = sa.SourcePincode,
+                                   DestinationCity = da.DestinationCity,
+                                   DestinationPincode = da.DestinationPincode,
+                                   Packagename = pd.Packagename,
                                    Quantity = pd.Quantity,
                                    ShipmentId = bd.ShipmentId,
                                    CargoLocation = tr.CurrentLocation,
-                                   CargoStatus = cr.StatusName
+                                   CargoStatus = cr.StatusName,
+                                   CompanyName = cd.CompanyName,
+                                   CustomerName = ur.Username,
+                                   Weight = pd.Weight,
+                                   Width = pd.Width,
+                                   DestinationAddress1 = da.DestinationAddress1,
+                                   DestinationAddress2 = da.DestinationAddress2,
+                                   DestinationCompanyName = da.CompanyName,
+                                   DestinationCountry = da.DestinationCountry,
+                                   DestinationCustomerName = da.CustomerName,
+                                   DestinationDocumentName = da.DestinationDocumentName,
+                                   DestinationDocumentNumber = da.DestinationDocumentNumber,
+                                   DestinationEmailId = da.Emailid,
+                                   DestinationPhone = da.Phone,
+                                   DestinationState = da.DestinationState,
+                                   Phone = ur.ContactNo,
+                                   Height = pd.Height,
+                                   Lenght = pd.Lenght,
+                                   PaymentType = bd.PaymentType,
+                                   SourceAddress1 = sa.SourceAddress1,
+                                   SourceAddress2 = sa.SourceAddress2,
+                                   SourceCountry = sa.SourceCountry,
+                                   SourceState = sa.SourceState,
+                                   CreatedDate = bd.CreatedDate.ToString()
+                                   
 
                                }).ToList();
             return BookingData;

@@ -76,7 +76,7 @@ namespace Data.CommonEntities.Repository
             bool IsOfficeAvailable = false;
             foreach (var item in OfficeList)
             {
-                if (item.UserId == Userid && item.BranchLocation == OfficeLocation)
+                if (item.BranchLocation == OfficeLocation)
                 {
                     IsOfficeAvailable = true;
                     break;

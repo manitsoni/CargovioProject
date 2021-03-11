@@ -24,6 +24,8 @@ namespace BusinessEntities.Customer
         public string DocumentNumber { get; set; }
         public Boolean IsActive { get; set; }
         public DateTime CreatedDate { get; set; }
-        public DateTime UpdatedDate { get; set; }
+        public int? CreatedBy { get; set; }
+        public string SourceDocumentName { get; set; }
+        public string SourceDocumentNumber { get; set; }
     }
 }

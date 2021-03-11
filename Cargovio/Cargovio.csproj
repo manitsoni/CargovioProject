@@ -179,6 +179,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\Area1AreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ManageCustomerController.cs" />
+    <Compile Include="Areas\CustomerAdmin\Controllers\CustomerAdminManageController.cs" />
     <Compile Include="Areas\CustomerAdmin\CustomerAdminAreaRegistration.cs" />
     <Compile Include="Areas\Customer\Controllers\BookingController.cs" />
     <Compile Include="Areas\Customer\Controllers\QuotationController.cs" />
@@ -282,7 +283,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Areas\CustomerAdmin\Controllers\" />
     <Folder Include="Areas\CustomerAdmin\Models\" />
     <Folder Include="Areas\CustomerAdmin\Views\Shared\" />
     <Folder Include="Areas\Customer\Views\Shared\" />

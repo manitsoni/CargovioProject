@@ -23,10 +23,10 @@ namespace Data.Model
     
         public int Id { get; set; }
         public Nullable<int> UserId { get; set; }
-        public string PackageType { get; set; }
+        public string Packagename { get; set; }
         public Nullable<int> Quantity { get; set; }
         public Nullable<int> Weight { get; set; }
-        public Nullable<int> Length { get; set; }
+        public Nullable<int> Lenght { get; set; }
         public Nullable<int> Height { get; set; }
         public Nullable<int> Width { get; set; }
         public Nullable<int> CreatedBy { get; set; }

@@ -17,9 +17,9 @@ namespace Business.Admin.Manager
         {
             manageCRepository = cust;
         }
-        public IList<CommonCustomerEntities> getCustomer()
+        public IList<CommonCustomerEntities> getCustomer(int OfficeId)
         {
-            return manageCRepository.getCostomers();
+            return manageCRepository.getCostomers(OfficeId);
         }
 
         public bool VerifyCustomer(int id)

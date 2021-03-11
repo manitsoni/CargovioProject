@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Data.Model;
 using BusinessEntities.Customer;
-namespace Data.CustomerAdmin.Repoitory.Interface
+namespace Business.CustomerAdmin.Manager.Interface
 {
-    public interface ICustomerRepository
+    public interface ICustomerAdminManager
     {
-        IQueryable<UserRegistration> GetAllCustomer(int Officeid);
-
         IList<CommonBookingEntities> GetMyShipments(int OfficeId);
     }
 }

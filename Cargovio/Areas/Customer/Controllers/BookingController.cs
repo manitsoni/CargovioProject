@@ -4,13 +4,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-
+using Cargovio.Areas.Customer.Models;
 using AutoMapper;
 using Data.Model;
 using BusinessEntities.Customer;
 using Business.Customer.Manager;
 using Business.Customer.Manager.Interface;
-using Cargovio.Areas.Customer.Models;
+
 namespace Cargovio.Areas.Customer.Controllers
 {
     public class BookingController : ApiController
@@ -24,7 +24,7 @@ namespace Cargovio.Areas.Customer.Controllers
             bookingManager = booking;
         }
         [HttpPost]
-        [Route("Customer/Api/Book/{Userid}")]
+        [Route("Customer/Api/BookCargo/{Userid}")]
         public IHttpActionResult Book(CommonBookingEntities objCommon,string Userid)
         {
             try
@@ -33,22 +33,26 @@ namespace Cargovio.Areas.Customer.Controllers
                 //Add Source Address To DB
                 int _userId = Convert.ToInt32(Userid);
                 var data = db.UserRegistrations.Where(m => m.Id == _userId).FirstOrDefault();
+                var company = db.CompanyDetails.Where(m => m.UserId == _userId).FirstOrDefault();
                 SourceAddressEntities se = new SourceAddressEntities();
-                se.CompanyName = objCommon.CompanyName;
+                se.CompanyName = company.CompanyName;
                 se.CreatedDate = DateTime.Now;
                 se.CustomerName = data.Username;
                 se.DocumentName = objCommon.DocumentName;
                 se.DocumentNumber = objCommon.DocumentNumber;
-                se.EmailId = objCommon.EmailId;
+                se.EmailId = data.Email;
                 se.IsActive = true;
-                se.Phone = objCommon.Phone;
+                se.Phone = data.ContactNo;
+                se.UserId = data.Id;
                 se.SourceAddress1 = objCommon.SourceAddress1;
                 se.SourceAddress2 = objCommon.SourceAddress2;
                 se.SourceCity = objCommon.SourceCity;
                 se.SourceState = objCommon.SourceState;
                 se.SourceCountry = objCommon.SourceCountry;
                 se.SourcePincode = objCommon.SourcePincode;
-                se.UpdatedDate = DateTime.Now;
+                se.CreatedBy = data.Id;
+                se.SourceDocumentName = objCommon.DestinationDocumentName;
+                se.SourceDocumentNumber = objCommon.DestinationDocumentNumber;
                 int SourceId = bookingManager.AddSourceAddress(se);
 
                 //Add Destination Address To DB
@@ -58,9 +62,9 @@ namespace Cargovio.Areas.Customer.Controllers
                 de.CustomerName = data.Username;
                 de.DocumentName = objCommon.DestinationDocumentName;
                 de.DocumentNumber = objCommon.DestinationDocumentNumber;
-                de.EmailId = objCommon.DestinationEmailId;
+                de.EmailId = data.Email;
                 de.IsActive = true;
-                de.Phone = objCommon.DestinationPhone;
+                de.Phone = data.ContactNo;
                 de.DestinationAddress1 = objCommon.DestinationAddress1;
                 de.DestinationAddress2 = objCommon.DestinationAddress2;
                 de.DestinationCity = objCommon.DestinationCity;
@@ -68,6 +72,9 @@ namespace Cargovio.Areas.Customer.Controllers
                 de.DestinationCountry = objCommon.DestinationCountry;
                 de.DestinationPincode = objCommon.DestinationPincode;
                 de.UpdatedDate = DateTime.Now;
+                de.UserId = data.Id;
+                de.DocumentName = objCommon.DestinationDocumentName;
+                de.DocumentNumber = objCommon.DestinationDocumentNumber;
                 int DestinationId = bookingManager.AddDestinationAddress(de);
 
                 //Add Package Details To DB
@@ -87,9 +94,9 @@ namespace Cargovio.Areas.Customer.Controllers
                 //Get OfficeId
 
 
-                string City = data.City;
+                string City = objCommon.SourceCity;
                 int OfficeId;
-                int oid = db.Offices.Where(m => m.City == City).Select(m => m.Id).First();
+                int oid = db.Offices.Where(m => m.BranchLocation == City).Select(m => m.Id).First();
                 int OfficeUserId = db.Offices.Where(m => m.City == City).Select(m => m.UserId).FirstOrDefault();
                 if (oid > 0)
                 {
@@ -97,21 +104,27 @@ namespace Cargovio.Areas.Customer.Controllers
                 }
                 else
                 {
-                    OfficeId = 3;
+                    OfficeId = 36;
                 }
                 //Add Booking Data To DB
                 BookingEntities be = new BookingEntities();
+                Helper h1 = new Helper();
                 be.Amount = 1500;
                 be.CreatedBy = _userId;
                 be.CreatedDate = DateTime.Now;
                 be.DestinationId = DestinationId;
                 be.OfficeId = OfficeId;
-                //be.ShipmentId = helper.GetShipmentNumber();
+                be.PackageDetailsId = PackageId;
+                be.PaymentType = "COD";
+                be.ShipmentId = h1.GetShipmentNumber();
                 be.SourceId = SourceId;
                 be.TransactionId = 101;
                 be.UpdatedBy = _userId;
                 be.UpdatedDate = DateTime.Now;
                 be.Userid = _userId;
+                be.IsPickUp = false;
+                be.IsActive = true;
+                be.IsDelivered = false;
                 int BookingId = bookingManager.AddBooking(be);
 
                 //Add Tracking Info in DB
@@ -146,14 +159,14 @@ namespace Cargovio.Areas.Customer.Controllers
         }
 
         [HttpGet]
-        [Route("Customer/Api/GetMyBookingDetails")]
+        [Route("Customer/Api/GetMyBookingDetails/{ShipmentId}")]
         public IHttpActionResult GetBookingDetails(string ShipmentId)
         {
             try
             {
                 return Ok(bookingManager.GetBookingDetails(ShipmentId));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return NotFound();
             }

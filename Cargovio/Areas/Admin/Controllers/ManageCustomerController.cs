@@ -12,18 +12,21 @@ namespace Cargovio.Areas.Admin.Controllers
     public class ManageCustomerController : ApiController
     {
         IManageCustomerByAdminManager cManager;
+        CargovioDbEntities db = new CargovioDbEntities();
         public ManageCustomerController(IManageCustomerByAdminManager mg)
         {
             cManager = mg;
         }
         [HttpGet]
-        [Route("Admin/Api/GetCustomer")]
-        public IHttpActionResult GetCustomers()
+        [Route("Admin/Api/GetCustomer/{Userid}")]
+        public IHttpActionResult GetCustomers(string Userid)
         {
             try
             {
-                var data = cManager.getCustomer();
-                return Ok(cManager.getCustomer());
+                int id = Convert.ToInt32(Userid);
+                var data = db.UserRegistrations.Where(m => m.Id == id).FirstOrDefault();
+                int OfficeId = Convert.ToInt32(data.OfficeId);
+                return Ok(cManager.getCustomer(OfficeId));
             }
             catch (Exception ex)
             {

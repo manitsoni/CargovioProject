@@ -80,14 +80,14 @@
     <Property Name="Emailid" Type="nvarchar(max)" />
     <Property Name="Phone" Type="nvarchar(max)" />
     <Property Name="CompanyName" Type="nvarchar(max)" />
-    <Property Name="AddressLine1" Type="nvarchar(max)" />
-    <Property Name="AddressLine2" Type="nvarchar(max)" />
-    <Property Name="Pincode" Type="nvarchar(max)" />
-    <Property Name="City" Type="nvarchar(max)" />
-    <Property Name="State" Type="nvarchar(max)" />
-    <Property Name="Country" Type="nvarchar(max)" />
-    <Property Name="DocumentName" Type="nvarchar(max)" />
-    <Property Name="DocumentNumber" Type="nvarchar(max)" />
+    <Property Name="DestinationAddress1" Type="nvarchar(max)" />
+    <Property Name="DestinationAddress2" Type="nvarchar(max)" />
+    <Property Name="DestinationPincode" Type="nvarchar(max)" />
+    <Property Name="DestinationCity" Type="nvarchar(max)" />
+    <Property Name="DestinationState" Type="nvarchar(max)" />
+    <Property Name="DestinationCountry" Type="nvarchar(max)" />
+    <Property Name="DestinationDocumentName" Type="nvarchar(max)" />
+    <Property Name="DestinationDocumentNumber" Type="nvarchar(max)" />
     <Property Name="IsActive" Type="bit" />
     <Property Name="CreatedBy" Type="int" />
     <Property Name="CreatedDate" Type="datetime" />
@@ -98,10 +98,10 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserId" Type="int" />
-    <Property Name="PackageType" Type="nvarchar(max)" />
+    <Property Name="Packagename" Type="nvarchar(max)" />
     <Property Name="Quantity" Type="int" />
     <Property Name="Weight" Type="int" />
-    <Property Name="Length" Type="int" />
+    <Property Name="Lenght" Type="int" />
     <Property Name="Height" Type="int" />
     <Property Name="Width" Type="int" />
     <Property Name="CreatedBy" Type="int" />
@@ -143,14 +143,14 @@
     <Property Name="Emailid" Type="nvarchar(max)" />
     <Property Name="Phone" Type="nvarchar(max)" />
     <Property Name="CompanyName" Type="nvarchar(max)" />
-    <Property Name="AddressLine1" Type="nvarchar(max)" />
-    <Property Name="AddressLine2" Type="nvarchar(max)" />
-    <Property Name="Pincode" Type="nvarchar(max)" />
-    <Property Name="City" Type="nvarchar(max)" />
-    <Property Name="State" Type="nvarchar(max)" />
-    <Property Name="Country" Type="nvarchar(max)" />
-    <Property Name="DocumentName" Type="nvarchar(max)" />
-    <Property Name="DocumentNumber" Type="nvarchar(max)" />
+    <Property Name="SourceAddress1" Type="nvarchar(max)" />
+    <Property Name="SourceAddress2" Type="nvarchar(max)" />
+    <Property Name="SourcePincode" Type="nvarchar(max)" />
+    <Property Name="SourceCity" Type="nvarchar(max)" />
+    <Property Name="SourceState" Type="nvarchar(max)" />
+    <Property Name="SourceCountry" Type="nvarchar(max)" />
+    <Property Name="SourceDocumentName" Type="nvarchar(max)" />
+    <Property Name="SourceDocumentNumber" Type="nvarchar(max)" />
     <Property Name="IsActive" Type="bit" />
     <Property Name="CreatedBy" Type="int" />
     <Property Name="CreatedDate" Type="datetime" />

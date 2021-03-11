@@ -12,7 +12,7 @@ namespace BusinessEntities.Customer
         public int? Userid { get; set; }
         public int? SourceId { get; set; }
         public int? DestinationId { get; set; }
-        public int? PackageId { get; set; }
+        public int? PackageDetailsId { get; set; }
         public int? Amount { get; set; }
         public string PaymentType { get; set; }
         public int? TransactionId { get; set; }
@@ -22,5 +22,10 @@ namespace BusinessEntities.Customer
         public int? UpdatedBy { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
+
+        public Boolean? IsActive { get; set; }
+        public Boolean? IsPickUp { get; set; }
+        public Boolean? IsDelivered { get; set; }
+
     }
 }

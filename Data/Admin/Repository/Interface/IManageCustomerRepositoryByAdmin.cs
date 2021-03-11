@@ -8,7 +8,7 @@ namespace Data.Admin.Repository.Interface
 {
     public interface IManageCustomerRepositoryByAdmin
     {
-        IList<CommonCustomerEntities> getCostomers();
+        IList<CommonCustomerEntities> getCostomers(int OfficeId);
 
         bool VerifyCustomer(int id);
     }

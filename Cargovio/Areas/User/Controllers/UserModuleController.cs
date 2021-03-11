@@ -37,13 +37,13 @@ namespace Cargovio.Areas.User.Controllers
                 if (_userType == "CustomerAdmin")
                 {
                     user.IsVerify = true;
-                    user.OfficeId = 2;
+                    user.OfficeId = 11;
                     user.UserTypeId = 2;
                 }
                 else if(_userType =="Customer")
                 {
                     var City = user.City;
-                    var data = db.Offices.Where(m => m.City == City).FirstOrDefault();
+                    var data = db.Offices.Where(m => m.BranchLocation == City).FirstOrDefault();
                     int OfficeId = data.Id;
                     if (OfficeId  > 0)
                     {
@@ -51,7 +51,7 @@ namespace Cargovio.Areas.User.Controllers
                     }
                     else
                     {
-                        user.OfficeId = 6;
+                        user.OfficeId = 11;
                     }
                    
                     user.IsVerify = false;
@@ -110,12 +110,23 @@ namespace Cargovio.Areas.User.Controllers
                     office.UserId = office.UserId;
                     office.OfficeLocation = office.City;
                     int OfficeId = userManager.OfficeDetails(office);
-                    UserRegistration ur = new UserRegistration();
-                    ur = db.UserRegistrations.Find(office.UserId);
-                    ur.OfficeId = OfficeId;
-                    db.Entry(ur).State = System.Data.Entity.EntityState.Modified;
-                    db.SaveChanges();
-                    return Ok(OfficeId);
+                    if (OfficeId > 0)
+                    {
+                        UserRegistration ur = new UserRegistration();
+                        ur = db.UserRegistrations.Find(office.UserId);
+                        ur.OfficeId = OfficeId;
+                        db.Entry(ur).State = System.Data.Entity.EntityState.Modified;
+                        db.SaveChanges();
+                        return Ok("Account Created Success!");
+                    }
+                    else
+                    {
+                        UserRegistration ur = db.UserRegistrations.Find(office.UserId);
+                        db.Entry(ur).State = System.Data.Entity.EntityState.Deleted;
+                        db.SaveChanges();
+                        return Ok("Office Already Exists!");
+                    }
+                   
 
                 }
                 else

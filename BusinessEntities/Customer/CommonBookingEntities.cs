@@ -48,7 +48,7 @@ namespace BusinessEntities.Customer
         public int? PackageCreatedBy { get; set; }
         public Nullable<Boolean> IsActive { get; set; }
 
-       
+        public string CreatedDate { get; set; }
         public decimal? Amount { get; set; }
         public string PaymentType { get; set; }
         

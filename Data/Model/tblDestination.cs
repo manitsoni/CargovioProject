@@ -26,14 +26,14 @@ namespace Data.Model
         public string Emailid { get; set; }
         public string Phone { get; set; }
         public string CompanyName { get; set; }
-        public string AddressLine1 { get; set; }
-        public string AddressLine2 { get; set; }
-        public string Pincode { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string Country { get; set; }
-        public string DocumentName { get; set; }
-        public string DocumentNumber { get; set; }
+        public string DestinationAddress1 { get; set; }
+        public string DestinationAddress2 { get; set; }
+        public string DestinationPincode { get; set; }
+        public string DestinationCity { get; set; }
+        public string DestinationState { get; set; }
+        public string DestinationCountry { get; set; }
+        public string DestinationDocumentName { get; set; }
+        public string DestinationDocumentNumber { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
