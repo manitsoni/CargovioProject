@@ -16,5 +16,7 @@ namespace Data.Customer.Repository.Interface
         int AddTracking(Tracking objTracking);
         IList<CommonBookingEntities> GetBooking(int id);
         IList<CommonBookingEntities> GetBookingDetails(string ShipmentId);
+        tblPackageDetail GetPackageById(int packageId);
+        bool UpdatePackage(tblPackageDetail pd);
     }
 }

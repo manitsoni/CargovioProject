@@ -129,5 +129,17 @@ namespace Data.Customer.Repository
                                }).ToList();
             return BookingData;
         }
+
+        public tblPackageDetail GetPackageById(int packageId)
+        {
+            tblPackageDetail pd = db.tblPackageDetails.Find(packageId);
+            return pd;
+        }
+
+        public bool UpdatePackage(tblPackageDetail pd)
+        {
+            db.Entry(pd).State = System.Data.Entity.EntityState.Modified;
+            return db.SaveChanges() > 0;
+        }
     }
 }

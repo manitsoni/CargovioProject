@@ -18,7 +18,7 @@ namespace Cargovio.Areas.Customer.Controllers
         private IBookingManager bookingManager;
        
         private static Random random = new Random();
-       
+        CargovioDbEntities db = new CargovioDbEntities();
         public BookingController(IBookingManager booking)
         {
             bookingManager = booking;
@@ -29,7 +29,7 @@ namespace Cargovio.Areas.Customer.Controllers
         {
             try
             {
-                CargovioDbEntities db = new CargovioDbEntities();
+               
                 //Add Source Address To DB
                 int _userId = Convert.ToInt32(Userid);
                 var data = db.UserRegistrations.Where(m => m.Id == _userId).FirstOrDefault();
@@ -169,6 +169,43 @@ namespace Cargovio.Areas.Customer.Controllers
             catch (Exception ex)
             {
                 return NotFound();
+            }
+        }
+        [HttpGet]
+        [Route("Customer/Api/UpdateBooking/{Bookingid}")]
+        public IHttpActionResult UpdateBooking(string Bookingid)
+        {
+            try
+            {
+                int bookingid = Convert.ToInt32(Bookingid);
+                var data = db.tblBookings.Where(m => m.ID == bookingid).FirstOrDefault();
+                if (data.IsPickUp == false)
+                {
+                    int _packageId = Convert.ToInt32(data.PackageDetailsId);
+                    return Ok(bookingManager.GetPackageById(_packageId));
+                }
+                else
+                {
+                    return Ok("Package Is Already Shipped!.....");
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex);
+            }
+        }
+        [HttpPost]
+        [Route("Customer/Api/UpdateById")]
+        public IHttpActionResult UpdateById(PackageEntities pe)
+        {
+            try
+            {
+                return Ok(bookingManager.UpdatePackage(pe));
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex);
             }
         }
 

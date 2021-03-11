@@ -84,5 +84,22 @@ namespace Business.Customer.Manager
         {
             return bookingRepository.GetBookingDetails(ShipmentId);
         }
+
+        public tblPackageDetail GetPackageById(int packageId)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<tblPackageDetail, PackageEntities>());
+            IMapper mapper = config.CreateMapper();
+            var package = bookingRepository.GetPackageById(packageId);
+            //PackageEntities packagdata = package.(x => mapper.Map<tblPackageDetail, PackageEntities>(x)).ToList();
+            return package;
+        }
+
+        public bool UpdatePackage(PackageEntities pe)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<PackageEntities, tblPackageDetail>());
+            IMapper mapper = config.CreateMapper();
+            tblPackageDetail package = mapper.Map<PackageEntities,tblPackageDetail>(pe);
+            return bookingRepository.UpdatePackage(package);
+        }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessEntities.Customer;
+using Data.Model;
 namespace Business.Customer.Manager.Interface
 {
     public interface IBookingManager
@@ -15,5 +16,8 @@ namespace Business.Customer.Manager.Interface
         int AddTracking(TrackingEntities te);
         IList<CommonBookingEntities> GetBooking(int id);
         IList<CommonBookingEntities> GetBookingDetails(string ShipmentId);
+
+        tblPackageDetail GetPackageById(int packageId);
+        bool UpdatePackage(PackageEntities pe);
     }
 }
