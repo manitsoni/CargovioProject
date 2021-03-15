@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CargovioDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CargovioDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CargoStatusType">
           <Key>
             <PropertyRef Name="Id" />
@@ -43,6 +43,23 @@
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="RateData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SourceCity" Type="varchar" MaxLength="50" />
+          <Property Name="SourceState" Type="varchar" MaxLength="50" />
+          <Property Name="SourceCountry" Type="varchar" MaxLength="50" />
+          <Property Name="DestinationCity" Type="varchar" MaxLength="50" />
+          <Property Name="DestinationState" Type="varchar" MaxLength="50" />
+          <Property Name="DestinationCountry" Type="varchar" MaxLength="50" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Weight" Type="decimal" Precision="3" Scale="2" />
+          <Property Name="Rate" Type="decimal" Precision="3" Scale="2" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -74,6 +91,7 @@
           <Property Name="IsDelivered" Type="bit" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="IsCurrent" Type="bit" />
         </EntityType>
         <EntityType Name="tblDestination">
           <Key>
@@ -172,6 +190,7 @@
           <Property Name="IsActive" Type="bit" />
           <Property Name="CreatedBy" Type="int" />
           <Property Name="UpdatedBy" Type="int" />
+          <Property Name="IsCurrent" Type="bit" />
         </EntityType>
         <EntityType Name="UserRegistration">
           <Key>
@@ -447,6 +466,7 @@
           <EntitySet Name="CargoStatusType" EntityType="Self.CargoStatusType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyDetails" EntityType="Self.CompanyDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Office" EntityType="Self.Office" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RateData" EntityType="Self.RateData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblBooking" EntityType="Self.tblBooking" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDestination" EntityType="Self.tblDestination" Schema="dbo" store:Type="Tables" />
@@ -537,8 +557,7 @@
             <End Role="UserRegistration" EntitySet="UserRegistration" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CargovioDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -623,6 +642,7 @@
           <NavigationProperty Name="UserRegistration" Relationship="Self.FK_tblBooking_UserRegistration" FromRole="tblBooking" ToRole="UserRegistration" />
           <NavigationProperty Name="UserRegistration1" Relationship="Self.FK_tblBooking_UserRegistration1" FromRole="tblBooking" ToRole="UserRegistration" />
           <NavigationProperty Name="Trackings" Relationship="Self.FK_Tracking_tblBooking" FromRole="tblBooking" ToRole="Tracking" />
+          <Property Name="IsCurrent" Type="Boolean" />
         </EntityType>
         <EntityType Name="tblDestination">
           <Key>
@@ -736,6 +756,7 @@
           <NavigationProperty Name="tblBooking" Relationship="Self.FK_Tracking_tblBooking" FromRole="Tracking" ToRole="tblBooking" />
           <NavigationProperty Name="UserRegistration" Relationship="Self.FK_Tracking_UserRegistration" FromRole="Tracking" ToRole="UserRegistration" />
           <NavigationProperty Name="UserRegistration1" Relationship="Self.FK_Tracking_UserRegistration1" FromRole="Tracking" ToRole="UserRegistration" />
+          <Property Name="IsCurrent" Type="Boolean" />
         </EntityType>
         <EntityType Name="UserRegistration">
           <Key>
@@ -1113,7 +1134,25 @@
             <End Role="UserType" EntitySet="UserTypes" />
             <End Role="UserRegistration" EntitySet="UserRegistrations" />
           </AssociationSet>
+          <EntitySet Name="RateDatas" EntityType="CargovioDbModel.RateData" />
         </EntityContainer>
+        <EntityType Name="RateData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SourceCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SourceState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SourceCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DestinationCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DestinationState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DestinationCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Weight" Type="Decimal" Precision="3" Scale="2" />
+          <Property Name="Rate" Type="Decimal" Precision="3" Scale="2" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1175,6 +1214,7 @@
           <EntitySetMapping Name="tblBookings">
             <EntityTypeMapping TypeName="CargovioDbModel.tblBooking">
               <MappingFragment StoreEntitySet="tblBooking">
+                <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Userid" ColumnName="Userid" />
                 <ScalarProperty Name="SourceId" ColumnName="SourceId" />
@@ -1287,6 +1327,7 @@
           <EntitySetMapping Name="Trackings">
             <EntityTypeMapping TypeName="CargovioDbModel.Tracking">
               <MappingFragment StoreEntitySet="Tracking">
+                <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="BookingId" ColumnName="BookingId" />
                 <ScalarProperty Name="CargoStatusTypeId" ColumnName="CargoStatusTypeId" />
@@ -1327,6 +1368,24 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Usertypename" ColumnName="Usertypename" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RateDatas">
+            <EntityTypeMapping TypeName="CargovioDbModel.RateData">
+              <MappingFragment StoreEntitySet="RateData">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="DestinationCountry" ColumnName="DestinationCountry" />
+                <ScalarProperty Name="DestinationState" ColumnName="DestinationState" />
+                <ScalarProperty Name="DestinationCity" ColumnName="DestinationCity" />
+                <ScalarProperty Name="SourceCountry" ColumnName="SourceCountry" />
+                <ScalarProperty Name="SourceState" ColumnName="SourceState" />
+                <ScalarProperty Name="SourceCity" ColumnName="SourceCity" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

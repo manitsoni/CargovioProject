@@ -85,6 +85,11 @@ namespace Business.Customer.Manager
             return bookingRepository.GetBookingDetails(ShipmentId);
         }
 
+        public IList<CommonBookingEntities> GetOldBooking(int id)
+        {
+            return bookingRepository.GetOldBooking(id);
+        }
+
         public PackageEntities GetPackageById(int packageId)
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<tblPackageDetail, PackageEntities>());

@@ -7,6 +7,7 @@ using System.Web.Http;
 using BusinessEntities.CommonEntities;
 using Data.Model;
 using Business.Admin.Manager.Interface;
+using BusinessEntities.Admin;
 namespace Cargovio.Areas.Admin.Controllers
 {
     public class ManageCustomerController : ApiController
@@ -45,6 +46,121 @@ namespace Cargovio.Areas.Admin.Controllers
             catch (Exception ex)
             {
                 return Ok(ex);
+            }
+        }
+        [HttpGet]
+        [Route("Admin/Api/Getcustomer")]
+        public IHttpActionResult GetCustomer()
+        {
+            try
+            {
+                return Ok(cManager.getAllCustomers().ToList());
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex);
+            }
+        }
+        [HttpGet]
+        [Route("Admin/Api/Getcustomeradmin")]
+        public IHttpActionResult GetCustomeradmin()
+        {
+            try
+            {
+                return Ok(cManager.getCustomerAdmins().ToList());
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex);
+            }
+        }
+        [HttpGet]
+        [Route("Admin/Api/GetBooking")]
+        public IHttpActionResult GetBookings()
+        {
+            try
+            {
+                return Ok(cManager.getBookings().ToList());
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex);
+            }
+        }
+        [HttpGet]
+        [Route("Admin/Api/GetBookingdetails/{ShipmentId}")]
+        public IHttpActionResult GetBookingdetails(string ShipmentId)
+        {
+            try
+            {
+                return Ok(cManager.getBookingDetails(ShipmentId).ToList());
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex);
+            }
+        }
+        [HttpGet]
+        [Route("Admin/Api/GetQuotationlist")]
+        public IHttpActionResult GetQuotationList()
+        {
+            try
+            {
+                return Ok(cManager.getQuotations().ToList());
+            }
+            catch (Exception _ex)
+            {
+                return Ok(_ex);
+            }
+        }
+        [HttpGet]
+        [Route("Admin/Api/Getdeliveredshipments")]
+        public IHttpActionResult Getdeliveredshipments()
+        {
+            try
+            {
+                return Ok(cManager.getDeliveredShipments());
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex);
+            }
+        }
+        [HttpPost]
+        [Route("Admin/Api/Rates/Add")]
+        public object AddRates(RatesModel rate)
+        {
+            rate.CreatedDate = DateTime.Now;
+            rate.IsActive = true;
+            cManager.AddRates(rate);
+            return Ok();
+        }
+        [HttpGet]
+        [Route("Admin/Api/Rates/Get")]
+        public IHttpActionResult GetRates()
+        {
+            try
+            {
+                return Ok(cManager.GetRates());
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        [HttpDelete]
+        [Route("Admin/Api/Rates/DeleteRate")]
+        public IHttpActionResult Delete(int id)
+        {
+            try
+            {
+                return Ok(cManager.DeleteRates(id));
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
     }

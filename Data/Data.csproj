@@ -83,6 +83,9 @@
     <Compile Include="Model\Office.cs">
       <DependentUpon>CargovioModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\RateData.cs">
+      <DependentUpon>CargovioModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\sysdiagram.cs">
       <DependentUpon>CargovioModel.tt</DependentUpon>
     </Compile>

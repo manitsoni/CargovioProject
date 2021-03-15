@@ -37,5 +37,6 @@ namespace Data.Model
         public virtual DbSet<Tracking> Trackings { get; set; }
         public virtual DbSet<UserRegistration> UserRegistrations { get; set; }
         public virtual DbSet<UserType> UserTypes { get; set; }
+        public virtual DbSet<RateData> RateDatas { get; set; }
     }
 }

@@ -75,6 +75,7 @@ namespace Cargovio.Areas.Customer.Controllers
                 de.UserId = data.Id;
                 de.DocumentName = objCommon.DestinationDocumentName;
                 de.DocumentNumber = objCommon.DestinationDocumentNumber;
+
                 int DestinationId = bookingManager.AddDestinationAddress(de);
 
                 //Add Package Details To DB
@@ -125,6 +126,7 @@ namespace Cargovio.Areas.Customer.Controllers
                 be.IsPickUp = false;
                 be.IsActive = true;
                 be.IsDelivered = false;
+                be.IsCurrent = true;
                 int BookingId = bookingManager.AddBooking(be);
 
                 //Add Tracking Info in DB
@@ -136,6 +138,7 @@ namespace Cargovio.Areas.Customer.Controllers
                 te.IsActive = true;
                 te.IsDelivered = false;
                 te.UpdatedBy = OfficeUserId;
+                te.IsCurrent = true;
                 int TrackingId = bookingManager.AddTracking(te);
                 return Ok(TrackingId);
             }
@@ -209,6 +212,20 @@ namespace Cargovio.Areas.Customer.Controllers
                 return Ok(ex);
             }
         }
+        [HttpGet]
+        [Route("Customer/Api/Getoldbookings/{Userid}")]
+        public IHttpActionResult Getoldbookings(int Userid)
+        {
+            try
+            {
+                return Ok(bookingManager.GetOldBooking(Userid).ToList());
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex);
+            }
+        }
+       
 
     }
 }

@@ -37,6 +37,7 @@ namespace Data.Model
         public Nullable<bool> IsDelivered { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public Nullable<bool> IsCurrent { get; set; }
     
         public virtual Office Office { get; set; }
         public virtual tblDestination tblDestination { get; set; }

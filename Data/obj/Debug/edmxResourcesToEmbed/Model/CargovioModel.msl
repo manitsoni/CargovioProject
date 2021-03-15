@@ -56,6 +56,7 @@
     <EntitySetMapping Name="tblBookings">
       <EntityTypeMapping TypeName="CargovioDbModel.tblBooking">
         <MappingFragment StoreEntitySet="tblBooking">
+          <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Userid" ColumnName="Userid" />
           <ScalarProperty Name="SourceId" ColumnName="SourceId" />
@@ -168,6 +169,7 @@
     <EntitySetMapping Name="Trackings">
       <EntityTypeMapping TypeName="CargovioDbModel.Tracking">
         <MappingFragment StoreEntitySet="Tracking">
+          <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="BookingId" ColumnName="BookingId" />
           <ScalarProperty Name="CargoStatusTypeId" ColumnName="CargoStatusTypeId" />
@@ -208,6 +210,24 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Usertypename" ColumnName="Usertypename" />
           <ScalarProperty Name="isActive" ColumnName="isActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RateDatas">
+      <EntityTypeMapping TypeName="CargovioDbModel.RateData">
+        <MappingFragment StoreEntitySet="RateData">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="DestinationCountry" ColumnName="DestinationCountry" />
+          <ScalarProperty Name="DestinationState" ColumnName="DestinationState" />
+          <ScalarProperty Name="DestinationCity" ColumnName="DestinationCity" />
+          <ScalarProperty Name="SourceCountry" ColumnName="SourceCountry" />
+          <ScalarProperty Name="SourceState" ColumnName="SourceState" />
+          <ScalarProperty Name="SourceCity" ColumnName="SourceCity" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

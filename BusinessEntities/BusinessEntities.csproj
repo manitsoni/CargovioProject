@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\RatesModel.cs" />
     <Compile Include="CommonEntities\CommonCustomerEntities.cs" />
     <Compile Include="CommonEntities\CompanyDetailsEntities.cs" />
     <Compile Include="CommonEntities\OfficeDetailsEntities.cs" />
@@ -57,8 +58,6 @@
     <Compile Include="Customer\TrackingEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Admin\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

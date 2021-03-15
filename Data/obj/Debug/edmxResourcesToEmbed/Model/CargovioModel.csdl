@@ -81,6 +81,7 @@
     <NavigationProperty Name="UserRegistration" Relationship="Self.FK_tblBooking_UserRegistration" FromRole="tblBooking" ToRole="UserRegistration" />
     <NavigationProperty Name="UserRegistration1" Relationship="Self.FK_tblBooking_UserRegistration1" FromRole="tblBooking" ToRole="UserRegistration" />
     <NavigationProperty Name="Trackings" Relationship="Self.FK_Tracking_tblBooking" FromRole="tblBooking" ToRole="Tracking" />
+    <Property Name="IsCurrent" Type="Boolean" />
   </EntityType>
   <EntityType Name="tblDestination">
     <Key>
@@ -194,6 +195,7 @@
     <NavigationProperty Name="tblBooking" Relationship="Self.FK_Tracking_tblBooking" FromRole="Tracking" ToRole="tblBooking" />
     <NavigationProperty Name="UserRegistration" Relationship="Self.FK_Tracking_UserRegistration" FromRole="Tracking" ToRole="UserRegistration" />
     <NavigationProperty Name="UserRegistration1" Relationship="Self.FK_Tracking_UserRegistration1" FromRole="Tracking" ToRole="UserRegistration" />
+    <Property Name="IsCurrent" Type="Boolean" />
   </EntityType>
   <EntityType Name="UserRegistration">
     <Key>
@@ -571,5 +573,23 @@
       <End Role="UserType" EntitySet="UserTypes" />
       <End Role="UserRegistration" EntitySet="UserRegistrations" />
     </AssociationSet>
+    <EntitySet Name="RateDatas" EntityType="CargovioDbModel.RateData" />
   </EntityContainer>
+  <EntityType Name="RateData">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SourceCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SourceState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SourceCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DestinationCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DestinationState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DestinationCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Weight" Type="Decimal" Precision="3" Scale="2" />
+    <Property Name="Rate" Type="Decimal" Precision="3" Scale="2" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
 </Schema>

@@ -22,6 +22,7 @@ namespace Data.Model
         public Nullable<bool> IsActive { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<int> UpdatedBy { get; set; }
+        public Nullable<bool> IsCurrent { get; set; }
     
         public virtual CargoStatusType CargoStatusType { get; set; }
         public virtual tblBooking tblBooking { get; set; }

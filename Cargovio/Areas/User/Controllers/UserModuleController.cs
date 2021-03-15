@@ -11,6 +11,9 @@ using BusinessEntities.CommonEntities;
 
 using Data.Model;
 using Cargovio.Areas.User.Models;
+using System.Net.Mail;
+using System.IO;
+
 namespace Cargovio.Areas.User.Controllers
 {
     public class UserModuleController : ApiController
@@ -58,6 +61,38 @@ namespace Cargovio.Areas.User.Controllers
                     user.UserTypeId = 3;
                 }
                 UserId = userManager.UserRegistration(user);
+                string FilePath = "D:\\CargovioProject\\Cargovio\\Common\\MailFormat\\UserRegistration.html";
+                StreamReader str = new StreamReader(FilePath);
+                string MailText = str.ReadToEnd();
+
+
+                DateTime time = DateTime.Now;
+
+                MailText = MailText.Replace("{UserName}", user.UserName);
+                //MailText = MailText.Replace("{BookingDate}", entity.BookingDate.ToString());
+                //MailText = MailText.Replace("{BookingTime}", time.ToString("t"));
+                //MailText = MailText.Replace("{PickupAddress}", entity.PickupAddress);
+                //MailText = MailText.Replace("{DropAddress}", entity.DropAddress);
+                //MailText = MailText.Replace("{Dealer}", dealer.Name);
+                //MailText = MailText.Replace("{PhoneNumber}", dealer.PhoneNumber);
+                //MailText = MailText.Replace("{Service}", htmlContentService);
+                //MailText = MailText.Replace("{Total}", totalAmmount.ToString());
+                str.Close();
+
+                MailMessage mail = new MailMessage();
+                mail.To.Add(user.Email);
+                mail.From = new MailAddress("automobile.onthego@gmail.com");
+                mail.Subject = "Appontment Booked";
+                string Body = MailText;
+                mail.Body = Body;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new System.Net.NetworkCredential("automobile.onthego@gmail.com", "Password@123");
+                smtp.EnableSsl = true;
+                smtp.Send(mail);
                 if (UserId == 0)
                 {
                     return NotFound();

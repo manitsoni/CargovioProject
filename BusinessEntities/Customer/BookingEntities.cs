@@ -25,6 +25,7 @@ namespace BusinessEntities.Customer
 
         public Boolean? IsActive { get; set; }
         public Boolean? IsPickUp { get; set; }
+        public Boolean? IsCurrent { get; set; }
         public Boolean? IsDelivered { get; set; }
 
     }

@@ -8,7 +8,8 @@ namespace BusinessEntities.Customer
 {
     public class CommonBookingEntities
     {
-      
+
+        public int ID { get; set; }
         public string CustomerName { get; set; }
         public string EmailId { get; set; }
         public string Phone { get; set; }
@@ -48,6 +49,8 @@ namespace BusinessEntities.Customer
         public int? PackageCreatedBy { get; set; }
         public Nullable<Boolean> IsActive { get; set; }
 
+        public string UpdatedDate { get; set; }
+
         public string CreatedDate { get; set; }
         public decimal? Amount { get; set; }
         public string PaymentType { get; set; }
@@ -56,5 +59,9 @@ namespace BusinessEntities.Customer
         public string ShipmentId { get; set; }
         public string CargoStatus { get; set; }
         public string CargoLocation { get; set; }
+
+        public bool? isActive { get; set; }
+        public bool? isDelivered { get; set; }
+        public bool? isPickup { get; set; }
     }
 }

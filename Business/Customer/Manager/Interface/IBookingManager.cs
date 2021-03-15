@@ -15,6 +15,7 @@ namespace Business.Customer.Manager.Interface
         int AddBooking(BookingEntities be);
         int AddTracking(TrackingEntities te);
         IList<CommonBookingEntities> GetBooking(int id);
+        IList<CommonBookingEntities> GetOldBooking(int id);
         IList<CommonBookingEntities> GetBookingDetails(string ShipmentId);
 
         PackageEntities GetPackageById(int packageId);
