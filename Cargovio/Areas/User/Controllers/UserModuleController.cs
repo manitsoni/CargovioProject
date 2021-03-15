@@ -69,20 +69,13 @@ namespace Cargovio.Areas.User.Controllers
                 DateTime time = DateTime.Now;
 
                 MailText = MailText.Replace("{UserName}", user.UserName);
-                //MailText = MailText.Replace("{BookingDate}", entity.BookingDate.ToString());
-                //MailText = MailText.Replace("{BookingTime}", time.ToString("t"));
-                //MailText = MailText.Replace("{PickupAddress}", entity.PickupAddress);
-                //MailText = MailText.Replace("{DropAddress}", entity.DropAddress);
-                //MailText = MailText.Replace("{Dealer}", dealer.Name);
-                //MailText = MailText.Replace("{PhoneNumber}", dealer.PhoneNumber);
-                //MailText = MailText.Replace("{Service}", htmlContentService);
-                //MailText = MailText.Replace("{Total}", totalAmmount.ToString());
+              
                 str.Close();
 
                 MailMessage mail = new MailMessage();
                 mail.To.Add(user.Email);
-                mail.From = new MailAddress("automobile.onthego@gmail.com");
-                mail.Subject = "Appontment Booked";
+                mail.From = new MailAddress("cargoviohub@gmail.com");
+                mail.Subject = "Account Created";
                 string Body = MailText;
                 mail.Body = Body;
                 mail.IsBodyHtml = true;
@@ -90,7 +83,7 @@ namespace Cargovio.Areas.User.Controllers
                 smtp.Host = "smtp.gmail.com";
                 smtp.Port = 587;
                 smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new System.Net.NetworkCredential("automobile.onthego@gmail.com", "Password@123");
+                smtp.Credentials = new System.Net.NetworkCredential("cargoviohub@gmail.com", "Password@123");
                 smtp.EnableSsl = true;
                 smtp.Send(mail);
                 if (UserId == 0)
@@ -118,6 +111,32 @@ namespace Cargovio.Areas.User.Controllers
                     company.CreatedDate = DateTime.Now;
                     company.CopmanyAddress1 = company.City;
                     company.CopmanyAddress2 = company.City;
+                    var data = db.UserRegistrations.Where(m => m.Id == company.UserId).FirstOrDefault();
+                    string FilePath = "D:\\CargovioProject\\Cargovio\\Common\\MailFormat\\CompanyRegistration.html";
+                    StreamReader str = new StreamReader(FilePath);
+                    string MailText = str.ReadToEnd();
+
+
+                    DateTime time = DateTime.Now;
+
+                    MailText = MailText.Replace("{UserName}", data.Username);
+                    MailText = MailText.Replace("{CompanyName}", company.CompanyName);
+                    str.Close();
+
+                    MailMessage mail = new MailMessage();
+                    mail.To.Add(data.Email);
+                    mail.From = new MailAddress("cargoviohub@gmail.com");
+                    mail.Subject = "Company Registration Success";
+                    string Body = MailText;
+                    mail.Body = Body;
+                    mail.IsBodyHtml = true;
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 587;
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = new System.Net.NetworkCredential("cargoviohub@gmail.com", "Password@123");
+                    smtp.EnableSsl = true;
+                    smtp.Send(mail);
                     return Ok(userManager.CompanyDetails(company));
                 }
                 else
@@ -152,6 +171,32 @@ namespace Cargovio.Areas.User.Controllers
                         ur.OfficeId = OfficeId;
                         db.Entry(ur).State = System.Data.Entity.EntityState.Modified;
                         db.SaveChanges();
+                        var data = db.UserRegistrations.Where(m => m.Id == office.UserId).FirstOrDefault();
+                        string FilePath = "D:\\CargovioProject\\Cargovio\\Common\\MailFormat\\OfficeRegistration.html";
+                        StreamReader str = new StreamReader(FilePath);
+                        string MailText = str.ReadToEnd();
+
+
+                        DateTime time = DateTime.Now;
+
+                        MailText = MailText.Replace("{UserName}", data.Username);
+                        MailText = MailText.Replace("{City}", office.OfficeLocation);
+                        str.Close();
+
+                        MailMessage mail = new MailMessage();
+                        mail.To.Add(data.Email);
+                        mail.From = new MailAddress("cargoviohub@gmail.com");
+                        mail.Subject = "Office Registration Success";
+                        string Body = MailText;
+                        mail.Body = Body;
+                        mail.IsBodyHtml = true;
+                        SmtpClient smtp = new SmtpClient();
+                        smtp.Host = "smtp.gmail.com";
+                        smtp.Port = 587;
+                        smtp.UseDefaultCredentials = false;
+                        smtp.Credentials = new System.Net.NetworkCredential("cargoviohub@gmail.com", "Password@123");
+                        smtp.EnableSsl = true;
+                        smtp.Send(mail);
                         return Ok("Account Created Success!");
                     }
                     else
