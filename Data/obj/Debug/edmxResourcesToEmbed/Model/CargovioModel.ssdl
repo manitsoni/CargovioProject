@@ -76,7 +76,7 @@
     <Property Name="PackageDetailsId" Type="int" />
     <Property Name="Amount" Type="money" />
     <Property Name="PaymentType" Type="nvarchar(max)" />
-    <Property Name="TransactionId" Type="int" />
+    <Property Name="TransactionId" Type="varchar(max)" />
     <Property Name="OfficeId" Type="int" />
     <Property Name="ShipmentId" Type="nvarchar" MaxLength="15" />
     <Property Name="CreatedBy" Type="int" />
@@ -109,6 +109,16 @@
     <Property Name="IsActive" Type="bit" />
     <Property Name="CreatedBy" Type="int" />
     <Property Name="CreatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblLatLong">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CityName" Type="varchar" MaxLength="50" />
+    <Property Name="LatAddress" Type="varchar" MaxLength="50" />
+    <Property Name="LongAddress" Type="varchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
   </EntityType>
   <EntityType Name="tblPackageDetails">
     <Key>
@@ -145,6 +155,7 @@
     <Property Name="DestinationCountry" Type="nvarchar(max)" />
     <Property Name="DestinationPincode" Type="nvarchar(max)" />
     <Property Name="PackageDeatilsId" Type="int" />
+    <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
     <Property Name="CreateBy" Type="int" />
     <Property Name="UpdatedBy" Type="int" />
     <Property Name="CreatedDate" Type="datetime" />
@@ -465,6 +476,7 @@
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblBooking" EntityType="Self.tblBooking" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblDestination" EntityType="Self.tblDestination" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblLatLong" EntityType="Self.tblLatLong" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblPackageDetails" EntityType="Self.tblPackageDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblQuotation" EntityType="Self.tblQuotation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblSource" EntityType="Self.tblSource" Schema="dbo" store:Type="Tables" />

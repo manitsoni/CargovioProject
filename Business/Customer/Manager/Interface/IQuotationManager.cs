@@ -11,5 +11,6 @@ namespace Business.Customer.Manager.Interface
         int AddPackage(PackageEntities pe);
         bool AddQuotation(QuotationEntities qe);
         IList<GetQuotationEntities> GetQuotation(int id);
+        int GetQuotationRate(string latitude1, string longitude1,string latitude2,string longitude2);
     }
 }

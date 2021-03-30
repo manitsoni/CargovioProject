@@ -28,6 +28,7 @@ namespace Data.Model
         public virtual DbSet<CargoStatusType> CargoStatusTypes { get; set; }
         public virtual DbSet<CompanyDetail> CompanyDetails { get; set; }
         public virtual DbSet<Office> Offices { get; set; }
+        public virtual DbSet<RateData> RateDatas { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<tblBooking> tblBookings { get; set; }
         public virtual DbSet<tblDestination> tblDestinations { get; set; }
@@ -37,6 +38,6 @@ namespace Data.Model
         public virtual DbSet<Tracking> Trackings { get; set; }
         public virtual DbSet<UserRegistration> UserRegistrations { get; set; }
         public virtual DbSet<UserType> UserTypes { get; set; }
-        public virtual DbSet<RateData> RateDatas { get; set; }
+        public virtual DbSet<tblLatLong> tblLatLongs { get; set; }
     }
 }

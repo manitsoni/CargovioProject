@@ -7,6 +7,7 @@ using System.Web.Http;
 using Cargovio.Areas.Customer.Models;
 using AutoMapper;
 using Data.Model;
+using Cargovio.Models;
 using BusinessEntities.Customer;
 using Business.Customer.Manager;
 using Business.Customer.Manager.Interface;
@@ -16,7 +17,7 @@ namespace Cargovio.Areas.Customer.Controllers
     public class BookingController : ApiController
     {
         private IBookingManager bookingManager;
-       
+        SMS sms = new SMS();
         private static Random random = new Random();
         CargovioDbEntities db = new CargovioDbEntities();
         public BookingController(IBookingManager booking)
@@ -34,6 +35,7 @@ namespace Cargovio.Areas.Customer.Controllers
                 int _userId = Convert.ToInt32(Userid);
                 var data = db.UserRegistrations.Where(m => m.Id == _userId).FirstOrDefault();
                 var company = db.CompanyDetails.Where(m => m.UserId == _userId).FirstOrDefault();
+
                 SourceAddressEntities se = new SourceAddressEntities();
                 se.CompanyName = company.CompanyName;
                 se.CreatedDate = DateTime.Now;
@@ -110,16 +112,15 @@ namespace Cargovio.Areas.Customer.Controllers
                 //Add Booking Data To DB
                 BookingEntities be = new BookingEntities();
                 Helper h1 = new Helper();
-                be.Amount = 1500;
+                be.Amount = Convert.ToInt32(objCommon.Amount) /100;
                 be.CreatedBy = _userId;
                 be.CreatedDate = DateTime.Now;
                 be.DestinationId = DestinationId;
                 be.OfficeId = OfficeId;
                 be.PackageDetailsId = PackageId;
-                be.PaymentType = "COD";
+                be.PaymentType = objCommon.PaymentType;
                 be.ShipmentId = h1.GetShipmentNumber();
                 be.SourceId = SourceId;
-                be.TransactionId = 101;
                 be.UpdatedBy = _userId;
                 be.UpdatedDate = DateTime.Now;
                 be.Userid = _userId;
@@ -127,6 +128,7 @@ namespace Cargovio.Areas.Customer.Controllers
                 be.IsActive = true;
                 be.IsDelivered = false;
                 be.IsCurrent = true;
+                be.TransactionId = objCommon.TransactionId;
                 int BookingId = bookingManager.AddBooking(be);
 
                 //Add Tracking Info in DB
@@ -140,11 +142,33 @@ namespace Cargovio.Areas.Customer.Controllers
                 te.UpdatedBy = OfficeUserId;
                 te.IsCurrent = true;
                 int TrackingId = bookingManager.AddTracking(te);
+                string Message = "Your Booking Is Done With Cargovio.in From " + se.SourceCity + " To " + de.DestinationCity + " With Shipment Id " + be.ShipmentId;
+                sms.Send(data.ContactNo, Message);
+                string AdminMessage = "You Receive One New Booking From" + se.SourceCity + " To " + de.DestinationCity + " With Shipment Id " + be.ShipmentId;
+                sms.Send("9737920098", AdminMessage);
+                var data1 = db.UserRegistrations.Where(m => m.UserTypeId == 2 && m.OfficeId == OfficeId).FirstOrDefault();
+                string CAdminMessage = "You Receive One New Booking From" + se.SourceCity + " To " + de.DestinationCity + " With Shipment Id " + be.ShipmentId;
+                sms.Send(data1.ContactNo, CAdminMessage);
                 return Ok(TrackingId);
             }
             catch (Exception ex)
             {
                 return Ok(ex);
+            }
+        }
+        [HttpGet]
+        [Route("Customer/Api/GetKM")]
+        public IHttpActionResult GetRate(string City1,string City2)
+        {
+            try
+            {
+                int rate = Convert.ToInt32(bookingManager.getRate(City1, City2));
+                
+                return Ok(rate);
+            }
+            catch (Exception)
+            {
+                return NotFound();
             }
         }
         [HttpGet]
@@ -162,12 +186,12 @@ namespace Cargovio.Areas.Customer.Controllers
         }
 
         [HttpGet]
-        [Route("Customer/Api/GetMyBookingDetails/{ShipmentId}")]
-        public IHttpActionResult GetBookingDetails(string ShipmentId)
+        [Route("Customer/Api/GetMyBookingDetails")]
+        public IHttpActionResult GetBookingDetails(string ShipmentId,int Userid)
         {
             try
             {
-                return Ok(bookingManager.GetBookingDetails(ShipmentId));
+                return Ok(bookingManager.GetBookingDetails(ShipmentId,Userid));
             }
             catch (Exception ex)
             {
@@ -225,7 +249,21 @@ namespace Cargovio.Areas.Customer.Controllers
                 return Ok(ex);
             }
         }
+        [HttpGet]
+        [Route("Customer/Api/GetMyOffice/{Userid}")]
+        public IHttpActionResult GetMyOffice(int Userid)
+        {
+            try
+            {
+                return Ok(bookingManager.GetMyoffice(Userid).ToList());
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex);
+            }
+        }
        
+
 
     }
 }

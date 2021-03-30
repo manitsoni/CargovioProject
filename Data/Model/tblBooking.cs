@@ -27,7 +27,7 @@ namespace Data.Model
         public Nullable<int> PackageDetailsId { get; set; }
         public Nullable<decimal> Amount { get; set; }
         public string PaymentType { get; set; }
-        public Nullable<int> TransactionId { get; set; }
+        public string TransactionId { get; set; }
         public Nullable<int> OfficeId { get; set; }
         public string ShipmentId { get; set; }
         public Nullable<int> CreatedBy { get; set; }

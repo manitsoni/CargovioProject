@@ -54,6 +54,7 @@ namespace BusinessEntities.Customer
         public string CreatedDate { get; set; }
         public decimal? Amount { get; set; }
         public string PaymentType { get; set; }
+        public string TransactionId { get; set; }
         
         //Optional
         public string ShipmentId { get; set; }

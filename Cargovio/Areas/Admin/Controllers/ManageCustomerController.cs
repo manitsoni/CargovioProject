@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using BusinessEntities.CommonEntities;
 using Data.Model;
+using Cargovio.Models;
 using Business.Admin.Manager.Interface;
 using BusinessEntities.Admin;
 namespace Cargovio.Areas.Admin.Controllers
@@ -14,6 +15,7 @@ namespace Cargovio.Areas.Admin.Controllers
     {
         IManageCustomerByAdminManager cManager;
         CargovioDbEntities db = new CargovioDbEntities();
+        SMS sms = new SMS();
         public ManageCustomerController(IManageCustomerByAdminManager mg)
         {
             cManager = mg;
@@ -40,7 +42,10 @@ namespace Cargovio.Areas.Admin.Controllers
         {
             try
             {
-                
+                int uid = Convert.ToInt32(Userid);
+                var data = db.UserRegistrations.Where(m => m.Id == uid).FirstOrDefault();
+                string Message = "Your Verification Is Done With Cargovio.in Now You Can Login On Cargovio.in And Use The Service Provide By Us. Thankyou";
+                sms.Send(data.ContactNo, Message);
                 return Ok(cManager.VerifyCustomer(Convert.ToInt32(Userid)));
             }
             catch (Exception ex)

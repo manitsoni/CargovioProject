@@ -7,11 +7,13 @@ using System.Web.Http;
 using BusinessEntities.Customer;
 using Business.CustomerAdmin.Manager.Interface;
 using Data.Model;
+using Cargovio.Models;
 namespace Cargovio.Areas.CustomerAdmin.Controllers
 {
     public class CustomerAdminManageController : ApiController
     {
         public ICustomerAdminManager customer;
+        SMS sms = new SMS();
         CargovioDbEntities db = new CargovioDbEntities();
         public CustomerAdminManageController(ICustomerAdminManager cust)
         {
@@ -102,10 +104,18 @@ namespace Cargovio.Areas.CustomerAdmin.Controllers
                 if (sname == "Delivered" && CurrentCity == destcity)
                 {
                     //code for delivered product
+                    string Message = "Dear Customer Your Shipment #" +data1.ShipmentId + " Is Arriving At" + destcity +" By CARGOVIO.IN";
+                    int userid = Convert.ToInt32(data1.Userid);
+                    var d = db.UserRegistrations.Where(m => m.Id == userid).FirstOrDefault();
+                    sms.Send(d.ContactNo, Message);
                     customer.DeliveredShipment(StatusId, BookingId, OfficeId, Userid);
                 }
                 else
                 {
+                    string Message = "Dear Customer Your Shipment #" + data1.ShipmentId + " Is Out Of Delivery By CARGOVIO Executive Ph:9737920098";
+                    int userid = Convert.ToInt32(data1.Userid);
+                    var d = db.UserRegistrations.Where(m => m.Id == userid).FirstOrDefault();
+                    sms.Send(d.ContactNo, Message);
                     customer.UpdateTracking(StatusId, BookingId, OfficeId, Userid);
                 }
                 

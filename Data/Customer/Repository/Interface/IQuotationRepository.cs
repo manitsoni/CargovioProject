@@ -14,5 +14,6 @@ namespace Data.Customer.Repository.Interface
         bool BookQuotation(tblQuotation objQuotation);
         
         IList<GetQuotationEntities> GetQuotation(int id);
+        int GetQuotationRate(string latitude1, string longitude1, string latitude2, string longitude2);
     }
 }

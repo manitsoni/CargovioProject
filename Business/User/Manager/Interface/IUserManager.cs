@@ -14,7 +14,9 @@ namespace Business.User.Manager.Interface
         bool CompanyDetails(CompanyDetailsEntities objCompany);
         int OfficeDetails(OfficeDetailsEntities objOffice);
         bool LogOut(int UserId);
+        IQueryable<UserRegistration> getMyInfo(int Userid);
+        bool AddLatLong(string Lat, string Long, string City);
         //IList<UserRegistrationEntities> BindToSession(int id);
-       
+
     }
 }

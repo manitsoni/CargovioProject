@@ -15,7 +15,7 @@ namespace BusinessEntities.Customer
         public int? PackageDetailsId { get; set; }
         public int? Amount { get; set; }
         public string PaymentType { get; set; }
-        public int? TransactionId { get; set; }
+        public string TransactionId { get; set; }
         public int? OfficeId { get; set; }
         public string ShipmentId { get; set; }
         public int? CreatedBy { get; set; }

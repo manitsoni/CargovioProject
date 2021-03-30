@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Data.Model;
 using Data.CommonEntities.Repository.Interface;
+using BusinessEntities.CommonEntities;
+using System.IO;
+
 namespace Data.CommonEntities.Repository
 {
     public class UserRepository : IUserRepository
@@ -13,6 +16,17 @@ namespace Data.CommonEntities.Repository
         public bool AddCompanyDetails(CompanyDetail objCompanyDetails)
         {
             db.CompanyDetails.Add(objCompanyDetails);
+            return db.SaveChanges() > 0;
+        }
+
+        public bool AddLatLong(string Lat, string Long, string City)
+        {
+            tblLatLong LatiLong = new tblLatLong();
+            LatiLong.LatAddress = Lat;
+            LatiLong.LongAddress = Long;
+            LatiLong.CityName = City;
+            LatiLong.IsActive = true;
+            db.tblLatLongs.Add(LatiLong);
             return db.SaveChanges() > 0;
         }
 
@@ -28,6 +42,8 @@ namespace Data.CommonEntities.Repository
         {
             try
             {
+                
+
                 db.Offices.Add(objOffice);
                 db.SaveChanges();
                 return (objOffice.Id);
@@ -98,6 +114,22 @@ namespace Data.CommonEntities.Repository
                 }
             }
             return IsAvailable;
+        }
+
+        public IQueryable<UserRegistration> getMyInfo(int Userid)
+        {
+            try
+            {
+                var Data = db.UserRegistrations.Where(m => m.Id == Userid);
+
+                return Data;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+           
         }
 
         public int GetOfficeId(int Userid)

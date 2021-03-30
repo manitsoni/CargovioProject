@@ -10,6 +10,9 @@ using Data.Model;
 using BusinessEntities.Customer;
 using Business.Customer.Manager;
 using Business.Customer.Manager.Interface;
+using System.IO;
+using Newtonsoft.Json.Linq;
+
 namespace Cargovio.Areas.Customer.Controllers
 {
     public class QuotationController : ApiController
@@ -62,6 +65,7 @@ namespace Cargovio.Areas.Customer.Controllers
                 qe.PackageDeatilsId = PackageId;
                 qe.UpdatedBy = _userId;
                 qe.UpdatedDate = DateTime.Now;
+                qe.Amount = objCommon.Amount;
                 qe.UserId = _userId;
                 string City = "Ahmedabad";
                 int OfficeId;
@@ -97,6 +101,42 @@ namespace Cargovio.Areas.Customer.Controllers
             catch (Exception e)
             {
                 return NotFound();
+            }
+        }
+
+        [HttpGet]
+        [Route("Customer/Api/GetQuotationRate")]
+        public IHttpActionResult GetQuotationRate(string City1,string City2)
+        {
+            try
+            {
+                string latitude1, latitude2, longitude1, longitude2;
+                using (var client = new WebClient())
+                {
+                    string url = "http://api.positionstack.com/v1/forward?access_key=284d4543eb91f4bd81dff5d9d7f52d07&query=" + City1 + " India";
+                    Stream stream = client.OpenRead(url);
+                    StreamReader reader = new StreamReader(stream);
+                    JObject jObject = JObject.Parse(reader.ReadLine());
+                    latitude1 = jObject["data"][0]["latitude"].ToString();
+                    longitude1 = jObject["data"][0]["longitude"].ToString();
+
+
+                }
+                using (var client = new WebClient())
+                {
+                    string url = "http://api.positionstack.com/v1/forward?access_key=284d4543eb91f4bd81dff5d9d7f52d07&query=" + City2 + " India";
+                    Stream stream = client.OpenRead(url);
+                    StreamReader reader = new StreamReader(stream);
+                    JObject jObject = JObject.Parse(reader.ReadLine());
+                    latitude2 = jObject["data"][0]["latitude"].ToString();
+                    longitude2 = jObject["data"][0]["longitude"].ToString();
+                }
+
+                return Ok(quotationManager.GetQuotationRate(latitude1,longitude1,latitude2,longitude2));
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex);
             }
         }
     }

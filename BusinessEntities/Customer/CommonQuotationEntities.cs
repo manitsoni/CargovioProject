@@ -29,6 +29,7 @@ namespace BusinessEntities.Customer
         public int? Lenght { get; set; }
         public int? Weight { get; set; }
         public int? OfficeId { get; set; }
+        public decimal? Amount { get; set; }
     
     }
 }

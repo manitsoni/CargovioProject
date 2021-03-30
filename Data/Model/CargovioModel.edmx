@@ -81,7 +81,7 @@
           <Property Name="PackageDetailsId" Type="int" />
           <Property Name="Amount" Type="money" />
           <Property Name="PaymentType" Type="nvarchar(max)" />
-          <Property Name="TransactionId" Type="int" />
+          <Property Name="TransactionId" Type="varchar(max)" />
           <Property Name="OfficeId" Type="int" />
           <Property Name="ShipmentId" Type="nvarchar" MaxLength="15" />
           <Property Name="CreatedBy" Type="int" />
@@ -114,6 +114,16 @@
           <Property Name="IsActive" Type="bit" />
           <Property Name="CreatedBy" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblLatLong">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityName" Type="varchar" MaxLength="50" />
+          <Property Name="LatAddress" Type="varchar" MaxLength="50" />
+          <Property Name="LongAddress" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="tblPackageDetails">
           <Key>
@@ -150,6 +160,7 @@
           <Property Name="DestinationCountry" Type="nvarchar(max)" />
           <Property Name="DestinationPincode" Type="nvarchar(max)" />
           <Property Name="PackageDeatilsId" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
           <Property Name="CreateBy" Type="int" />
           <Property Name="UpdatedBy" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
@@ -470,6 +481,7 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblBooking" EntityType="Self.tblBooking" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDestination" EntityType="Self.tblDestination" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblLatLong" EntityType="Self.tblLatLong" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPackageDetails" EntityType="Self.tblPackageDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblQuotation" EntityType="Self.tblQuotation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblSource" EntityType="Self.tblSource" Schema="dbo" store:Type="Tables" />
@@ -604,6 +616,23 @@
           <NavigationProperty Name="tblBookings" Relationship="Self.FK_tblBooking_Office" FromRole="Office" ToRole="tblBooking" />
           <NavigationProperty Name="tblQuotations" Relationship="Self.FK_tblQuotation_Office" FromRole="Office" ToRole="tblQuotation" />
         </EntityType>
+        <EntityType Name="RateData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SourceCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SourceState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SourceCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DestinationCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DestinationState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DestinationCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Weight" Type="Decimal" Precision="3" Scale="2" />
+          <Property Name="Rate" Type="Decimal" Precision="3" Scale="2" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -625,7 +654,7 @@
           <Property Name="PackageDetailsId" Type="Int32" />
           <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="PaymentType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="TransactionId" Type="Int32" />
+          <Property Name="TransactionId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="OfficeId" Type="Int32" />
           <Property Name="ShipmentId" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="CreatedBy" Type="Int32" />
@@ -635,6 +664,7 @@
           <Property Name="IsDelivered" Type="Boolean" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsCurrent" Type="Boolean" />
           <NavigationProperty Name="Office" Relationship="Self.FK_tblBooking_Office" FromRole="tblBooking" ToRole="Office" />
           <NavigationProperty Name="tblDestination" Relationship="Self.FK_tblBooking_tblDestination" FromRole="tblBooking" ToRole="tblDestination" />
           <NavigationProperty Name="tblPackageDetail" Relationship="Self.FK_tblBooking_tblPackageDetails" FromRole="tblBooking" ToRole="tblPackageDetails" />
@@ -642,7 +672,6 @@
           <NavigationProperty Name="UserRegistration" Relationship="Self.FK_tblBooking_UserRegistration" FromRole="tblBooking" ToRole="UserRegistration" />
           <NavigationProperty Name="UserRegistration1" Relationship="Self.FK_tblBooking_UserRegistration1" FromRole="tblBooking" ToRole="UserRegistration" />
           <NavigationProperty Name="Trackings" Relationship="Self.FK_Tracking_tblBooking" FromRole="tblBooking" ToRole="Tracking" />
-          <Property Name="IsCurrent" Type="Boolean" />
         </EntityType>
         <EntityType Name="tblDestination">
           <Key>
@@ -716,6 +745,7 @@
           <NavigationProperty Name="UserRegistration" Relationship="Self.FK_tblQuotation_UserRegistration" FromRole="tblQuotation" ToRole="UserRegistration" />
           <NavigationProperty Name="UserRegistration1" Relationship="Self.FK_tblQuotation_UserRegistration1" FromRole="tblQuotation" ToRole="UserRegistration" />
           <NavigationProperty Name="UserRegistration2" Relationship="Self.FK_tblQuotation_UserRegistration2" FromRole="tblQuotation" ToRole="UserRegistration" />
+          <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="tblSource">
           <Key>
@@ -752,11 +782,11 @@
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="IsCurrent" Type="Boolean" />
           <NavigationProperty Name="CargoStatusType" Relationship="Self.FK_Tracking_CargoStatusType" FromRole="Tracking" ToRole="CargoStatusType" />
           <NavigationProperty Name="tblBooking" Relationship="Self.FK_Tracking_tblBooking" FromRole="Tracking" ToRole="tblBooking" />
           <NavigationProperty Name="UserRegistration" Relationship="Self.FK_Tracking_UserRegistration" FromRole="Tracking" ToRole="UserRegistration" />
           <NavigationProperty Name="UserRegistration1" Relationship="Self.FK_Tracking_UserRegistration1" FromRole="Tracking" ToRole="UserRegistration" />
-          <Property Name="IsCurrent" Type="Boolean" />
         </EntityType>
         <EntityType Name="UserRegistration">
           <Key>
@@ -1045,6 +1075,7 @@
           <EntitySet Name="CargoStatusTypes" EntityType="Self.CargoStatusType" />
           <EntitySet Name="CompanyDetails" EntityType="Self.CompanyDetail" />
           <EntitySet Name="Offices" EntityType="Self.Office" />
+          <EntitySet Name="RateDatas" EntityType="Self.RateData" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="tblBookings" EntityType="Self.tblBooking" />
           <EntitySet Name="tblDestinations" EntityType="Self.tblDestination" />
@@ -1134,24 +1165,17 @@
             <End Role="UserType" EntitySet="UserTypes" />
             <End Role="UserRegistration" EntitySet="UserRegistrations" />
           </AssociationSet>
-          <EntitySet Name="RateDatas" EntityType="CargovioDbModel.RateData" />
+          <EntitySet Name="tblLatLongs" EntityType="CargovioDbModel.tblLatLong" />
         </EntityContainer>
-        <EntityType Name="RateData">
+        <EntityType Name="tblLatLong">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SourceCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SourceState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SourceCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DestinationCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DestinationState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DestinationCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Quantity" Type="Int32" />
-          <Property Name="Weight" Type="Decimal" Precision="3" Scale="2" />
-          <Property Name="Rate" Type="Decimal" Precision="3" Scale="2" />
+          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LatAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LongAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IsActive" Type="Boolean" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1200,6 +1224,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="RateDatas">
+            <EntityTypeMapping TypeName="CargovioDbModel.RateData">
+              <MappingFragment StoreEntitySet="RateData">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SourceCity" ColumnName="SourceCity" />
+                <ScalarProperty Name="SourceState" ColumnName="SourceState" />
+                <ScalarProperty Name="SourceCountry" ColumnName="SourceCountry" />
+                <ScalarProperty Name="DestinationCity" ColumnName="DestinationCity" />
+                <ScalarProperty Name="DestinationState" ColumnName="DestinationState" />
+                <ScalarProperty Name="DestinationCountry" ColumnName="DestinationCountry" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="CargovioDbModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -1214,7 +1256,6 @@
           <EntitySetMapping Name="tblBookings">
             <EntityTypeMapping TypeName="CargovioDbModel.tblBooking">
               <MappingFragment StoreEntitySet="tblBooking">
-                <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Userid" ColumnName="Userid" />
                 <ScalarProperty Name="SourceId" ColumnName="SourceId" />
@@ -1232,6 +1273,7 @@
                 <ScalarProperty Name="IsDelivered" ColumnName="IsDelivered" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1277,6 +1319,7 @@
           <EntitySetMapping Name="tblQuotations">
             <EntityTypeMapping TypeName="CargovioDbModel.tblQuotation">
               <MappingFragment StoreEntitySet="tblQuotation">
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
@@ -1327,7 +1370,6 @@
           <EntitySetMapping Name="Trackings">
             <EntityTypeMapping TypeName="CargovioDbModel.Tracking">
               <MappingFragment StoreEntitySet="Tracking">
-                <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="BookingId" ColumnName="BookingId" />
                 <ScalarProperty Name="CargoStatusTypeId" ColumnName="CargoStatusTypeId" />
@@ -1336,6 +1378,7 @@
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1371,20 +1414,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RateDatas">
-            <EntityTypeMapping TypeName="CargovioDbModel.RateData">
-              <MappingFragment StoreEntitySet="RateData">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <EntitySetMapping Name="tblLatLongs">
+            <EntityTypeMapping TypeName="CargovioDbModel.tblLatLong">
+              <MappingFragment StoreEntitySet="tblLatLong">
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="DestinationCountry" ColumnName="DestinationCountry" />
-                <ScalarProperty Name="DestinationState" ColumnName="DestinationState" />
-                <ScalarProperty Name="DestinationCity" ColumnName="DestinationCity" />
-                <ScalarProperty Name="SourceCountry" ColumnName="SourceCountry" />
-                <ScalarProperty Name="SourceState" ColumnName="SourceState" />
-                <ScalarProperty Name="SourceCity" ColumnName="SourceCity" />
+                <ScalarProperty Name="LongAddress" ColumnName="LongAddress" />
+                <ScalarProperty Name="LatAddress" ColumnName="LatAddress" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

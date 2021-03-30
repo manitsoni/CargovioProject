@@ -58,5 +58,10 @@ namespace Business.Customer.Manager
         {
             return quotationRepository.GetQuotation(id).ToList();
         }
+
+        public int GetQuotationRate(string latitude1, string longitude1, string latitude2, string longitude2)
+        {
+            return quotationRepository.GetQuotationRate(latitude1, longitude1, latitude2, longitude2);
+        }
     }
 }

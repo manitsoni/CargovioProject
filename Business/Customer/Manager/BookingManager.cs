@@ -10,6 +10,8 @@ using Data.Customer.Repository;
 using Data.Customer.Repository.Interface;
 using Business.Customer.Manager.Interface;
 using BusinessEntities.Customer;
+using BusinessEntities.CustomerAdmin;
+
 namespace Business.Customer.Manager
 {
     public class BookingManager : IBookingManager
@@ -80,9 +82,23 @@ namespace Business.Customer.Manager
             return bookingRepository.GetBooking(id);
         }
 
-        public IList<CommonBookingEntities> GetBookingDetails(string ShipmentId)
+        public IList<CommonBookingEntities> GetBookingDetails(string ShipmentId,int Userid)
         {
-            return bookingRepository.GetBookingDetails(ShipmentId);
+            return bookingRepository.GetBookingDetails(ShipmentId,Userid);
+        }
+
+        public double getRate(string City1, string City2)
+        {
+            return bookingRepository.getRate(City1, City2);
+        }
+
+        public IList<OfficeList> GetMyoffice(int Userid)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Office, OfficeList>());
+            IMapper mapper = config.CreateMapper();
+            var office = bookingRepository.GetMyOffice(Userid).ToList();
+            List<OfficeList> officelist = office.Select(x => mapper.Map<Office, OfficeList>(x)).ToList();
+            return officelist;
         }
 
         public IList<CommonBookingEntities> GetOldBooking(int id)

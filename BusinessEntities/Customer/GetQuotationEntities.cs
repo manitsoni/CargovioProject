@@ -33,8 +33,9 @@ namespace BusinessEntities.Customer
         public int? Quantity { get; set; }
         public int? Width { get; set; }
         public int? Height { get; set; }
-        public int? Length { get; set; }
+        public int? Lenght { get; set; }
         public int? Weight { get; set; }
+        public decimal? Amount { get; set; }
 
         public Nullable<Boolean> IsActive { get; set; }
     }

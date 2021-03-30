@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Data.Model;
+using System.Net;
 using Data.Customer.Repository.Interface;
 using Common;
 using BusinessEntities.Customer;
@@ -76,10 +77,10 @@ namespace Data.Customer.Repository
                                }).ToList();
             return BookingData;
         }
-        public IList<CommonBookingEntities> GetBookingDetails(string ShipmentId)
+        public IList<CommonBookingEntities> GetBookingDetails(string ShipmentId,int Userid)
         {
             var data = db.tblBookings.Where(m => m.ShipmentId == ShipmentId).FirstOrDefault();
-            int Userid = Convert.ToInt32(data.Userid);
+            //int Userid = Convert.ToInt32(data.Userid);
             var BookingData = (from tr in db.Trackings
                                join bd in db.tblBookings on tr.BookingId equals bd.ID
                                join cr in db.CargoStatusTypes on tr.CargoStatusTypeId equals cr.Id
@@ -130,6 +131,73 @@ namespace Data.Customer.Repository
                                }).ToList();
             return BookingData;
         }
+
+        public double getRate(string City1, string City2)
+        {
+            try
+            {
+                double lat1, lat2, long1, long2;
+                var CityLatLong1 = db.tblLatLongs.Where(m => m.CityName == City1).FirstOrDefault();
+                var CityLatLong2 = db.tblLatLongs.Where(m => m.CityName == City2).FirstOrDefault();
+                lat1 = Convert.ToDouble(CityLatLong1.LatAddress);
+                long1 = Convert.ToDouble(CityLatLong1.LongAddress);
+                lat2 = Convert.ToDouble(CityLatLong2.LatAddress);
+                long2 = Convert.ToDouble(CityLatLong2.LongAddress);
+                double Km = distance(lat1, lat2, long1, long2);
+                double rate = Km * 25;
+                double value = rate;
+                int factor = 100;
+                int nearestMultiple = (int)Math.Round((value / (double)factor), MidpointRounding.AwayFromZero) * factor;
+                return nearestMultiple;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        static double toRadians(double angleIn10thofaDegree)
+        {
+            return (angleIn10thofaDegree *
+                        Math.PI) / 180;
+        }
+        static double distance(double lat1, double lat2, double lon1, double lon2)
+        {
+            lon1 = toRadians(lon1);
+            lon2 = toRadians(lon2);
+            lat1 = toRadians(lat1);
+            lat2 = toRadians(lat2);
+            double dlon = lon2 - lon1;
+            double dlat = lat2 - lat1;
+            double a = Math.Pow(Math.Sin(dlat / 2), 2) +
+                    Math.Cos(lat1) * Math.Cos(lat2) *
+                    Math.Pow(Math.Sin(dlon / 2), 2);
+
+            double c = 2 * Math.Asin(Math.Sqrt(a));
+
+            // Radius of earth in
+            // kilometers. Use 3956
+            // for miles
+            double r = 6371;
+
+            // calculate the result
+            return (c * r);
+        }
+
+        public IQueryable<Office> GetMyOffice(int Userid)
+        {
+            try
+            {
+                var data = db.UserRegistrations.Where(m => m.Id == Userid).FirstOrDefault();
+                int oid = Convert.ToInt32(data.OfficeId);
+                return (db.Offices.Where(m => m.Id == oid));
+            }
+            catch (Exception ex) 
+            {
+                throw;
+            }
+        }
+
         public IList<CommonBookingEntities> GetOldBooking(int id)
         {
             var BookingData = (from tr in db.Trackings

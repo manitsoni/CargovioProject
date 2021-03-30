@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Data.Model;
+using BusinessEntities.CommonEntities;
+
 namespace Data.CommonEntities.Repository.Interface
 {
     public interface IUserRepository
@@ -21,5 +23,7 @@ namespace Data.CommonEntities.Repository.Interface
         bool CheckOffice(int Userid, string OfficeLocation);
         IQueryable<UserRegistration> GetUser(int id);
         int GetOfficeId(int Userid);
+        IQueryable<UserRegistration> getMyInfo(int Userid);
+        bool AddLatLong(string Lat, string Long, string City);
     }
 }

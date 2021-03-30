@@ -8,17 +8,20 @@ using Business;
 using Business.User.Manager;
 using Business.User.Manager.Interface;
 using BusinessEntities.CommonEntities;
-
+using Cargovio.Models;
 using Data.Model;
 using Cargovio.Areas.User.Models;
 using System.Net.Mail;
 using System.IO;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json.Linq;
 
 namespace Cargovio.Areas.User.Controllers
 {
     public class UserModuleController : ApiController
     {
         private IUserManager userManager;
+        SMS sms = new SMS();
         private int UserId;
         CargovioDbEntities db = new CargovioDbEntities();
         private string UserType = "";
@@ -50,6 +53,10 @@ namespace Cargovio.Areas.User.Controllers
                     int OfficeId = data.Id;
                     if (OfficeId  > 0)
                     {
+                        int userid = data.UserId;
+                        var ur = db.UserRegistrations.Where(m => m.Id == userid).FirstOrDefault();
+                        string CMessage = ur.Username + " You Recived One New Customer With Email Id " + user.Email + " Please Check It Details And Verify It. Thankyou";
+                        sms.Send(ur.ContactNo, CMessage);
                         user.OfficeId = OfficeId;
                     }
                     else
@@ -86,6 +93,8 @@ namespace Cargovio.Areas.User.Controllers
                 smtp.Credentials = new System.Net.NetworkCredential("cargoviohub@gmail.com", "Password@123");
                 smtp.EnableSsl = true;
                 smtp.Send(mail);
+                string Message = user.UserName + " Your Account Is Register With Cargovio.in Now You Login With You LoginID" + user.Email;
+                sms.Send(user.ContactNo,Message);
                 if (UserId == 0)
                 {
                     return NotFound();
@@ -137,6 +146,8 @@ namespace Cargovio.Areas.User.Controllers
                     smtp.Credentials = new System.Net.NetworkCredential("cargoviohub@gmail.com", "Password@123");
                     smtp.EnableSsl = true;
                     smtp.Send(mail);
+                    string Message = data.Username + " Your Company " + company.CompanyName + " Is Register With Cargovio.in Now You Login With You LoginID" + data.Email;
+                    sms.Send(data.ContactNo, Message);
                     return Ok(userManager.CompanyDetails(company));
                 }
                 else
@@ -164,8 +175,19 @@ namespace Cargovio.Areas.User.Controllers
                     office.UserId = office.UserId;
                     office.OfficeLocation = office.City;
                     int OfficeId = userManager.OfficeDetails(office);
+                    var location = office.City + " " + office.Country;
                     if (OfficeId > 0)
                     {
+                        using (var client = new WebClient())
+                        {
+                            string url = "http://api.positionstack.com/v1/forward?access_key=284d4543eb91f4bd81dff5d9d7f52d07&query="+ location;
+                            Stream stream = client.OpenRead(url);
+                            StreamReader reader = new StreamReader(stream);
+                            JObject jObject = JObject.Parse(reader.ReadLine());
+                            string Latitude = jObject["data"][0]["latitude"].ToString();
+                            string Longitude = jObject["data"][0]["longitude"].ToString();
+                            userManager.AddLatLong(Latitude, Longitude, office.City);
+                        }
                         UserRegistration ur = new UserRegistration();
                         ur = db.UserRegistrations.Find(office.UserId);
                         ur.OfficeId = OfficeId;
@@ -197,6 +219,8 @@ namespace Cargovio.Areas.User.Controllers
                         smtp.Credentials = new System.Net.NetworkCredential("cargoviohub@gmail.com", "Password@123");
                         smtp.EnableSsl = true;
                         smtp.Send(mail);
+                        string Message = data.Username + " Our New Office In" + office.OfficeLocation + " Is Allocated With You";
+                        sms.Send(data.ContactNo, Message);
                         return Ok("Account Created Success!");
                     }
                     else
@@ -214,7 +238,7 @@ namespace Cargovio.Areas.User.Controllers
                     return NotFound();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 return NotFound();
@@ -268,6 +292,20 @@ namespace Cargovio.Areas.User.Controllers
             var data = db.UserRegistrations.Where(m => m.Id == Userid).FirstOrDefault();
             int TypeId = data.UserTypeId;
             return Ok(TypeId);
+        }
+        [HttpGet]
+        [Route("User/Api/UserModule/GetMyInfo/{Userid}")]
+        public IHttpActionResult GetMyInfo(int Userid)
+        {
+            try
+            {
+                var data = userManager.getMyInfo(Userid).ToList();
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex);
+            }
         }
     }
 }

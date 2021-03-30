@@ -23,6 +23,7 @@ namespace BusinessEntities.Customer
         public string DestinationPincode { get; set; }
         public string DestinationState { get; set; }
         public string DestinationCountry { get; set; }
+        public decimal? Amount { get; set; }
         public int? PackageDeatilsId { get; set; }
         public int? CreateBy { get; set; }
         public int? UpdatedBy { get; set; }

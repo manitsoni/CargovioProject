@@ -16,8 +16,10 @@ namespace Data.Customer.Repository.Interface
         int AddTracking(Tracking objTracking);
         IList<CommonBookingEntities> GetBooking(int id);
         IList<CommonBookingEntities> GetOldBooking(int id);
-        IList<CommonBookingEntities> GetBookingDetails(string ShipmentId);
+        IList<CommonBookingEntities> GetBookingDetails(string ShipmentId,int Userid);
         tblPackageDetail GetPackageById(int packageId);
         bool UpdatePackage(tblPackageDetail pd);
+        IQueryable<Office> GetMyOffice(int Userid);
+        double getRate(string City1, string City2);
     }
 }

@@ -22,7 +22,10 @@ namespace Business.User.Manager
             userRepository = user;
         }
 
-        
+        public bool AddLatLong(string Lat, string Long, string City)
+        {
+            return userRepository.AddLatLong(Lat, Long, City);
+        }
 
         public bool CompanyDetails(CompanyDetailsEntities objCompany)
         {
@@ -48,6 +51,11 @@ namespace Business.User.Manager
                 throw;
             }
          
+        }
+
+        public IQueryable<UserRegistration> getMyInfo(int Userid)
+        {
+            return userRepository.getMyInfo(Userid);
         }
 
         public int Login(string Email, string Password)

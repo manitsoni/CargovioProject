@@ -42,6 +42,24 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="RateDatas">
+      <EntityTypeMapping TypeName="CargovioDbModel.RateData">
+        <MappingFragment StoreEntitySet="RateData">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SourceCity" ColumnName="SourceCity" />
+          <ScalarProperty Name="SourceState" ColumnName="SourceState" />
+          <ScalarProperty Name="SourceCountry" ColumnName="SourceCountry" />
+          <ScalarProperty Name="DestinationCity" ColumnName="DestinationCity" />
+          <ScalarProperty Name="DestinationState" ColumnName="DestinationState" />
+          <ScalarProperty Name="DestinationCountry" ColumnName="DestinationCountry" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
       <EntityTypeMapping TypeName="CargovioDbModel.sysdiagram">
         <MappingFragment StoreEntitySet="sysdiagrams">
@@ -56,7 +74,6 @@
     <EntitySetMapping Name="tblBookings">
       <EntityTypeMapping TypeName="CargovioDbModel.tblBooking">
         <MappingFragment StoreEntitySet="tblBooking">
-          <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Userid" ColumnName="Userid" />
           <ScalarProperty Name="SourceId" ColumnName="SourceId" />
@@ -74,6 +91,7 @@
           <ScalarProperty Name="IsDelivered" ColumnName="IsDelivered" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -119,6 +137,7 @@
     <EntitySetMapping Name="tblQuotations">
       <EntityTypeMapping TypeName="CargovioDbModel.tblQuotation">
         <MappingFragment StoreEntitySet="tblQuotation">
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
@@ -169,7 +188,6 @@
     <EntitySetMapping Name="Trackings">
       <EntityTypeMapping TypeName="CargovioDbModel.Tracking">
         <MappingFragment StoreEntitySet="Tracking">
-          <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="BookingId" ColumnName="BookingId" />
           <ScalarProperty Name="CargoStatusTypeId" ColumnName="CargoStatusTypeId" />
@@ -178,6 +196,7 @@
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
           <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -213,20 +232,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="RateDatas">
-      <EntityTypeMapping TypeName="CargovioDbModel.RateData">
-        <MappingFragment StoreEntitySet="RateData">
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+    <EntitySetMapping Name="tblLatLongs">
+      <EntityTypeMapping TypeName="CargovioDbModel.tblLatLong">
+        <MappingFragment StoreEntitySet="tblLatLong">
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="Rate" ColumnName="Rate" />
-          <ScalarProperty Name="Weight" ColumnName="Weight" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="DestinationCountry" ColumnName="DestinationCountry" />
-          <ScalarProperty Name="DestinationState" ColumnName="DestinationState" />
-          <ScalarProperty Name="DestinationCity" ColumnName="DestinationCity" />
-          <ScalarProperty Name="SourceCountry" ColumnName="SourceCountry" />
-          <ScalarProperty Name="SourceState" ColumnName="SourceState" />
-          <ScalarProperty Name="SourceCity" ColumnName="SourceCity" />
+          <ScalarProperty Name="LongAddress" ColumnName="LongAddress" />
+          <ScalarProperty Name="LatAddress" ColumnName="LatAddress" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

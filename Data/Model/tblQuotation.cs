@@ -35,6 +35,7 @@ namespace Data.Model
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        public Nullable<decimal> Amount { get; set; }
     
         public virtual Office Office { get; set; }
         public virtual tblPackageDetail tblPackageDetail { get; set; }
